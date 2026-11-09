@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="DreamLand/DreamLand.vcxproj" Id="eb4e12d4-a90d-4484-8c41-e53cc3f04ca5" />
+</Solution>
