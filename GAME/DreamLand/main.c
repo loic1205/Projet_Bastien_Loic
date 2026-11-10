@@ -1,5 +1,6 @@
 #include "tools.h"
 
+sfVector2f posEditorView = { (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 
 int main()
 {
@@ -11,7 +12,7 @@ int main()
 
 
 	//////////////////////////
-	//Game Loop				//
+	//      Game Loop		//
 	//////////////////////////
 	while (sfRenderWindow_isOpen(window))
 	{
@@ -22,14 +23,14 @@ int main()
 		}
 
 		//////////////////////////
-		//Update				//
+		//		  Update		//
 		//////////////////////////
 
 
 
 
 		//////////////////////////
-		//Display				//
+		//		  Display		//
 		//////////////////////////
 		sfRenderWindow_clear(window, sfBlack);
 
