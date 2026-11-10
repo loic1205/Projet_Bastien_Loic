@@ -315,9 +315,13 @@
             "c:\\users\\l.begue\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\audio\\soundbuffer.h",
             "c:\\users\\l.begue\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\audio\\soundbufferrecorder.h",
             "c:\\users\\l.begue\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\audio\\soundrecorder.h",
+<<<<<<< Updated upstream
             "c:\\users\\l.begue\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\audio\\soundstream.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\math.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_math.h"
+=======
+            "c:\\users\\l.begue\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\audio\\soundstream.h"
+>>>>>>> Stashed changes
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

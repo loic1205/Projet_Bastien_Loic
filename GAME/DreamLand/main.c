@@ -23,7 +23,11 @@ int main()
 
 
 	//////////////////////////
+<<<<<<< Updated upstream
 	//		   View			//
+=======
+	//       Game Loop		//
+>>>>>>> Stashed changes
 	//////////////////////////
 
 	editorView = sfView_createFromRect((sfFloatRect) { 0.0f, 0.0f, MAP_WIDTH* TILE_SIZE, MAP_HEIGHT* TILE_SIZE });
@@ -51,7 +55,11 @@ int main()
 		}
 
 		//////////////////////////
+<<<<<<< Updated upstream
 		//		  Update		//
+=======
+		//        Update	   	//
+>>>>>>> Stashed changes
 		//////////////////////////
 		
 		updatePlayer();
@@ -59,7 +67,11 @@ int main()
 
 
 		//////////////////////////
+<<<<<<< Updated upstream
 		//		  Display		//
+=======
+		//        Display		//
+>>>>>>> Stashed changes
 		//////////////////////////
 		sfRenderWindow_clear(window, sfBlack);
 		if (state == GAME)
