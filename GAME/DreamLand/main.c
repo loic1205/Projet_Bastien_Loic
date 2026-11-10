@@ -3,7 +3,7 @@
 #include "chest.h"
 #include "map.h"
 
-sfVector2f posView = { 650.f, 100.f };
+sfVector2f posView = { 100.f, 50.f };
 sfVector2f posEditorView = { (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 
 int main()
@@ -11,16 +11,21 @@ int main()
 	//////////////////////////
 	//		  Inits 		//
 	//////////////////////////
+
 	sfVideoMode mode = { WIDTH_WINDOW_GAME / 2, HEIGHT_WINDOW_GAME / 2, 32 }; // fenêtre de jeu 
 	sfRenderWindow* window = sfRenderWindow_create(mode, "CSFML Window", sfResize | sfClose, sfWindowed, NULL);
 	sfEvent event;
 
 	initTools();
+	initPlayer();
 	initMap();
 	state = GAME;
+
+
 	//////////////////////////
 	//		   View			//
 	//////////////////////////
+
 	editorView = sfView_createFromRect((sfFloatRect) { 0.0f, 0.0f, MAP_WIDTH* TILE_SIZE, MAP_HEIGHT* TILE_SIZE });
 
 	sfView* viewMinimap = sfView_createFromRect((sfFloatRect) { 0.0f, 0.0f, MAP_WIDTH* TILE_SIZE, MAP_HEIGHT* TILE_SIZE });
@@ -47,11 +52,14 @@ int main()
 		//		  Update		//
 		//////////////////////////
 
-		
 		updateMap(window);
+		updatePlayer();
+
+
 		//////////////////////////
 		//		  Display		//
 		//////////////////////////
+
 		sfRenderWindow_clear(window, sfBlack);
 		if (state == GAME)
 		{
@@ -60,13 +68,13 @@ int main()
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
 			//displayChest(window);
-			//displayPlayer(window);
+			displayPlayer(window);
 
 			//View minimap
 			sfRenderWindow_setView(window, viewMinimap);
 			displayMap(window);
 			//displayChest(window);
-			//displayPlayer(window);
+			displayPlayer(window);
 		}
 		if (state == EDITOR)
 		{
@@ -79,9 +87,12 @@ int main()
 		}
 		sfRenderWindow_display(window);
 	}	
+
+
 	//////////////////////////
 	//		   Save		    //
 	//////////////////////////
+
 	saveMap();
 	saveMapBin();
 
