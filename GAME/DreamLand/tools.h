@@ -13,3 +13,35 @@
 #define TILE_SIZE 32
 #define WIDTH_WINDOW_GAME MAP_WIDTH * TILE_SIZE
 #define HEIGHT_WINDOW_GAME MAP_HEIGHT * TILE_SIZE
+
+
+typedef struct Chest Chest;
+struct Chest {
+	sfVector2i coo;
+	bool isOpen;
+	float ChestanimTimer;
+	int ChestframeX;
+	sfTexture* texChest;
+	sfSprite* spChest;
+	sfIntRect irectChest;
+	sfVector2f position;
+};
+
+
+
+typedef enum { BAS, DROITE, GAUCHE, HAUT }Direction;
+typedef enum { MENU, GAME, EDITOR }State;
+State state;
+FILE* fichier;
+sfView* editorView;
+
+
+
+
+
+
+void initTools();
+void restartClock();
+float getDeltaTime();
+
+
