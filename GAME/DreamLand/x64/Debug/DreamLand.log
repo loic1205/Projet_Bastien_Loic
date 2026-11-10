@@ -1,4 +1,5 @@
 ﻿  map.c
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(41,42): warning C4553: '==': result of expression not used; did you intend '='?
 C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(285,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(285,46): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(317,2): warning C4098: 'saveMap': 'void' function returning a value
