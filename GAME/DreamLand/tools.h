@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <CSFML/Graphics.h>
 #include <CSFML/Audio.h>
+#include <math.h>
 
 #define TEXTURE_PATH "..\\Data\\textures\\"
 #define MAP_PATH "..\\Data\\maps\\"
