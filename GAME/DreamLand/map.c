@@ -315,6 +315,51 @@ void displayEditorTile(sfRenderWindow* _window)
 
 }
 
+bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _vitesse)
+{
+	sfVector2i nextPosInTab = { 0,0 };
+	sfVector2i nextPosInTab2 = { 0,0 };
+
+	if (_direction == HAUT)
+	{
+		// Calcul la position dans le tableau au prochain mouvement vers le Haut ( dans les 2 cases du tableau possible si le sprite est entre 2 cases )
+		nextPosInTab.x = _sprite.position.x / 32;
+		nextPosInTab.y = (_sprite.position.y - _vitesse.y * getDeltaTime()) / 32;
+		nextPosInTab2.x = (_sprite.position.x + _sprite.size.x) / 32;
+		nextPosInTab2.y = (_sprite.position.y - _vitesse.y * getDeltaTime()) / 32;
+	}
+	else if (_direction == BAS)
+	{
+		nextPosInTab.x = _sprite.position.x / 32;
+		nextPosInTab.y = (_sprite.position.y + _sprite.size.y + _vitesse.y * getDeltaTime()) / 32;
+		nextPosInTab2.x = (_sprite.position.x + _sprite.size.x) / 32;
+		nextPosInTab2.y = (_sprite.position.y + _sprite.size.y + _vitesse.y * getDeltaTime()) / 32;
+	}
+	else if (_direction == GAUCHE)
+	{
+		nextPosInTab.x = (_sprite.position.x - _vitesse.x * getDeltaTime()) / 32;
+		nextPosInTab.y = (_sprite.position.y) / 32;
+		nextPosInTab2.x = (_sprite.position.x - _vitesse.x * getDeltaTime()) / 32;
+		nextPosInTab2.y = (_sprite.position.y + _sprite.size.y) / 32;
+	}
+	else if (_direction == DROITE)
+	{
+		nextPosInTab.x = (_sprite.position.x + _sprite.size.x + _vitesse.x * getDeltaTime()) / 32;
+		nextPosInTab.y = _sprite.position.y / 32;
+		nextPosInTab2.x = (_sprite.position.x + _sprite.size.x + _vitesse.x * getDeltaTime()) / 32;
+		nextPosInTab2.y = (_sprite.position.y + _sprite.size.y) / 32;
+	}
+	// Si la ou les case(s) est une case non traversable ( entre 3 et 6 )
+	if (map[nextPosInTab.y][nextPosInTab.x] >= 3 && map[nextPosInTab.y][nextPosInTab.x] <= 39 ||
+		map[nextPosInTab2.y][nextPosInTab2.x] >= 3 && map[nextPosInTab2.y][nextPosInTab2.x] <= 39)
+	{
+		return true; // retourne sfTrue si collision
+	}
+
+	return false; // retourne sfFalse si pas de collision
+}
+
+
 void saveMap()
 {
 	fichier = fopen("../Data/MAP/map.txt", "wt");

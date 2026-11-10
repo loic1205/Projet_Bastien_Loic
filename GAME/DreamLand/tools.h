@@ -30,7 +30,7 @@ struct Chest {
 
 
 
-typedef enum { BAS, DROITE, GAUCHE, HAUT }Direction;
+typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
 typedef enum { MENU, GAME, EDITOR }State;
 State state;
 FILE* fichier;
