@@ -19,15 +19,16 @@ sfVector2i chestPos;
 bool chestAlreadyexist = false;
 
 int map[MAP_HEIGHT][MAP_WIDTH];
-int tileType = 3;
+int tileTypeX = 0;
+int tileTypeY = 0;
 
 void initMap()
 {
-	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"tileDamien.png", NULL);
+	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Tileset.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
 
 
-	fichier = fopen("../Data/MAP/map.txt", "rt");
+	fichier = fopen("../Data/Map/map.txt", "rt");
 
 	if (fichier)
 	{
@@ -72,6 +73,7 @@ void updateMap(sfRenderWindow* _window)
 {
 
 	keyTimer += getDeltaTime();
+	
 	if (state == GAME)
 	{
 		if (sfKeyboard_isScancodePressed(sfScanE) && keyTimer >= 0.2f)
@@ -167,20 +169,32 @@ void updateMap(sfRenderWindow* _window)
 
 
 		if (sfKeyboard_isKeyPressed(sfKeyNum1))
-			tileType = 1;
+			tileTypeX = 0;
 		if (sfKeyboard_isKeyPressed(sfKeyNum2))
-			tileType = 2;
+			tileTypeX = 1;
 		if (sfKeyboard_isKeyPressed(sfKeyNum3))
-			tileType = 3;
+			tileTypeX = 2;
 		if (sfKeyboard_isKeyPressed(sfKeyNum4))
-			tileType = 4;
+			tileTypeX = 3;
 		if (sfKeyboard_isKeyPressed(sfKeyNum5))
-			tileType = 5;
+			tileTypeX = 4;
 		if (sfKeyboard_isKeyPressed(sfKeyNum6))
-			tileType = 6;
+			tileTypeX = 5;
 		if (sfKeyboard_isKeyPressed(sfKeyNum7))
-			tileType = 7;
+			tileTypeX = 6;
+		if (sfKeyboard_isKeyPressed(sfKeyNum8))
+			tileTypeX = 7;
 
+		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum1))
+			tileTypeY = 0;
+		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum2))
+			tileTypeY = 1;
+		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum3))
+			tileTypeY = 2;
+		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum4))
+			tileTypeY = 3;
+		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum5))
+			tileTypeY = 4;
 
 		if (sfMouse_isButtonPressed(sfMouseLeft))
 		{
@@ -188,7 +202,7 @@ void updateMap(sfRenderWindow* _window)
 			int x = (mousePos.x * 2) / TILE_SIZE;
 			int y = (mousePos.y * 2) / TILE_SIZE;
 
-			map[y][x] = tileType;
+			map[y][x] = tileTypeX + (8 * tileTypeY);
 
 		}
 
@@ -199,7 +213,7 @@ void updateMap(sfRenderWindow* _window)
 			int x = (mousePos.x) * 2 / TILE_SIZE;
 			int y = (mousePos.y) * 2 / TILE_SIZE;
 
-			tileType = map[y][x];
+			tileTypeX = (map[y][x] % 8);
 		}
 
 		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
@@ -239,7 +253,34 @@ void displayMap(sfRenderWindow* _window)
 	{
 		for (int x = 0; x < MAP_WIDTH; x++)
 		{
-			tileRect.position.x = map[y][x] * tileRect.size.x;
+			if(map[y][x] < 8)
+			{
+				tileRect.position.x = map[y][x] * tileRect.size.x;
+				tileRect.position.y = 0;
+			}
+			if (map[y][x] >= 8 && map[y][x] < 16)
+			{
+				tileRect.position.x = (map[y][x] - 8) * tileRect.size.x;
+				tileRect.position.y = tileRect.size.y;
+			}
+			if (map[y][x] >= 16 && map[y][x] < 24)
+			{
+				tileRect.position.x = (map[y][x] - 16) * tileRect.size.x;
+				tileRect.position.y = tileRect.size.y*2;
+			}
+			if (map[y][x] >= 24 && map[y][x] < 32)
+			{
+				tileRect.position.x = (map[y][x] - 24) * tileRect.size.x;
+				tileRect.position.y = tileRect.size.y*3;
+			}
+			if (map[y][x] >= 32 && map[y][x] < 40)
+			{
+				tileRect.position.x = (map[y][x] - 32) * tileRect.size.x;
+				tileRect.position.y = tileRect.size.y*4;
+			}
+
+
+
 			sfSprite_setTextureRect(tileSprite, tileRect);
 			sfVector2f pos = { x * tileRect.size.x, y * tileRect.size.y };
 			sfSprite_setPosition(tileSprite, pos);
@@ -249,7 +290,8 @@ void displayMap(sfRenderWindow* _window)
 
 	if (state == EDITOR)
 	{
-		tileRect.position.x = tileType * tileRect.size.x;
+		tileRect.position.x = tileTypeX * tileRect.size.x;
+		tileRect.position.y = tileTypeY * tileRect.size.y;
 		sfSprite_setTextureRect(tileSprite, tileRect);
 		sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
 		iMousePos.x *= 2;
@@ -259,5 +301,28 @@ void displayMap(sfRenderWindow* _window)
 		sfRenderWindow_drawSprite(_window, tileSprite, NULL);
 		sfRenderWindow_setMouseCursorVisible(_window, false);
 	}
+}
 
+void saveMap()
+{
+	fichier = fopen("../Data/MAP/map.txt", "wt");
+
+	for (int y = 0; y < MAP_WIDTH; y++)
+	{
+		for (int x = 0;x < MAP_HEIGHT; x++)
+			fprintf(fichier, "%d", map[x][y]);
+		fprintf(fichier, "\n");
+	}
+	fclose(fichier);
+	return true;
+}
+
+void saveMapBin()
+{
+	fichier = fopen("../Data/MAP/map_bin.bin", "wb");
+
+	fwrite(map, sizeof(int), MAP_HEIGHT * MAP_WIDTH, fichier);
+
+	fclose(fichier);
+	return true;
 }
