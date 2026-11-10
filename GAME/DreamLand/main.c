@@ -1,4 +1,7 @@
 #include "tools.h"
+#include "player.h"
+#include "chest.h"
+#include "map.h"
 
 sfVector2f posView = { 650.f, 100.f };
 sfVector2f posEditorView = { (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
@@ -70,6 +73,7 @@ int main()
 			//View editor
 			sfView_setCenter(editorView, posEditorView);
 			sfRenderWindow_setView(window, editorView);
+			displayEditorTile(window);
 			//displayChest(window);
 			displayMap(window);
 		}
