@@ -24,7 +24,7 @@ int tileTypeY = 0;
 
 void initMap()
 {
-	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Tileset.png", NULL);
+	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Document.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
 
 
@@ -158,31 +158,24 @@ void updateMap(sfRenderWindow* _window)
 		}
 
 
-		if (sfMouse_isButtonPressed(sfMouseRight))
-		{
-			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
-
-			int x = (mousePos.x) * 2 / TILE_SIZE;
-			int y = (mousePos.y) * 2 / TILE_SIZE;
-			map[y][x] = 0;
-		}
+		
 
 
-		if (sfKeyboard_isKeyPressed(sfKeyNum1))
+		if (sfKeyboard_isKeyPressed(sfKeyNum1) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 0;
-		if (sfKeyboard_isKeyPressed(sfKeyNum2))
+		if (sfKeyboard_isKeyPressed(sfKeyNum2) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 1;
-		if (sfKeyboard_isKeyPressed(sfKeyNum3))
+		if (sfKeyboard_isKeyPressed(sfKeyNum3) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 2;
-		if (sfKeyboard_isKeyPressed(sfKeyNum4))
+		if (sfKeyboard_isKeyPressed(sfKeyNum4) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 3;
-		if (sfKeyboard_isKeyPressed(sfKeyNum5))
+		if (sfKeyboard_isKeyPressed(sfKeyNum5) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 4;
-		if (sfKeyboard_isKeyPressed(sfKeyNum6))
+		if (sfKeyboard_isKeyPressed(sfKeyNum6) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 5;
-		if (sfKeyboard_isKeyPressed(sfKeyNum7))
+		if (sfKeyboard_isKeyPressed(sfKeyNum7) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 6;
-		if (sfKeyboard_isKeyPressed(sfKeyNum8))
+		if (sfKeyboard_isKeyPressed(sfKeyNum8) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 			tileTypeX = 7;
 
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum1))
@@ -196,6 +189,16 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum5))
 			tileTypeY = 4;
 
+
+		if (sfMouse_isButtonPressed(sfMouseRight))
+		{
+			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+
+			int x = (mousePos.x) * 2 / TILE_SIZE;
+			int y = (mousePos.y) * 2 / TILE_SIZE;
+			map[y][x] = 32;
+		}
+
 		if (sfMouse_isButtonPressed(sfMouseLeft))
 		{
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
@@ -203,42 +206,46 @@ void updateMap(sfRenderWindow* _window)
 			int y = (mousePos.y * 2) / TILE_SIZE;
 
 			map[y][x] = tileTypeX + (8 * tileTypeY);
-
 		}
 
 		if (sfMouse_isButtonPressed(sfMouseMiddle))
 		{
-
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
 			int x = (mousePos.x) * 2 / TILE_SIZE;
 			int y = (mousePos.y) * 2 / TILE_SIZE;
 
 			tileTypeX = (map[y][x] % 8);
+			tileTypeY = (map[y][x]/8);
 		}
+
+
+
 
 		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
 		{
 			sfView_zoom(editorView, 0.999f);
-
 		}
 
 		if (sfKeyboard_isScancodePressed(sfScanNumpadMinus))
 		{
 			sfView_zoom(editorView, 1.001f);
-
 		}
+
 		if (sfKeyboard_isScancodePressed(sfScanUp))
 		{
 			posEditorView.y -= 0.4f;
 		}
+
 		if (sfKeyboard_isScancodePressed(sfScanDown))
 		{
 			posEditorView.y += 0.4f;
 		}
+
 		if (sfKeyboard_isScancodePressed(sfScanRight))
 		{
 			posEditorView.x += 0.4f;
 		}
+
 		if (sfKeyboard_isScancodePressed(sfScanLeft))
 		{
 			posEditorView.x -= 0.4f;
@@ -301,6 +308,11 @@ void displayMap(sfRenderWindow* _window)
 		sfRenderWindow_drawSprite(_window, tileSprite, NULL);
 		sfRenderWindow_setMouseCursorVisible(_window, false);
 	}
+}
+
+void displayEditorTile(sfRenderWindow* _window)
+{
+
 }
 
 void saveMap()
