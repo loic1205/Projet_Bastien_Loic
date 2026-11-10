@@ -9,3 +9,5 @@ void updateMap(sfRenderWindow* _window);
 void displayMap(sfRenderWindow* _window);
 void saveMap();
 void saveMapBin();
+
+bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _vitesse);

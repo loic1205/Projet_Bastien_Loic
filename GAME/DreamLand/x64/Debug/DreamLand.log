@@ -1,6 +1,2 @@
-﻿  map.c
-C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(285,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(285,46): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(317,2): warning C4098: 'saveMap': 'void' function returning a value
-C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(327,2): warning C4098: 'saveMapBin': 'void' function returning a value
-  DreamLand.vcxproj -> C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
+﻿  player.c
+  DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
