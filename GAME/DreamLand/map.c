@@ -32,14 +32,15 @@ void initMap()
 
 	if (fichier)
 	{
-		char tile_initMap = 0;
+		int tile_initMap = 0;
 
 		for (int y = 0; y < MAP_WIDTH; y++)
 		{
 			for (int x = 0; x < MAP_HEIGHT; x++)
 			{
-				tile_initMap = fgetc(fichier);
-				map[x][y] = tile_initMap - 48;
+				fscanf(fichier, "%d", &tile_initMap) == 1;
+				map[x][y] = tile_initMap;
+				fgetc(fichier);
 			}
 			tile_initMap = fgetc(fichier);
 		}
@@ -88,7 +89,6 @@ void updateMap(sfRenderWindow* _window)
 		{
 			keyTimer = 0.0f;
 			sfVector2i mouseCoo = sfMouse_getPositionRenderWindow(_window);
-			printf("x:%d y:%d\n", mouseCoo.x, mouseCoo.y);
 		}
 
 		if (sfKeyboard_isKeyPressed(sfKeyF) && keyTimer > 0.2f)
@@ -310,7 +310,7 @@ void saveMap()
 	for (int y = 0; y < MAP_WIDTH; y++)
 	{
 		for (int x = 0;x < MAP_HEIGHT; x++)
-			fprintf(fichier, "%d", map[x][y]);
+			fprintf(fichier, "%d ", map[x][y]);
 		fprintf(fichier, "\n");
 	}
 	fclose(fichier);
