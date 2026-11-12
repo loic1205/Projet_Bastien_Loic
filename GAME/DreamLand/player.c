@@ -90,8 +90,8 @@ void updatePlayer()
 
 			if (frameX > 5) frameX = 0;
 
-			irectPlayer.position.x = frameX * irectPlayer.size.x;
-			irectPlayer.position.y = frameY * irectPlayer.size.y;
+			irectPlayer.position.x = 16 * (1 + (4 * frameX)); // 16 pour le départ du rectangle de la frame, 1 + 4*frameX pour passer de frame en frame (il y a un espacement de 32 pixel entre chaque frame) 
+			irectPlayer.position.y = 16 * (1 + (4 * frameY));
 			sfSprite_setTextureRect(spPlayer, irectPlayer);
 			animtime = 0.0f;
 		}

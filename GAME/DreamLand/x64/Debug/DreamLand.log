@@ -1,2 +1,30 @@
-﻿  player.c
-  DreamLand.vcxproj -> C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
+﻿  chest.c
+  main.c
+  map.c
+  player.c
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(41,42): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(292,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(292,46): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(326,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(327,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(328,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(329,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(333,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(334,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(335,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(336,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(340,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(341,41): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(342,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(343,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(347,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(348,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(349,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(350,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(374,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(384,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+  tools.c
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\tools.c(10,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  Génération de code en cours...
+  LINK : C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\\Debug\DreamLand.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+  DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
