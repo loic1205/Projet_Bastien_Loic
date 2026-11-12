@@ -16,6 +16,8 @@ bool isTrolling = false;
 sfVector2f position = { 1.0f, 1.0f };
 sfVector2f velocity = { 100.0f,100.0f };
 
+extern sfVector2f posView;
+
 
 void initPlayer()
 {
@@ -39,15 +41,19 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{
 				position.y -= velocity.y * getDeltaTime();
+				if (posView.y > 80 && posView.y >= position.y)
+					posView.y -= velocity.y * getDeltaTime();
 			}
 			frameY = HAUT;
 			hasMoved = true;
 		}
-		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < HEIGHT_WINDOW_GAME - irectPlayer.size.x)
+		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < HEIGHT_WINDOW_GAME - irectPlayer.size.y)
 		{
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
 			{
 				position.y += velocity.y * getDeltaTime();
+				if (posView.y < HEIGHT_WINDOW_GAME - 80 && posView.y <= position.y)
+					posView.y += velocity.y * getDeltaTime();
 			}
 			frameY = BAS;
 			hasMoved = true;
@@ -57,6 +63,8 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
 			{
 				position.x -= velocity.x * getDeltaTime();
+				if (posView.x > 160 && posView.x >= position.x)
+					posView.x -= velocity.x * getDeltaTime();
 			}
 			frameY = GAUCHE;
 			hasMoved = true;
@@ -66,6 +74,8 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{
 				position.x += velocity.x * getDeltaTime();
+				if (posView.x < WIDTH_WINDOW_GAME - 160 && posView.x <= position.x)
+					posView.x += velocity.x * getDeltaTime();
 			}
 			frameY = DROITE;
 			hasMoved = true;
@@ -80,8 +90,8 @@ void updatePlayer()
 
 			if (frameX > 5) frameX = 0;
 
-			irectPlayer.position.x = frameX * irectPlayer.size.x;
-			irectPlayer.position.y = frameY * irectPlayer.size.y;
+			irectPlayer.position.x = 16 * (1 + (4 * frameX)); // 16 pour le départ du rectangle de la frame, 1 + 4*frameX pour passer de frame en frame (il y a un espacement de 32 pixel entre chaque frame) 
+			irectPlayer.position.y = 16 * (1 + (4 * frameY));
 			sfSprite_setTextureRect(spPlayer, irectPlayer);
 			animtime = 0.0f;
 		}
