@@ -1,0 +1,27 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\renderstates.h",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\export.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\config.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdbool.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdint.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vcruntime.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\sal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\concurrencysal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vadefs.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\blendmode.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\coordinatetype.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\stencilmode.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\transform.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\rect.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\system\\vector2.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\system\\export.h",
+            "c:\\users\\b.bourret\\documents\\github\\projet_bastien_loic\\game\\csfml3\\include\\csfml\\graphics\\types.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

@@ -9,6 +9,7 @@
 
 #define TEXTURE_PATH "..\\Data\\textures\\"
 #define MAP_PATH "..\\Data\\maps\\"
+#define FONT_PATH "..\\Data\\font\\"
 #define MAP_WIDTH 80
 #define MAP_HEIGHT 40
 #define TILE_SIZE 32
@@ -36,7 +37,8 @@ State state;
 FILE* fichier;
 sfView* editorView;
 
-
+sfVector2f posView;
+sfVector2f posEditorView;
 
 
 
