@@ -3,7 +3,8 @@
 
 sfTexture* texPlayer;
 sfSprite* spPlayer;
-sfIntRect irectPlayer = { 0,0,29,34 }; // sprite a décaler de 1 pixel
+sfIntRect irectPlayer = { 0,0,64,64 }; // sprite a décaler de 1 pixel
+sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur
 
 float animtime = 0.0f;
 int frameX = 0;
@@ -19,8 +20,8 @@ extern sfVector2f posView;
 
 void initPlayer()
 {
-	// animation de marche du joueur
-	texPlayer = sfTexture_createFromFile(TEXTURE_PATH"tilesetPlayer/player_walk.png", NULL);
+	// animation de vol du joueur
+	texPlayer = sfTexture_createFromFile(TEXTURE_PATH"tilesetPlayer/player_fly.png", NULL);
 	spPlayer = sfSprite_create(texPlayer);
 	sfSprite_setTextureRect(spPlayer, irectPlayer);
 }
@@ -29,16 +30,17 @@ void updatePlayer()
 {
 	if (state == GAME)
 	{
-		// place le joueur sur la map (sprit du joueur, position du joueur)
+		// place le joueur sur la map (sprite du joueur, position du joueur)
 		sfSprite_setPosition(spPlayer, position);
 
 		hasMoved = false;
-		sfFloatRect playerfrect = sfSprite_getGlobalBounds(spPlayer); // récupère les dimensions du sprite du joueur avec ses coordonnées
+		sfFloatRect playerfrect = hb_Player; // récupère les dimensions du sprite du joueur avec ses coordonnées
 		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0)
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{
 				position.y -= velocity.y * getDeltaTime();
+				hb_Player.position.y -= velocity.y * getDeltaTime();
 				if (posView.y > 80 && posView.y >= position.y)
 					posView.y -= velocity.y * getDeltaTime();
 			}
@@ -50,6 +52,7 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
 			{
 				position.y += velocity.y * getDeltaTime();
+				hb_Player.position.y += velocity.y * getDeltaTime();
 				if (posView.y < HEIGHT_WINDOW_GAME - 80 && posView.y <= position.y)
 					posView.y += velocity.y * getDeltaTime();
 			}
@@ -61,6 +64,7 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
 			{
 				position.x -= velocity.x * getDeltaTime();
+				hb_Player.position.x -= velocity.x * getDeltaTime();
 				if (posView.x > 160 && posView.x >= position.x)
 					posView.x -= velocity.x * getDeltaTime();
 			}
@@ -72,6 +76,7 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{
 				position.x += velocity.x * getDeltaTime();
+				hb_Player.position.x += velocity.x * getDeltaTime();
 				if (posView.x < WIDTH_WINDOW_GAME - 160 && posView.x <= position.x)
 					posView.x += velocity.x * getDeltaTime();
 			}
@@ -95,7 +100,6 @@ void updatePlayer()
 		}
 		sfSprite_setPosition(spPlayer, position);
 		playerfrect = sfSprite_getGlobalBounds(spPlayer);
-
 	}
 }
 

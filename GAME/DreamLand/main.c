@@ -16,11 +16,12 @@ int main()
 	sfRenderWindow* window = sfRenderWindow_create(mode, "CSFML Window", sfResize | sfClose, sfWindowed, NULL);
 	sfEvent event;
 
+
+	state = GAME;
+
 	initTools();
 	initPlayer();
 	initMap();
-	state = GAME;
-
 
 	//////////////////////////
 	//		   View			//
@@ -42,6 +43,10 @@ int main()
 	while (sfRenderWindow_isOpen(window))
 	{
 		restartClock();
+
+		// Dimensions de la map
+		sfVector2f mapSize = { MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE };
+
 		while (sfRenderWindow_pollEvent(window, &event))
 		{
 			if (event.type == sfEvtClosed)
@@ -63,8 +68,53 @@ int main()
 		sfRenderWindow_clear(window, sfBlack);
 		if (state == GAME)
 		{
+			/////////////////////////////////////////////////////
+			////                                             ////
+			////      GESTION DE LA VUE SUR LE JOUEUR        ////
+			////                                             ////
+			/////////////////////////////////////////////////////
+
+			// Récupération de la position du joueur
+			sfVector2f playerCenter = { 0.0f, 0.0f };
+			playerCenter.x = position.x + irectPlayer.size.x / 2.0f;
+			playerCenter.y = position.y + irectPlayer.size.y / 2.0f;
+
+			// Récupération de la taille de la vue
+			sfVector2f viewSize = sfView_getSize(view);
+
+			// Calcul des limites de la caméra 
+			float halfWidth = viewSize.x / 2.0f; // on attribut a cette variable la moitié de la taille de la vue en largeur
+			float halfHeight = viewSize.y / 2.0f; // on attribut a cette variable la moitié de la taille de la vue en longueur
+
+			// Limite gauche et droite
+			if (viewSize.x >= mapSize.x) // vérifie si la map est plus petite que la vue (on l'affiche au centre)
+				playerCenter.x = mapSize.x / 2.0f;
+			else
+			{
+				if (playerCenter.x < halfWidth) // si le joueur est trop proche du bord gauche on arrête la caméra a la moitié de la taille de la vue pour pas dépasser
+					playerCenter.x = halfWidth;
+
+				if (playerCenter.x > mapSize.x - halfWidth) // pareil pour la droite
+					playerCenter.x = mapSize.x - halfWidth;
+			}
+
+			// Limite haut et bas
+			if (viewSize.y >= mapSize.y) // idem pour la map trop petite en hauteur (on la met au centre)
+				playerCenter.y = mapSize.y / 2.0f;
+			else
+			{
+				if (playerCenter.y < halfHeight) // la limite en haut
+					playerCenter.y = halfHeight;
+
+				if (playerCenter.y > mapSize.y - halfHeight) // la limite en bas
+					playerCenter.y = mapSize.y - halfHeight;
+			}
+
+			// Mise à jour de la caméra
+			sfView_setCenter(view, playerCenter);
+
 			//View player
-			sfView_setCenter(view, posView);
+			sfView_setCenter(view, playerCenter);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
 			//displayChest(window);
