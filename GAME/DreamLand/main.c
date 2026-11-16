@@ -2,9 +2,9 @@
 #include "player.h"
 #include "chest.h"
 #include "map.h"
+#include "PNJ.h"
 
-sfVector2f posView = { 100.f, 50.f };
-sfVector2f posEditorView = { (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
+
 
 int main()
 {
@@ -15,13 +15,16 @@ int main()
 	sfVideoMode mode = { WIDTH_WINDOW_GAME / 2, HEIGHT_WINDOW_GAME / 2, 32 }; // fenêtre de jeu 
 	sfRenderWindow* window = sfRenderWindow_create(mode, "CSFML Window", sfResize | sfClose, sfWindowed, NULL);
 	sfEvent event;
+	posView = (sfVector2f){ 100.f, 50.f };
+	posEditorView = (sfVector2f){ (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 
-
-	state = GAME;
 
 	initTools();
 	initPlayer();
 	initMap();
+	initPNJ();
+	state = GAME;
+
 
 	//////////////////////////
 	//		   View			//
@@ -59,7 +62,7 @@ int main()
 
 		updateMap(window);
 		updatePlayer();
-
+		updatePNJ();
 
 		//////////////////////////
 		//		  Display		//
@@ -119,12 +122,15 @@ int main()
 			displayMap(window);
 			//displayChest(window);
 			displayPlayer(window);
+			displayPNJ(window);
 
 			//View minimap
+			sfView_setCenter(view, posViewMinimap);
 			sfRenderWindow_setView(window, viewMinimap);
 			displayMap(window);
 			//displayChest(window);
 			displayPlayer(window);
+			displayPNJ(window);
 		}
 		if (state == EDITOR)
 		{

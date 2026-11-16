@@ -155,12 +155,14 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="map.c" />
     <ClCompile Include="player.c" />
+    <ClCompile Include="pnj.c" />
     <ClCompile Include="tools.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chest.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="pnj.h" />
     <ClInclude Include="tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,7 +15,7 @@ bool hasMoved = false;
 sfVector2f position = { 50.0f, 50.0f };
 sfVector2f velocity = { 100.0f,100.0f };
 
-extern sfVector2f posView;
+//extern sfVector2f posView;
 
 
 void initPlayer()
