@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\player.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|solutionrelative:DreamLand\\player.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|solutionrelative:DreamLand\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\player.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|solutionrelative:DreamLand\\player.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB4E12D4-A90D-4484-8C41-E53CC3F04CA5}|DreamLand\\DreamLand.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\tools.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -50,17 +50,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "main.c",
               "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\main.c",
               "RelativeDocumentMoniker": "DreamLand\\main.c",
               "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\main.c",
               "RelativeToolTip": "DreamLand\\main.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACMAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:13:11.579Z",
               "IsPinned": true,
@@ -96,13 +96,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "player.c",
               "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\player.c",
               "RelativeDocumentMoniker": "DreamLand\\player.c",
               "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\player.c",
               "RelativeToolTip": "DreamLand\\player.c",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFsAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:36:22.479Z",
               "EditorCaption": ""
