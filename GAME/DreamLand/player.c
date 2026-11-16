@@ -3,7 +3,7 @@
 
 sfTexture* texPlayer;
 sfSprite* spPlayer;
-sfIntRect irectPlayer = { 0,0,23,30 }; // sprite a décaler de 1 pixel
+sfIntRect irectPlayer = { 0,0,29,34 }; // sprite a décaler de 1 pixel
 
 float animtime = 0.0f;
 int frameX = 0;
@@ -11,9 +11,7 @@ int frameY = 0;
 
 bool hasMoved = false;
 
-bool isTrolling = false;
-
-sfVector2f position = { 1.0f, 1.0f };
+sfVector2f position = { 50.0f, 50.0f };
 sfVector2f velocity = { 100.0f,100.0f };
 
 extern sfVector2f posView;
@@ -90,8 +88,8 @@ void updatePlayer()
 
 			if (frameX > 5) frameX = 0;
 
-			irectPlayer.position.x = 16 * (1 + (4 * frameX)); // 16 pour le départ du rectangle de la frame, 1 + 4*frameX pour passer de frame en frame (il y a un espacement de 32 pixel entre chaque frame) 
-			irectPlayer.position.y = 16 * (1 + (4 * frameY));
+			irectPlayer.position.x = frameX * irectPlayer.size.x; // sprite découpe en x = 29px et y = 34px
+			irectPlayer.position.y = frameY * irectPlayer.size.y;
 			sfSprite_setTextureRect(spPlayer, irectPlayer);
 			animtime = 0.0f;
 		}
