@@ -35,8 +35,7 @@
               "ViewState": "AgIAAEUAAAAAAAAAAAAAAHAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:13:11.579Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -50,7 +49,7 @@
               "RelativeDocumentMoniker": "DreamLand\\player.c",
               "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\player.c",
               "RelativeToolTip": "DreamLand\\player.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAABqAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:36:22.479Z",
               "EditorCaption": ""
@@ -65,8 +64,7 @@
               "RelativeToolTip": "DreamLand\\player.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-11-10T08:36:35.549Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-10T08:36:35.549Z"
             }
           ]
         }

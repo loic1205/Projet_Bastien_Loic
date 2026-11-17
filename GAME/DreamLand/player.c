@@ -41,7 +41,7 @@ void initPlayer()
 	sfSprite_setTextureRect(spPlayer, irectPlayer);
 }
 
-void updatePlayer()
+void updatePlayer()  
 {
 	if (state == GAME)
 	{
@@ -84,6 +84,7 @@ void updatePlayer()
 		/////////////////////////////////////////////////////
 
 		// déplacement vers le haut
+
 		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0)
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity) && !player_attack)
@@ -96,7 +97,10 @@ void updatePlayer()
 			frameY = HAUT;
 			hasMoved = true;
 		}
+
+
 		// déplacement vers le bas
+
 		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack)
 		{
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
@@ -109,7 +113,10 @@ void updatePlayer()
 			frameY = BAS;
 			hasMoved = true;
 		}
+
+
 		// déplacement vers la gauche
+
 		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack)
 		{
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
@@ -122,7 +129,10 @@ void updatePlayer()
 			frameY = GAUCHE;
 			hasMoved = true;
 		}
+
+
 		// déplacement vers la droite
+
 		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack)
 		{
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
@@ -136,6 +146,8 @@ void updatePlayer()
 			hasMoved = true;
 		}
 
+
+		// bouton d'attaque
 		if (sfMouse_isButtonPressed(sfMouseLeft) && !player_attack)
 		{
 			frameX = 0;
