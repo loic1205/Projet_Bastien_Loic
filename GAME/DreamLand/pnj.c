@@ -25,7 +25,7 @@ void initPNJ()
 
 
 
-	font = sfFont_createFromFile(FONT_PATH"Crimson_Horror_One.ttf");
+	font = sfFont_createFromFile(FONT_PATH"fontPNJ.ttf");
 	text = sfText_create(font);
 	sfText_setString(text, "HELLO WORLD!!!");
 	sfText_setCharacterSize(text, 100);

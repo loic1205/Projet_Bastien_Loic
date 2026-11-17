@@ -1,4 +1,7 @@
 ﻿  menu.c
-C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(103,63): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(103,109): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(41,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(41,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(91,44): warning C4133: 'function': incompatible types - from 'sfRenderWindow *' to 'const sfWindow *'
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(177,63): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(177,109): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   DreamLand.vcxproj -> C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
