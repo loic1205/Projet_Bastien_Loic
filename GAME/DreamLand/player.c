@@ -8,20 +8,21 @@ sfTexture* texPlayer_hurt;
 sfTexture* texPlayer_death;
 sfTexture* texPlayer_attack;
 
-sfSprite* spPlayer;
-sfIntRect irectPlayer = { 0,0,64,64 }; // rectangle du sprite du joueur
-sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur ( position.x , position.y , taille.x , taille.y )
-
 float animtime = 0.0f;
 int frameX = 0;
 int frameY = 0;
 int animLenght = 0;
 
+sfSprite* spPlayer;
+sfIntRect irectPlayer = { 0,0,64,64 }; // rectangle du sprite du joueur
+sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur ( position.x , position.y , taille.x , taille.y )
+
 bool hasMoved = false;
 bool player_attack = false;
+bool player_Gmode = false;
 
 sfVector2f position = { 50.0f, 50.0f };
-sfVector2f velocity = { 100.0f,100.0f };
+sfVector2f velocity = { 80.0f,80.0f };
 
 //extern sfVector2f posView;
 
@@ -51,19 +52,44 @@ void updatePlayer()
 
 		/////////////////////////////////////////////////////
 		////                                             ////
-		////      GESTION DU DEPLACEMENT DU JOUEUR       ////
+		////             GESTION DU GOD_MODE             ////
 		////                                             ////
 		/////////////////////////////////////////////////////
 
 		hasMoved = false;
 		sfFloatRect playerfrect = hb_Player; // récupère les dimensions du sprite du joueur avec ses coordonnées
+
+
+		// mod de débug (impact les collisions, la hitbox et la vitesse du joueur
+		if (sfKeyboard_isScancodePressed(sfScanSpace) && sfKeyboard_isScancodePressed(sfScanLControl) && animtime > 0.1f && !player_Gmode)
+		{
+			player_Gmode = true;
+			hb_Player = (sfFloatRect) { 70.0f,90.0f,25.0f,10.0f };
+			velocity = (sfVector2f){ 300.0f, 300.0f };
+			sfSprite_setTexture(spPlayer, texPlayer_fly, NULL);
+		}
+		// enlever le mod débug ( reset les variables impactées par le Gmode )
+		if (sfKeyboard_isScancodePressed(sfScanSpace) && sfKeyboard_isScancodePressed(sfScanRControl) && animtime > 0.1f && player_Gmode)
+		{
+			player_Gmode = false;
+			hb_Player = (sfFloatRect){ (sfSprite_getPosition(spPlayer).x + 20.0f),(sfSprite_getPosition(spPlayer).y + 40.0f),25.0f,10.0f };
+			velocity = (sfVector2f){ 80.0f,80.0f };
+			sfSprite_setTexture(spPlayer, texPlayer, NULL);
+		}
+
+		/////////////////////////////////////////////////////
+		////                                             ////
+		////      GESTION DES DEPLACEMENT DU JOUEUR      ////
+		////                                             ////
+		/////////////////////////////////////////////////////
+
 		// déplacement vers le haut
 		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0)
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity) && !player_attack)
 			{
 				position.y -= velocity.y * getDeltaTime();
-				hb_Player.position.y -= velocity.y * getDeltaTime();
+				if(!player_Gmode) hb_Player.position.y -= velocity.y * getDeltaTime();
 				if (posView.y > 80 && posView.y >= position.y)
 					posView.y -= velocity.y * getDeltaTime();
 			}
@@ -76,7 +102,7 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
 			{
 				position.y += velocity.y * getDeltaTime();
-				hb_Player.position.y += velocity.y * getDeltaTime();
+				if (!player_Gmode) hb_Player.position.y += velocity.y * getDeltaTime();
 				if (posView.y < HEIGHT_WINDOW_GAME - 80 && posView.y <= position.y)
 					posView.y += velocity.y * getDeltaTime();
 			}
@@ -89,7 +115,7 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
 			{
 				position.x -= velocity.x * getDeltaTime();
-				hb_Player.position.x -= velocity.x * getDeltaTime();
+				if (!player_Gmode) hb_Player.position.x -= velocity.x * getDeltaTime();
 				if (posView.x > 160 && posView.x >= position.x)
 					posView.x -= velocity.x * getDeltaTime();
 			}
@@ -102,7 +128,7 @@ void updatePlayer()
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{
 				position.x += velocity.x * getDeltaTime();
-				hb_Player.position.x += velocity.x * getDeltaTime();
+				if (!player_Gmode) hb_Player.position.x += velocity.x * getDeltaTime();
 				if (posView.x < WIDTH_WINDOW_GAME - 160 && posView.x <= position.x)
 					posView.x += velocity.x * getDeltaTime();
 			}
@@ -141,7 +167,7 @@ void updatePlayer()
 			}
 		}
 
-		if (animtime > 0.1f && !player_attack) // animation de marche du joueur
+		if (animtime > 0.15f && !player_attack) // animation de marche du joueur
 		{
 			if (!hasMoved) // animation idle si le personnage ne bouge pas 
 			{
@@ -161,13 +187,21 @@ void updatePlayer()
 				frameX++;
 				sfSprite_setTexture(spPlayer, texPlayer, NULL);
 			}
+			if (frameX > 5 && hasMoved) frameX = 0; // animation de marche du joueur
 
-
-			if (frameX > 5 && hasMoved) frameX = 0;
-
-			irectPlayer.position.x = frameX * irectPlayer.size.x; 
-			irectPlayer.position.y = frameY * irectPlayer.size.y;
-			sfSprite_setTextureRect(spPlayer, irectPlayer);
+			if (!player_Gmode)
+			{
+				irectPlayer.position.x = frameX * irectPlayer.size.x;
+				irectPlayer.position.y = frameY * irectPlayer.size.y;
+				sfSprite_setTextureRect(spPlayer, irectPlayer);
+			}
+			else
+			{
+				sfSprite_setTexture(spPlayer, texPlayer_fly, NULL);
+				irectPlayer.position.x = frameX * irectPlayer.size.x;
+				irectPlayer.position.y = frameY * irectPlayer.size.y;
+				sfSprite_setTextureRect(spPlayer, irectPlayer);
+			}
 			animtime = 0.0f;
 		}
 

@@ -24,7 +24,7 @@ int main()
 	initMap();
 	initPNJ();
 	initMenu();
-	state = MENU;
+	state = GAME;
 
 
 	//////////////////////////
