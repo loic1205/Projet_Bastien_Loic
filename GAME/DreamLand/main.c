@@ -57,14 +57,29 @@ int main()
 				sfRenderWindow_close(window);
 		}
 
+		if (state != MENU && sfKeyboard_isScancodePressed(sfScanEscape))
+			state = MENU;
+
+
+
+
+
+
+
+
+
+
+
+
 		//////////////////////////
 		//		  Update		//
 		//////////////////////////
 
+
 		updateMap(window);
 		updatePlayer();
 		updatePNJ();
-		updateMenu();
+		updateMenu(window);
 
 		//////////////////////////
 		//		  Display		//

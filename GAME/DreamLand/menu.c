@@ -31,24 +31,98 @@ sfIntRect irectMenuBackground = {0, 0, 32, 32};
 sfVector2f scaleMenuBackground = {10, 10};
 
 
+sfFont* fontMenu;
+sfText* playText;
+sfText* editorText;
+sfText* quitterText;
+sfText* gameNameText;
+sfSprite* spSettingsButton;
+sfIntRect irectSettingsButton = { 32*4, 32*3, 32, 32 };
+sfVector2f scaleTextMenu = { 0.3, 0.3 };
+
+float butonPressedTimer = 0.0f;
 
 void initMenu()
 {
+
 	texMenuBackground = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/tilesetMenu.png", NULL);
    	spMenuBackground = sfSprite_create(texMenuBackground);
 	sfSprite_setTextureRect(spMenuBackground, irectMenuBackground);
-	//sfSprite_setScale(spMenuBackground, scaleMenuBackground);
-}
-
-void updateMenu()
-{
 	sfSprite_setPosition(spMenuBackground, (sfVector2f) { 100, 100 });
 	sfSprite_setScale(spMenuBackground, (sfVector2f) { 0.5, 0.5 });
+
+
+
+	fontMenu = sfFont_createFromFile(FONT_PATH"fontMenu.ttf");
+
+	playText = sfText_create(fontMenu);
+	sfText_setString(playText, "JOUER");
+	sfText_setCharacterSize(playText, 100);
+	sfText_scale(playText, scaleTextMenu);
+	sfText_setPosition(playText, (sfVector2f) {415, 205});
+
+	editorText = sfText_create(fontMenu);
+	sfText_setString(editorText, "EDITER");
+	sfText_setCharacterSize(editorText, 100);
+	sfText_scale(editorText, scaleTextMenu);
+	sfText_setPosition(editorText, (sfVector2f) { 413, 300 });
+
+	quitterText = sfText_create(fontMenu);
+	sfText_setString(quitterText, "QUITTER");
+	sfText_setCharacterSize(quitterText, 100);
+	sfText_scale(quitterText, scaleTextMenu);
+	sfText_setPosition(quitterText, (sfVector2f) { 400, 397 });
+
+	gameNameText = sfText_create(fontMenu);
+	sfText_setString(gameNameText, " BLOODY\nBLOODLINE");
+	sfText_setCharacterSize(gameNameText, 100);
+	sfText_scale(gameNameText, scaleTextMenu);
+	sfText_setPosition(gameNameText, (sfVector2f) { 600, 205 });
+
+	spSettingsButton = sfSprite_create(texMenuBackground);
+	sfSprite_setTextureRect(spSettingsButton, irectSettingsButton);
+	sfSprite_setPosition(spSettingsButton, (sfVector2f) { 890, 415 });
+	sfSprite_setScale(spSettingsButton, (sfVector2f){1.5, 1.5});
+
+}
+
+void updateMenu(sfRenderWindow* _window)
+{
+	sfVector2i mousePos = sfMouse_getPosition(_window);
+	//printf("%d %d\n", mousePos.x, mousePos.y);
+
+	butonPressedTimer += getDeltaTime();
+
+	if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 193 && mousePos.y < 256 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		state = GAME;
+	}
+
+	if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 289 && mousePos.y < 352 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		state = EDITOR;
+	}
+
+	if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 385 && mousePos.y < 448 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		sfRenderWindow_close(_window);
+	}
+
+	//if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 193 && mousePos.y < 256 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	//{
+	//	butonPressedTimer = 0.0f;
+	//	state = GAME;
+	//}
+
 }
 
 
 void displayMenu(sfRenderWindow* _window)
 {
+	sfRenderWindow_setMouseCursorVisible(_window, true);
 	if (state == MENU) 
 	{
 		for (int y = 0; y < 22; y++)
@@ -106,6 +180,17 @@ void displayMenu(sfRenderWindow* _window)
 
 			}
 		}
+
+
+		sfRenderWindow_drawSprite(_window, spSettingsButton, NULL);
+		sfRenderWindow_drawText(_window, playText, NULL);
+		sfRenderWindow_drawText(_window, editorText, NULL);
+		sfRenderWindow_drawText(_window, quitterText, NULL);
+		sfRenderWindow_drawText(_window, gameNameText, NULL);
+
+
+
+
 	}
 	if (state == GAME) 
 	{
