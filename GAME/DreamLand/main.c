@@ -3,7 +3,7 @@
 #include "chest.h"
 #include "map.h"
 #include "PNJ.h"
-
+#include "menu.h"
 
 
 int main()
@@ -23,7 +23,8 @@ int main()
 	initPlayer();
 	initMap();
 	initPNJ();
-	state = GAME;
+	initMenu();
+	state = MENU;
 
 
 	//////////////////////////
@@ -63,12 +64,23 @@ int main()
 		updateMap(window);
 		updatePlayer();
 		updatePNJ();
+		updateMenu();
 
 		//////////////////////////
 		//		  Display		//
 		//////////////////////////
 
 		sfRenderWindow_clear(window, sfBlack);
+		if (state == MENU)
+		{
+			displayMenu(window);
+
+
+
+
+
+
+		}
 		if (state == GAME)
 		{
 			/////////////////////////////////////////////////////
@@ -122,7 +134,7 @@ int main()
 			displayMap(window);
 			//displayChest(window);
 			displayPlayer(window);
-			displayPNJ(window);
+			//displayPNJ(window);
 
 			//View minimap
 			sfView_setCenter(view, posViewMinimap);
@@ -130,7 +142,6 @@ int main()
 			displayMap(window);
 			//displayChest(window);
 			displayPlayer(window);
-			displayPNJ(window);
 		}
 		if (state == EDITOR)
 		{
