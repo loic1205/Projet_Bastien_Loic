@@ -103,6 +103,9 @@ void updatePlayer()
 	}
 }
 
+
+
+
 void displayPlayer(sfRenderWindow* _window)
 {
 	sfRenderWindow_drawSprite(_window, spPlayer, NULL);
