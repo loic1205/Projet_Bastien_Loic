@@ -1,2 +1,5 @@
 ﻿  pnj.c
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\pnj.c(10,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\pnj.c(10,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\pnj.c(15,37): warning C4305: 'initializing': truncation from 'double' to 'float'
   DreamLand.vcxproj -> C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
