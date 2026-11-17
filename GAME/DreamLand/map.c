@@ -81,8 +81,6 @@ void updateMap(sfRenderWindow* _window)
 		{
 			state = EDITOR;
 			keyTimer = 0.0f;
-
-
 		}
 
 		if (sfMouse_isButtonPressed(sfMouseLeft) && keyTimer > 0.2f)
@@ -110,9 +108,6 @@ void updateMap(sfRenderWindow* _window)
 						float distance = (float)sqrt(pow((chestPos.x - (position.x) + 17 / 2), 2) + pow((chestPos.y - 5 - (position.y) + 23 / 2), 2));
 
 
-
-
-
 						chestAlreadyexist = false;
 
 						for (int z = 0; z < sizeof(chest) / sizeof(chest[0]); z++)
@@ -132,22 +127,10 @@ void updateMap(sfRenderWindow* _window)
 							chest[i].position = (sfVector2f){ (float)chestPos.x, (float)chestPos.y };
 							i++;
 						}
-
-
-
-
-
 					}
 				}
 			}
 		}
-
-
-
-
-
-
-
 	}
 	else if (state == EDITOR)
 	{
@@ -156,9 +139,6 @@ void updateMap(sfRenderWindow* _window)
 			state = GAME;
 			keyTimer = 0.0f;
 		}
-
-
-		
 
 
 		if (sfKeyboard_isKeyPressed(sfKeyNum1) && !sfKeyboard_isKeyPressed(sfKeyLControl))
@@ -219,8 +199,6 @@ void updateMap(sfRenderWindow* _window)
 		}
 
 
-
-
 		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
 		{
 			sfView_zoom(editorView, 0.999f);
@@ -251,7 +229,6 @@ void updateMap(sfRenderWindow* _window)
 			posEditorView.x -= 0.4f;
 		}
 	}
-
 }
 
 void displayMap(sfRenderWindow* _window)
@@ -285,8 +262,6 @@ void displayMap(sfRenderWindow* _window)
 				tileRect.position.x = (map[y][x] - 32) * tileRect.size.x;
 				tileRect.position.y = tileRect.size.y*4;
 			}
-
-
 
 			sfSprite_setTextureRect(tileSprite, tileRect);
 			sfVector2f pos = { x * tileRect.size.x, y * tileRect.size.y };
