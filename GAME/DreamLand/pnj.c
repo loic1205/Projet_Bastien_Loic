@@ -5,12 +5,14 @@ sfSprite* spPNJ;
 sfIntRect irectPNJ = { 0, 0, 64, 64 };
 sfVector2f positionPNJ = {30.0f, 30.0f};
 
-sfText* dialogue;
+sfText* text;
 sfFont* font;
+sfVector2f scaleText = { 0.1, 0.1 };
+
 sfTexture* texDialogue;
 sfSprite* spDialogue;
-sfIntRect irectDialogue = { 0, 0, 64, 64 };
-
+sfIntRect irectDialogue = { 0, 0, 10000, 10000 };
+sfVector2f scaleDialogue = { 0.125, 0.08 };
 
 void initPNJ()
 {
@@ -24,27 +26,29 @@ void initPNJ()
 
 
 	font = sfFont_createFromFile(FONT_PATH"Crimson_Horror_One.ttf");
-	dialogue = sfText_create(font);
-	sfText_setString(dialogue, "HELLO WORLD!!!");
-	sfText_setCharacterSize(dialogue, 20);
+	text = sfText_create(font);
+	sfText_setString(text, "HELLO WORLD!!!");
+	sfText_setCharacterSize(text, 100);
+	sfText_scale(text, scaleText);
 
 
-	texDialogue = sfTexture_createFromFile(FONT_PATH"dialogue_text.png", NULL);
+	texDialogue = sfTexture_createFromFile(TEXTURE_PATH"dialogue_text.png", NULL);
 	spDialogue = sfSprite_create(texDialogue);
 	sfSprite_setTextureRect(spDialogue, irectDialogue);
+	sfSprite_setScale(spDialogue, scaleDialogue);
 }
 
 void updatePNJ() 
 {
-	sfText_setPosition(dialogue, (sfVector2f) { posView.x - 80, posView.y + 50 });
-	sfSprite_setPosition(spDialogue, (sfVector2f) { posView.x - 80, posView.y + 50 });
+	sfText_setPosition(text, (sfVector2f) { posView.x - 60, posView.y + 40 });
+	sfSprite_setPosition(spDialogue, (sfVector2f) { posView.x - 70, posView.y + 10 });
 }
 
 
 
 void displayPNJ(sfRenderWindow* _window)
 {
-	sfRenderWindow_drawText(_window, dialogue, NULL);
 	sfRenderWindow_drawSprite(_window, spDialogue, NULL);
 	sfRenderWindow_drawSprite(_window, spPNJ, NULL);
+	sfRenderWindow_drawText(_window, text, NULL);
 }
