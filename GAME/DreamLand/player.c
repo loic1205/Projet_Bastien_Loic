@@ -220,7 +220,6 @@ void updatePlayer()
 
 		sfSprite_setPosition(spPlayer, position);
 		playerfrect = sfSprite_getGlobalBounds(spPlayer);
-		printf("%d\n", frameX);
 	}
 }
 

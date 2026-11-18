@@ -111,11 +111,11 @@ void updateMenu(sfRenderWindow* _window)
 		sfRenderWindow_close(_window);
 	}
 
-	//if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 193 && mousePos.y < 256 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
-	//{
-	//	butonPressedTimer = 0.0f;
-	//	state = GAME;
-	//}
+	if (mousePos.x > 890 && mousePos.x < 938 && mousePos.y > 415 && mousePos.y < 462 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		printf("settings\n");
+	}
 
 }
 

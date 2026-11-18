@@ -24,7 +24,7 @@ int main()
 	initMap();
 	initPNJ();
 	initMenu();
-	state = GAME;
+	state = MENU;
 
 
 	//////////////////////////
@@ -75,11 +75,11 @@ int main()
 		//		  Update		//
 		//////////////////////////
 
-
 		updateMap(window);
 		updatePlayer();
 		updatePNJ();
-		updateMenu(window);
+		if(state == MENU)
+			updateMenu(window);
 
 		//////////////////////////
 		//		  Display		//
