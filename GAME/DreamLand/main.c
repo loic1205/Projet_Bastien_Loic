@@ -57,7 +57,7 @@ int main()
 				sfRenderWindow_close(window);
 		}
 
-		if (state != MENU && sfKeyboard_isScancodePressed(sfScanEscape))
+		if ((state == GAME || state == EDITOR) && sfKeyboard_isScancodePressed(sfScanEscape))
 			state = MENU;
 
 
@@ -80,21 +80,17 @@ int main()
 		updatePNJ();
 		if(state == MENU)
 			updateMenu(window);
+		if (state == SETTINGS)
+			updateSettings(window);
 
 		//////////////////////////
 		//		  Display		//
 		//////////////////////////
 
 		sfRenderWindow_clear(window, sfBlack);
-		if (state == MENU)
+		if (state == MENU || state == SETTINGS)
 		{
 			displayMenu(window);
-
-
-
-
-
-
 		}
 		if (state == GAME)
 		{
