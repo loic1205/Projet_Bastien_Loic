@@ -133,7 +133,7 @@ void updatePlayer()
 
 		// déplacement vers la droite
 
-		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack)
+		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack )
 		{
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{
@@ -148,7 +148,7 @@ void updatePlayer()
 
 
 		// bouton d'attaque
-		if (sfMouse_isButtonPressed(sfMouseLeft) && !player_attack)
+		if (sfMouse_isButtonPressed(sfMouseLeft) && !player_attack && animtime > 0.09f)
 		{
 			frameX = 0;
 			player_attack = true; // permet de laisser l'animation d'attaque sans rester appuyez sur le clic droit de la souris

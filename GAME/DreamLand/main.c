@@ -61,16 +61,6 @@ int main()
 			state = MENU;
 
 
-
-
-
-
-
-
-
-
-
-
 		//////////////////////////
 		//		  Update		//
 		//////////////////////////
@@ -89,13 +79,9 @@ int main()
 		if (state == MENU)
 		{
 			displayMenu(window);
-
-
-
-
-
-
 		}
+
+
 		if (state == GAME)
 		{
 			/////////////////////////////////////////////////////
@@ -147,15 +133,18 @@ int main()
 			sfView_setCenter(view, playerCenter);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
+			displaytest(window);
 			//displayChest(window);
-			displayPlayer(window);
 			//displayPNJ(window);
+			displayPlayer(window);
 
 			//View minimap
 			sfView_setCenter(view, posViewMinimap);
 			sfRenderWindow_setView(window, viewMinimap);
 			displayMap(window);
+			displaytest(window);
 			//displayChest(window);
+			//displayPNJ(window);
 			displayPlayer(window);
 		}
 		if (state == EDITOR)
@@ -166,6 +155,7 @@ int main()
 			displayEditorTile(window);
 			//displayChest(window);
 			displayMap(window);
+			displaytest(window);
 		}
 		sfRenderWindow_display(window);
 	}	
