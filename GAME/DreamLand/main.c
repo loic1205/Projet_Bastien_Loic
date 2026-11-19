@@ -68,27 +68,23 @@ int main()
 		updateMap(window);
 		updatePlayer();
 		updatePNJ();
+
 		if(state == MENU)
 			updateMenu(window);
+
 		if (state == SETTINGS)
 			updateSettings(window);
+
 		if (state == PAUSE_MENU)
 			updatePauseMenu(window);
+
+
 
 		//////////////////////////
 		//		  Display		//
 		//////////////////////////
 
 		sfRenderWindow_clear(window, sfBlack);
-		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)
-		{
-			if (state != SETTINGS)
-				displayBackground(window);
-
-			displayMenu(window);
-		}
-
-
 		if (state == GAME)
 		{
 			/////////////////////////////////////////////////////
@@ -159,11 +155,20 @@ int main()
 			//View editor
 			sfView_setCenter(editorView, posEditorView);
 			sfRenderWindow_setView(window, editorView);
-			displayEditorTile(window);
 			//displayChest(window);
 			displayMap(window);
 			displaytest(window);
 		}
+		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)
+		{
+			sfRenderWindow_setView(window, sfRenderWindow_getDefaultView(window));
+
+			if (state != SETTINGS)
+				displayBackground(window);
+
+			displayMenu(window);
+		}
+
 		sfRenderWindow_display(window);
 	}	
 

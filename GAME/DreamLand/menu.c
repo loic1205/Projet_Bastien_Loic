@@ -556,14 +556,6 @@ void displayMenu(sfRenderWindow* _window)
 		sfRenderWindow_drawText(_window, textMenuButtonPM, NULL);
 		sfRenderWindow_drawSprite(_window, spLeaveButtonPM, NULL);
 		sfRenderWindow_drawText(_window, textLeaveButtonPM, NULL);
-
-
-
-
-
-
-
-
 	}
 
 }

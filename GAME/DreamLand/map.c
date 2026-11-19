@@ -391,12 +391,6 @@ void displaytest(sfRenderWindow* _window)
 		sfRenderWindow_drawSprite(_window, summons[i], NULL); // dessine les copies de spriteSummon
 }
 
-void displayEditorTile(sfRenderWindow* _window)
-{
-
-}
-
-
 /////////////////////////////////////////////////////
 ////                                             ////
 ////      GESTION DES COLLISIONS DE LA MAP       ////
