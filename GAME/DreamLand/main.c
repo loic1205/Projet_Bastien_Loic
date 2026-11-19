@@ -58,7 +58,7 @@ int main()
 		}
 
 		if ((state == GAME || state == EDITOR) && sfKeyboard_isScancodePressed(sfScanEscape))
-			state = MENU;
+			state = PAUSE_MENU;
 
 
 		//////////////////////////
@@ -72,13 +72,15 @@ int main()
 			updateMenu(window);
 		if (state == SETTINGS)
 			updateSettings(window);
+		if (state == PAUSE_MENU)
+			updatePauseMenu(window);
 
 		//////////////////////////
 		//		  Display		//
 		//////////////////////////
 
 		sfRenderWindow_clear(window, sfBlack);
-		if (state == MENU || state == SETTINGS)
+		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)
 		{
 			if (state != SETTINGS)
 				displayBackground(window);
