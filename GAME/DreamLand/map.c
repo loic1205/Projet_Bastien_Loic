@@ -407,7 +407,7 @@ void displayMap(sfRenderWindow* _window)
 
 	if (state == EDITOR)
 	{
-		if (!tileSummon)
+		if (!tileSummon && !tileSpawn)
 		{
 			tileRect.position.x = tileTypeX * tileRect.size.x;
 			tileRect.position.y = tileTypeY * tileRect.size.y;
@@ -445,7 +445,7 @@ void displayMap(sfRenderWindow* _window)
 	}
 }
 
-void displaytest(sfRenderWindow* _window)
+void displaySummon(sfRenderWindow* _window)
 {
 	sfRenderWindow_drawSprite(_window, spriteSummon, NULL); // affiche le sprite rituel
 

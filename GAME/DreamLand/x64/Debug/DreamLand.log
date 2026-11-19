@@ -1,4 +1,5 @@
-﻿  map.c
+﻿  main.c
+  map.c
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(68,44): warning C4305: 'initialisation' : troncation de 'double' à 'float'
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(68,49): warning C4305: 'initialisation' : troncation de 'double' à 'float'
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(74,49): warning C4305: 'initialisation' : troncation de 'double' à 'float'
@@ -34,4 +35,18 @@ C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(499,8
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(500,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(530,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(540,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+  player.c
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(69,49): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(69,49): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(77,45): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(77,45): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(171,53): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(171,53): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(189,51): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(189,51): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(200,46): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(200,46): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(212,50): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(212,50): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+  Génération de code en cours...
   DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe

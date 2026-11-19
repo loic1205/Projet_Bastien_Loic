@@ -138,7 +138,7 @@ int main()
 			sfView_setCenter(view, playerCenter);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
-			displaytest(window);
+			displaySummon(window);
 			//displayChest(window);
 			//displayPNJ(window);
 			displayPlayer(window);
@@ -147,7 +147,7 @@ int main()
 			sfView_setCenter(view, posViewMinimap);
 			sfRenderWindow_setView(window, viewMinimap);
 			displayMap(window);
-			displaytest(window);
+			displaySummon(window);
 			//displayChest(window);
 			//displayPNJ(window);
 			displayPlayer(window);
@@ -160,7 +160,7 @@ int main()
 			displayEditorTile(window);
 			//displayChest(window);
 			displayMap(window);
-			displaytest(window);
+			displaySummon(window);
 		}
 		sfRenderWindow_display(window);
 	}	
