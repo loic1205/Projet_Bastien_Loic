@@ -136,7 +136,7 @@ int main()
 			sfView_setCenter(view, playerCenter);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
-			displaytest(window);
+			displaySummon(window);
 			//displayChest(window);
 			//displayPNJ(window);
 			displayPlayer(window);
@@ -145,7 +145,7 @@ int main()
 			sfView_setCenter(view, posViewMinimap);
 			sfRenderWindow_setView(window, viewMinimap);
 			displayMap(window);
-			displaytest(window);
+			displaySummon(window);
 			//displayChest(window);
 			//displayPNJ(window);
 			displayPlayer(window);
@@ -157,7 +157,7 @@ int main()
 			sfRenderWindow_setView(window, editorView);
 			//displayChest(window);
 			displayMap(window);
-			displaytest(window);
+			displaySummon(window);
 		}
 		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)
 		{
