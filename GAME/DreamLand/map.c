@@ -9,13 +9,26 @@
 ////                                             ////
 /////////////////////////////////////////////////////
 
+
+// texture du spawn du joueur
+sfTexture* texSpawn;
+sfSprite* spSpawn;
+sfIntRect irectSpawn = { 0,0,32,64 }; // rectangle du sprite du rituel
+sfVector2f positionCoffin = { 32.0f, 32.0f }; // position du sprite du spawn
+bool tileSpawn = false;
+
+
+// texture rituel
 sfSprite* summons[MAX_SUMMON];
 int summonCount = 0;
-
-//texture rituel
 sfTexture* texSummon;
 sfSprite* spriteSummon;
 sfSprite* previewSummon;
+sfIntRect irectSummon = { 0,0,500,500 }; // rectangle du sprite du rituel
+sfVector2f positionSummon = { 1080.0f, 400.0f }; // position du sprite du rituel
+bool tileSummon = false;
+bool summonOrigin = false;
+
 
 // texture map
 sfTexture* tileTexture;
@@ -26,21 +39,16 @@ extern sfVector2f position;
 
 float keyTimer = 0.0f;
 
-sfIntRect irectSummon = { 0,0,500,500 }; // rectangle du sprite du rituel
-sfVector2f positionSummon = { 1080.0f, 400.0f }; // position du sprite du rituel
-
 
 //view
 extern sfVector2f posEditorView;
-
-bool tileSummon = false;
-bool summonOrigin = false;
 
 
 //chest
 extern Chest chest[20];
 sfVector2i chestPos;
 bool chestAlreadyexist = false;
+
 
 int map[MAP_HEIGHT][MAP_WIDTH];
 int tileTypeX = 0;
@@ -52,6 +60,12 @@ void initMap()
 	// récupère le tileSheet de la map
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Document.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
+
+	// récupère le sprite du cercueil (spawn) 
+	texSpawn = sfTexture_createFromFile(TEXTURE_PATH"/tilesetPlayer/coffin_open.jpg", NULL);
+	spSpawn = sfSprite_create(texSpawn);
+	sfSprite_setTextureRect(spSpawn, irectSummon);
+	sfSprite_setScale(spSpawn, (sfVector2f) { 0.1, 0.1 });
 
 	// récupère le sprite du rituel 
 	texSummon = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel.png", NULL);
@@ -95,10 +109,16 @@ void initMapBin()
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"tileset1.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
 
-	// récupère le sprite du rituel (test shader light fade-off)
+	// récupère le sprite du cercueil (spawn) 
+	texSpawn = sfTexture_createFromFile(TEXTURE_PATH"/tilesetPlayer/coffin_open.jpg", NULL);
+	spSpawn = sfSprite_create(texSpawn);
+	sfSprite_setTextureRect(spSpawn, irectSpawn);
+	sfSprite_setScale(spSpawn, (sfVector2f) { 0.1, 0.1 });
+
+	// récupère le sprite du rituel
 	texSummon = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel.png", NULL);
 	spriteSummon = sfSprite_create(texSummon);
-	sfSprite_setTextureRect(spriteSummon, irectSummon);
+	sfSprite_setTextureRect(spriteSummon, irectSpawn);
 
 	// créer une preview du sprite rituel a afficher en EDITOR au niveau du curseur
 	previewSummon = sfSprite_create(texSummon);
@@ -162,45 +182,62 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isKeyPressed(sfKeyNum1) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 0;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum2) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 1;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum3) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 2;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum4) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 3;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum5) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 4;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum6) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 5;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum7) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 6;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum8) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 7;
+			tileSpawn = false;
 			tileSummon = false;
 		}
 		if (sfKeyboard_isScancodePressed(sfScanR) && !sfKeyboard_isKeyPressed(sfKeyLControl))
+		{
+			tileSpawn = false;
 			tileSummon = true;
+		}
+		if (sfKeyboard_isScancodePressed(sfScanO) && !sfKeyboard_isKeyPressed(sfKeyLControl))
+		{
+			tileSpawn = true;
+			tileSummon = false;
+		}
+
 
 		// permet de changer la ligne sélectionner du spritesheet de la map 
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum1))
@@ -227,6 +264,8 @@ void updateMap(sfRenderWindow* _window)
 		if (sfMouse_isButtonPressed(sfMouseLeft))
 		{ 
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+			sfVector2f pos = { (float)mousePos.x * 2 - (tileRect.size.x / 2), (float)mousePos.y * 2 - (tileRect.size.y / 2) };
+
 
 			if(!tileSummon)
 			{
@@ -239,8 +278,6 @@ void updateMap(sfRenderWindow* _window)
 			}
 			else if (keyTimer > 0.2f && summonCount < MAX_SUMMON)
 			{
-				sfVector2f pos = { (float)mousePos.x * 2 - (tileRect.size.x / 2), (float)mousePos.y * 2 - (tileRect.size.y / 2) };
-
 				if (!summonOrigin) // place le rituel originale
 				{
 					keyTimer = 0.0f;
@@ -258,6 +295,13 @@ void updateMap(sfRenderWindow* _window)
 					sfSprite_setPosition(summons[summonCount], pos);
 					summonCount++;
 				}
+			}
+			else if (tileSpawn)
+			{
+				keyTimer = 0.0f;
+
+				positionCoffin = pos;
+				sfSprite_setPosition(spSpawn, positionCoffin);
 			}
 		}
 
@@ -354,6 +398,13 @@ void displayMap(sfRenderWindow* _window)
 		}
 	}
 
+
+	/////////////////////////////////////////////////////
+	////                                             ////
+	////   GESTION DU SPRITE SELECTIONNER AFICHER    ////
+	////                                             ////
+	/////////////////////////////////////////////////////
+
 	if (state == EDITOR)
 	{
 		if (!tileSummon)
@@ -369,7 +420,7 @@ void displayMap(sfRenderWindow* _window)
 			sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
 			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
 		}
-		else
+		else if (tileSummon)
 		{
 			sfSprite_setTexture(spriteSummon, texSummon, NULL);
 			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
@@ -378,6 +429,17 @@ void displayMap(sfRenderWindow* _window)
 			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
 			sfSprite_setPosition(previewSummon, fMousePos);
 			sfRenderWindow_drawSprite(_window, previewSummon, NULL); // affiche le sprite choisi au niveau du curseur
+			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
+		}
+		else
+		{
+			sfSprite_setTexture(spSpawn, texSpawn, NULL);
+			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
+			iMousePos.x *= 2;
+			iMousePos.y *= 2;
+			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
+			sfSprite_setPosition(spSpawn, fMousePos);
+			sfRenderWindow_drawSprite(_window, spSpawn, NULL); // affiche le sprite choisi au niveau du curseur
 			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
 		}
 	}
