@@ -80,6 +80,9 @@ int main()
 		sfRenderWindow_clear(window, sfBlack);
 		if (state == MENU || state == SETTINGS)
 		{
+			if (state != SETTINGS)
+				displayBackground(window);
+
 			displayMenu(window);
 		}
 

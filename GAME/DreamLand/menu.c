@@ -68,7 +68,10 @@ sfSprite* spSettingsButton;
 sfIntRect irectSettingsButton = { 32 * 4, 32 * 3, 32, 32 };
 sfVector2f scaleTextMenu = { 0.3, 0.3 };
 
-
+// inits sprite background fenêtre de jeu state = MENU
+sfTexture* texBackground_MenuWindow;
+sfSprite* spBackground_MenuWindow;
+sfIntRect irectBackground_MenuWindow = { 0, 0, 1200, 700 };
 
 
 sfTexture* texButtonPM;
@@ -87,6 +90,13 @@ float butonPressedTimer = 0.0f;
 
 void initMenu()
 {
+	// background de la fenêtre de jeu dans le state MENU
+	texBackground_MenuWindow = sfTexture_createFromFile(TEXTURE_PATH"background/background_menu.jpg", NULL);
+	spBackground_MenuWindow = sfSprite_create(texBackground_MenuWindow);
+	sfSprite_setTextureRect(spBackground_MenuWindow, irectBackground_MenuWindow);
+	sfSprite_setScale(spBackground_MenuWindow, (sfVector2f) { 1.1, 1.1 });
+
+
 	texMenuBackground = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/tilesetMenu.png", NULL);
 	spMenuBackground = sfSprite_create(texMenuBackground);
 	sfSprite_setTextureRect(spMenuBackground, irectMenuBackground);
@@ -247,9 +257,11 @@ void updateSettings(sfRenderWindow* window)
 }
 
 
-
-
-
+void displayBackground(sfRenderWindow* _window)
+{
+	// dessine le background de la fenêtre de jeu dans le Menu
+	sfRenderWindow_drawSprite(_window, spBackground_MenuWindow, NULL);
+}
 
 
 
