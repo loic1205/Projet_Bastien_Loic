@@ -97,11 +97,13 @@ sfText* textLeaveButtonPM;
 
 // inits sprite fenêtre de jeu state = SETTINGS
 
-
-
-
 sfSprite* spMenuButtonSM;
 sfText* textSettingsButtonSM;
+
+
+// inits des musique du menu
+
+sfMusic* musiqueMenu;
 
 
 
@@ -237,10 +239,11 @@ void initMenu()
 	sfText_setFillColor(textSettingsButtonSM, (sfColor) { 0, 0, 0, 255 });
 
 
+	//inits musique
 
-	
-
-
+	musiqueMenu = sfMusic_createFromFile(SOUND_PATH"music/musicMenu.mp3");
+	sfMusic_setLooping(musiqueMenu, true);
+	sfMusic_setVolume(musiqueMenu, 10.0f);
 
 }
 
@@ -272,6 +275,17 @@ void initSettings()
 
 void updateMenu(sfRenderWindow* _window)
 {
+	//musique
+
+	if (sfMusic_getStatus(musiqueMenu) != sfPlaying)
+		sfMusic_play(musiqueMenu);
+
+
+
+
+
+
+
 	sfVector2i mousePos = sfMouse_getPosition(_window);
 	//printf("%d %d\n", mousePos.x, mousePos.y);
 
@@ -460,8 +474,8 @@ void displayMenu(sfRenderWindow* _window)
 				sfSprite_setTextureRect(spMenuBackground, irectMenuBackground);
 				sfVector2f pos = { ((x * irectMenuBackground.size.x) / 2) + 305, ((y * irectMenuBackground.size.y) / 2) + 145 };
 				sfSprite_setPosition(spMenuBackground, pos);
+				sfSprite_setScale(spMenuBackground, (sfVector2f) { 0.5, 0.5 });
 				sfRenderWindow_drawSprite(_window, spMenuBackground, NULL);
-
 			}
 		}
 		
