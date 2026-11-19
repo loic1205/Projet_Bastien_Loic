@@ -43,6 +43,8 @@ void initPlayer()
 
 void updatePlayer()  
 {
+	if (state == PAUSE_MENU)
+		animtime = 0.0f;
 	if (state == GAME)
 	{
 		// place le joueur sur la map (sprite du joueur, position du joueur)
