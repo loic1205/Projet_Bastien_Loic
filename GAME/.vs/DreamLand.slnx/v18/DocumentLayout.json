@@ -51,8 +51,7 @@
               "ViewState": "AgIAAJIAAAAAAAAAAAAqwKsAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:13:11.579Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -64,9 +63,9 @@
               "Title": "map.c",
               "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\map.c",
               "RelativeDocumentMoniker": "DreamLand\\map.c",
-              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\map.c*",
-              "RelativeToolTip": "DreamLand\\map.c*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAABMAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\map.c",
+              "RelativeToolTip": "DreamLand\\map.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-18T08:56:55.18Z",
               "EditorCaption": ""
