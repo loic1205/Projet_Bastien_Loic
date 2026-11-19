@@ -51,8 +51,7 @@
               "ViewState": "AgIAAI0AAAAAAAAAAAAIwJ0AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:13:11.579Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -66,7 +65,7 @@
               "RelativeDocumentMoniker": "DreamLand\\map.c",
               "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\map.c*",
               "RelativeToolTip": "DreamLand\\map.c*",
-              "ViewState": "AgIAAOQAAAAAAAAAAAAIwPkAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAP4AAAAAAAAAAAAAAA8BAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-18T08:56:55.18Z",
               "EditorCaption": ""
@@ -81,8 +80,7 @@
               "RelativeToolTip": "DreamLand\\map.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-11-18T09:11:49.575Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-18T09:11:49.575Z"
             },
             {
               "$type": "Document",
@@ -94,8 +92,7 @@
               "RelativeToolTip": "DreamLand\\menu.c",
               "ViewState": "AgIAAFQAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2026-11-18T07:25:23.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-18T07:25:23.763Z"
             },
             {
               "$type": "Document",
@@ -119,8 +116,7 @@
               "RelativeToolTip": "DreamLand\\player.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2026-11-10T08:36:22.479Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-10T08:36:22.479Z"
             },
             {
               "$type": "Document",
@@ -132,8 +128,7 @@
               "RelativeToolTip": "DreamLand\\player.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-11-10T08:36:35.549Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-10T08:36:35.549Z"
             }
           ]
         }

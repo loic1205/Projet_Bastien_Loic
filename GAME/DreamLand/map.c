@@ -261,7 +261,7 @@ void updateMap(sfRenderWindow* _window)
 			}
 		}
 
-		if (sfKeyboard_isScancode(sfScanD) && keyTimer > 0.1f) // détruis les copies de summon et permet de toutes les replacer
+		if (sfKeyboard_isScancodePressed(sfScanD) && keyTimer > 0.1f) // détruis les copies de summon et permet de toutes les replacer
 		{
 			for (int i = 0; i < summonCount; i++)
 				sfSprite_destroy(summons[i]);

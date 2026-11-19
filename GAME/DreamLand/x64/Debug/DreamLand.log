@@ -6,7 +6,6 @@ C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(64,55
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(77,42): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(105,50): warning C4305: 'initialisation' : troncation de 'double' à 'float'
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(105,55): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(264,7): warning C4013: 'sfKeyboard_isScancode' non défini(e) ; extern retournant int pris par défaut
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(374,49): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(374,49): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(351,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
@@ -29,5 +28,4 @@ C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(437,8
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(438,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(468,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(478,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
-map.obj : error LNK2019: symbole externe non résolu sfKeyboard_isScancode référencé dans la fonction updateMap
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\\Debug\DreamLand.exe : fatal error LNK1120: 1 externes non résolus
+  DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
