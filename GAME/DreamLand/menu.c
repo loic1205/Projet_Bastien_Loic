@@ -72,16 +72,19 @@ sfVector2f scaleTextMenu = { 0.3, 0.3 };
 
 
 sfTexture* texButtonPM;
-
+sfIntRect irectButtonPM = { 0, 0, 690, 260 };
+sfFont* font;
 
 sfSprite* spPlayButtonPM;
-sfIntRect irectPlayButtonPM = { 308, 96, 197, 47 };
 sfSprite* spSettingsButtonPM;
-sfIntRect irectSettingsButtonPM = { 58, 24, 197, 47 };
-sfSprite* spRetourButtonPM;
-sfIntRect irectRetourButtonPM = { 0, 0, 197, 47 };
-sfSprite* spQuitterButtonPM;
-sfIntRect irectQuitterButtonPM = { 0, 0, 197, 47 };
+sfSprite* spMenuButtonPM;
+sfSprite* spLeaveButtonPM;
+
+sfText* textPlayButtonPM;
+sfText* textSettingsButtonPM;
+sfText* textMenuButtonPM;
+sfText* textLeaveButtonPM;
+
 
 float butonPressedTimer = 0.0f;
 
@@ -127,6 +130,7 @@ void initMenu()
 	sfText_scale(gameNameText, scaleTextMenu);
 	sfText_setPosition(gameNameText, (sfVector2f) { 600, 205 });
 
+
 	texSettingsButtonPressed = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/caillou.png", NULL);
 	spSettingsButton = sfSprite_create(texMenuBackground);
 	sfSprite_setTextureRect(spSettingsButton, irectSettingsButton);
@@ -134,13 +138,58 @@ void initMenu()
 	sfSprite_setScale(spSettingsButton, (sfVector2f) { 1.5, 1.5 });
 
 
-	texButtonPM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/buttonPM.png", NULL);
 
-	texSettingsButtonPressed = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/caillou.png", NULL);
+	texButtonPM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/buttonPM.png", NULL);
+	font = sfFont_createFromFile(FONT_PATH"fontMenu.ttf");
+	
 	spPlayButtonPM = sfSprite_create(texButtonPM);
-	sfSprite_setTextureRect(spPlayButtonPM, irectPlayButtonPM);
-	sfSprite_setPosition(spPlayButtonPM, (sfVector2f) { 500, 215 });
-	sfSprite_setScale(spPlayButtonPM, (sfVector2f) { 1.5, 1.5 });
+	sfSprite_setTextureRect(spPlayButtonPM, irectButtonPM);
+	sfSprite_setPosition(spPlayButtonPM, (sfVector2f) { 547, 175 });
+	sfSprite_setScale(spPlayButtonPM, (sfVector2f) { 0.25, 0.25 });
+
+	textPlayButtonPM = sfText_create(font);
+	sfText_setString(textPlayButtonPM, "JOUER");
+	sfText_setPosition(textPlayButtonPM, (sfVector2f){ 592, 182 });
+	sfText_setFillColor(textPlayButtonPM, (sfColor){0, 0, 0, 255});
+
+
+
+
+	spSettingsButtonPM = sfSprite_create(texButtonPM);
+	sfSprite_setTextureRect(spSettingsButtonPM, irectButtonPM);
+	sfSprite_setPosition(spSettingsButtonPM, (sfVector2f) { 547, 260 });
+	sfSprite_setScale(spSettingsButtonPM, (sfVector2f) { 0.25, 0.25 });
+
+	textSettingsButtonPM = sfText_create(font);
+	sfText_setString(textSettingsButtonPM, "PARAMETRE");
+	sfText_setPosition(textSettingsButtonPM, (sfVector2f) { 570, 272 });
+	sfText_setFillColor(textSettingsButtonPM, (sfColor) { 0, 0, 0, 255 });
+	sfText_setScale(textSettingsButtonPM, (sfVector2f) { 0.8, 0.8});
+
+
+
+	spMenuButtonPM = sfSprite_create(texButtonPM);
+	sfSprite_setTextureRect(spMenuButtonPM, irectButtonPM);
+	sfSprite_setPosition(spMenuButtonPM, (sfVector2f) { 547, 345});
+	sfSprite_setScale(spMenuButtonPM, (sfVector2f) { 0.25, 0.25 });
+
+	textMenuButtonPM = sfText_create(font);
+	sfText_setString(textMenuButtonPM, "MENU");
+	sfText_setPosition(textMenuButtonPM, (sfVector2f) { 597, 352 });
+	sfText_setFillColor(textMenuButtonPM, (sfColor) { 0, 0, 0, 255 });
+
+
+
+
+	spLeaveButtonPM = sfSprite_create(texButtonPM);
+	sfSprite_setTextureRect(spLeaveButtonPM, irectButtonPM);
+	sfSprite_setPosition(spLeaveButtonPM, (sfVector2f) { 547, 430 });
+	sfSprite_setScale(spLeaveButtonPM, (sfVector2f) { 0.25, 0.25 });
+
+	textLeaveButtonPM = sfText_create(font);
+	sfText_setString(textLeaveButtonPM, "QUITTER");
+	sfText_setPosition(textLeaveButtonPM, (sfVector2f) { 578, 437 });
+	sfText_setFillColor(textLeaveButtonPM, (sfColor) { 0, 0, 0, 255 });
 
 
 
@@ -231,7 +280,42 @@ void updateMenu(sfRenderWindow* _window)
 	}
 }
 
-void updateSettings(sfRenderWindow* window)
+void updatePauseMenu(sfRenderWindow* _window)
+{
+
+	sfVector2i mousePos = sfMouse_getPosition(_window);
+	butonPressedTimer += getDeltaTime();
+
+
+	if (sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		printf("%d %d\n", mousePos.x, mousePos.y);
+		butonPressedTimer = 0.0f;
+	}
+
+
+	sfText_setOutlineThickness(textPlayButtonPM, 0);
+	sfText_setOutlineThickness(textSettingsButtonPM, 0);
+	sfText_setOutlineThickness(textMenuButtonPM, 0);
+	sfText_setOutlineThickness(textLeaveButtonPM, 0);
+
+
+	if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 193 && mousePos.y < 256)
+	{
+
+	}
+
+
+
+
+
+
+
+
+
+}
+
+void updateSettings(sfRenderWindow* _window)
 {
 
 
@@ -323,7 +407,6 @@ void displayMenu(sfRenderWindow* _window)
 		sfRenderWindow_drawText(_window, quitterText, NULL);
 		sfRenderWindow_drawText(_window, gameNameText, NULL);
 
-		sfRenderWindow_drawSprite(_window, spPlayButtonPM, NULL);
 
 
 	}
@@ -383,6 +466,7 @@ void displayMenu(sfRenderWindow* _window)
 				sfSprite_setPosition(spMenuBackground, pos);
 				sfSprite_setScale(spMenuBackground, (sfVector2f) { 2, 2 });
 				sfRenderWindow_drawSprite(_window, spMenuBackground, NULL);
+
 
 
 			}
@@ -446,9 +530,20 @@ void displayMenu(sfRenderWindow* _window)
 				sfSprite_setScale(spMenuBackground, (sfVector2f) { 2, 2 });
 				sfRenderWindow_drawSprite(_window, spMenuBackground, NULL);
 
-				
+
+
 			}
+
 		}
+
+		sfRenderWindow_drawSprite(_window, spPlayButtonPM, NULL);
+		sfRenderWindow_drawText(_window, textPlayButtonPM, NULL);
+		sfRenderWindow_drawSprite(_window, spSettingsButtonPM, NULL);
+		sfRenderWindow_drawText(_window, textSettingsButtonPM, NULL);
+		sfRenderWindow_drawSprite(_window, spMenuButtonPM, NULL);
+		sfRenderWindow_drawText(_window, textMenuButtonPM, NULL);
+		sfRenderWindow_drawSprite(_window, spLeaveButtonPM, NULL);
+		sfRenderWindow_drawText(_window, textLeaveButtonPM, NULL);
 
 
 
