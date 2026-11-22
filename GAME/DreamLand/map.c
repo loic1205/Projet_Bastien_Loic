@@ -34,6 +34,14 @@ int currentLayer = 0;
 int tileTypeX = 0;
 int tileTypeY = 0;
 
+// renvoie true si la souris est au-dessus du panneau de tiles
+static bool mouseOnPalette(sfRenderWindow* _window)
+{
+	sfVector2u winSize = sfRenderWindow_getSize(_window);
+	sfVector2i m = sfMouse_getPositionRenderWindow(_window);
+	return m.x >= winSize.x * (1.0f - PALETTE_RATIO);
+}
+
 // initialise la map en fichier .txt
 void initMap()
 {
@@ -196,8 +204,27 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum5))
 			tileTypeY = 4;
 
+		bool onPalette = mouseOnPalette(_window);
 
-		if (sfMouse_isButtonPressed(sfMouseRight))
+		// clic sur le panneau : sélectionne la tile cliquée
+		if (onPalette && sfMouse_isButtonPressed(sfMouseLeft))
+		{
+			sfVector2u winSize = sfRenderWindow_getSize(_window);
+			sfVector2i m = sfMouse_getPositionRenderWindow(_window);
+			float panelW = winSize.x * PALETTE_RATIO;
+			float tileSize = panelW / TILESHEET_COLS;
+
+			int col = (m.x - (winSize.x - panelW)) / tileSize;
+			int row = m.y / tileSize;
+
+			if (col >= 0 && col < TILESHEET_COLS && row >= 0 && row < TILESHEET_ROWS)
+			{
+				tileTypeX = col;
+				tileTypeY = row;
+			}
+		}
+
+		if (!onPalette && sfMouse_isButtonPressed(sfMouseRight))
 		{
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
 
@@ -209,7 +236,7 @@ void updateMap(sfRenderWindow* _window)
 				map[currentLayer][y][x] = -1; // case transparente
 		}
 
-		if (sfMouse_isButtonPressed(sfMouseLeft))
+		if (!onPalette && sfMouse_isButtonPressed(sfMouseLeft))
 		{ 
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
 			sfVector2f pos = { (float)mousePos.x * 2 - (tileRect.size.x / 2), (float)mousePos.y * 2 - (tileRect.size.y / 2) };
@@ -221,7 +248,7 @@ void updateMap(sfRenderWindow* _window)
 			map[currentLayer][y][x] = tileTypeX + (8 * tileTypeY); // 8 * tileTypeY permet de récupérer la tile correspondantes a la ligne du tableau sélectionner 
 		}
 
-		if (sfMouse_isButtonPressed(sfMouseMiddle))
+		if (!onPalette && sfMouse_isButtonPressed(sfMouseMiddle))
 		{
 			// récupère la tile de la map pour en poser une copie ailleurss
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
@@ -268,6 +295,64 @@ void updateMap(sfRenderWindow* _window)
 			posEditorView.x -= 0.4f;
 		}
 	}
+}
+
+// affiche le panneau de sélection des tiles à droite de l'écran (mode EDITOR)
+void displayTilePalette(sfRenderWindow* _window)
+{
+	if (state != EDITOR) return;
+
+	static sfRectangleShape* bg = NULL;
+	static sfRectangleShape* selection = NULL;
+	if (!bg)
+	{
+		bg = sfRectangleShape_create();
+		sfRectangleShape_setFillColor(bg, (sfColor) { 30, 30, 30, 255 });
+
+		selection = sfRectangleShape_create();
+		sfRectangleShape_setFillColor(selection, sfTransparent);
+		sfRectangleShape_setOutlineColor(selection, sfYellow);
+		sfRectangleShape_setOutlineThickness(selection, 2.0f);
+	}
+
+	sfVector2u winSize = sfRenderWindow_getSize(_window);
+	float panelW = winSize.x * PALETTE_RATIO;
+	float panelX = winSize.x - panelW;
+	float tileSize = panelW / TILESHEET_COLS; // taille d'une tile à l'écran
+
+	// vue fixe qui couvre toute la fenêtre (on garde l'ancienne pour la remettre après)
+	sfView* oldView = sfView_copy(sfRenderWindow_getView(_window));
+	sfView* uiView = sfView_createFromRect((sfFloatRect) { { 0.0f, 0.0f }, { (float)winSize.x, (float)winSize.y } });
+	sfRenderWindow_setView(_window, uiView);
+
+	// fond du panneau
+	sfRectangleShape_setPosition(bg, (sfVector2f) { panelX, 0.0f });
+	sfRectangleShape_setSize(bg, (sfVector2f) { panelW, (float)winSize.y });
+	sfRenderWindow_drawRectangleShape(_window, bg, NULL);
+
+	// toutes les tiles du tileset
+	sfSprite_setScale(tileSprite, (sfVector2f) { tileSize / 32.0f, tileSize / 32.0f });
+	for (int r = 0; r < TILESHEET_ROWS; r++)
+	{
+		for (int c = 0; c < TILESHEET_COLS; c++)
+		{
+			sfIntRect rect = { { c * 32, r * 32 },{ 32, 32 } };
+			sfSprite_setTextureRect(tileSprite, rect);
+			sfSprite_setPosition(tileSprite, (sfVector2f) { panelX + c * tileSize, r* tileSize });
+			sfRenderWindow_drawSprite(_window, tileSprite, NULL);
+		}
+	}
+	sfSprite_setScale(tileSprite, (sfVector2f) { 1.0f, 1.0f }); // remet l'échelle normale
+
+	// contour jaune autour de la tile sélectionnée
+	sfRectangleShape_setPosition(selection, (sfVector2f) { panelX + tileTypeX * tileSize, tileTypeY* tileSize });
+	sfRectangleShape_setSize(selection, (sfVector2f) { tileSize, tileSize });
+	sfRenderWindow_drawRectangleShape(_window, selection, NULL);
+
+	// on remet la vue d'origine
+	sfRenderWindow_setView(_window, oldView);
+	sfView_destroy(uiView);
+	sfView_destroy(oldView);
 }
 
 // affichage des tiles dans la map en fonction de leur emplacement dans la tilesheet
@@ -323,16 +408,23 @@ void displayMap(sfRenderWindow* _window)
 
 	if (state == EDITOR)
 	{
-		tileRect.position.x = tileTypeX * tileRect.size.x;
-		tileRect.position.y = tileTypeY * tileRect.size.y;
-		sfSprite_setTextureRect(tileSprite, tileRect);
-		sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
-		iMousePos.x *= 2;
-		iMousePos.y *= 2;
-		sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
-		sfSprite_setPosition(tileSprite, fMousePos);
-		sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
-		sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
+		if (mouseOnPalette(_window))
+		{
+			sfRenderWindow_setMouseCursorVisible(_window, true); // curseur normal sur le panneau
+		}
+		else
+		{
+			tileRect.position.x = tileTypeX * tileRect.size.x;
+			tileRect.position.y = tileTypeY * tileRect.size.y;
+			sfSprite_setTextureRect(tileSprite, tileRect);
+			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
+			iMousePos.x *= 2;
+			iMousePos.y *= 2;
+			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
+			sfSprite_setPosition(tileSprite, fMousePos);
+			sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
+			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
+		}
 	}
 }
 
