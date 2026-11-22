@@ -1,2 +1,37 @@
-﻿  LINK : C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\\Debug\DreamLand.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
-  DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
+﻿  main.c
+  map.c
+  player.c
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(310,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(310,46): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(354,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(355,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(356,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(357,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(361,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(362,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(363,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(364,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(368,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(369,41): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(370,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(371,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(375,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(376,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(377,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(378,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(414,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(424,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(69,49): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(69,49): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(77,45): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(77,45): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(171,53): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(171,53): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(189,51): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(189,51): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(200,46): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(200,46): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(212,50): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
+C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\player.c(212,50): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
+  Génération de code en cours...
+  DreamLand.vcxproj -> C:\Users\Loïc\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
