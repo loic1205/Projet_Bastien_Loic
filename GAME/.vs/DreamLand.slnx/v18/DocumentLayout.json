@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 237,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "DreamLand\\main.c",
               "ToolTip": "C:\\Users\\Lo\u00EFc\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\main.c",
               "RelativeToolTip": "DreamLand\\main.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAJwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-10T08:13:11.579Z",
               "IsPinned": true,
@@ -60,10 +60,6 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "map.c",
@@ -71,7 +67,7 @@
               "RelativeDocumentMoniker": "DreamLand\\map.c",
               "ToolTip": "C:\\Users\\Lo\u00EFc\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\map.c",
               "RelativeToolTip": "DreamLand\\map.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ8BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACcBAAAAAAAAAAAowDgBAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2026-11-18T08:56:55.18Z",
               "EditorCaption": "",
@@ -85,7 +81,7 @@
               "RelativeDocumentMoniker": "DreamLand\\map.h",
               "ToolTip": "C:\\Users\\Lo\u00EFc\\Documents\\GitHub\\Projet_Bastien_Loic\\GAME\\DreamLand\\map.h",
               "RelativeToolTip": "DreamLand\\map.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-11-18T09:11:49.575Z",
               "EditorCaption": "",
