@@ -9,27 +9,6 @@
 ////                                             ////
 /////////////////////////////////////////////////////
 
-
-// texture du spawn du joueur
-sfTexture* texSpawn;
-sfSprite* spSpawn;
-sfIntRect irectSpawn = { 0,0,32,64 }; // rectangle du sprite du rituel
-sfVector2f positionCoffin = { 32.0f, 32.0f }; // position du sprite du spawn
-bool tileSpawn = false;
-
-
-// texture rituel
-sfSprite* summons[MAX_SUMMON];
-int summonCount = 0;
-sfTexture* texSummon;
-sfSprite* spriteSummon;
-sfSprite* previewSummon;
-sfIntRect irectSummon = { 0,0,500,500 }; // rectangle du sprite du rituel
-sfVector2f positionSummon = { 1080.0f, 400.0f }; // position du sprite du rituel
-bool tileSummon = false;
-bool summonOrigin = false;
-
-
 // texture map
 sfTexture* tileTexture;
 sfSprite* tileSprite;
@@ -50,7 +29,8 @@ sfVector2i chestPos;
 bool chestAlreadyexist = false;
 
 
-int map[MAP_HEIGHT][MAP_WIDTH];
+int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH]; // remplace l'ancien map[MAP_HEIGHT][MAP_WIDTH]
+int currentLayer = 0;
 int tileTypeX = 0;
 int tileTypeY = 0;
 
@@ -61,38 +41,31 @@ void initMap()
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Document.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
 
-	// récupère le sprite du cercueil (spawn) 
-	texSpawn = sfTexture_createFromFile(TEXTURE_PATH"/tilesetPlayer/coffin_open.jpg", NULL);
-	spSpawn = sfSprite_create(texSpawn);
-	sfSprite_setTextureRect(spSpawn, irectSummon);
-	sfSprite_setScale(spSpawn, (sfVector2f) { 0.1, 0.1 });
 
-	// récupère le sprite du rituel 
-	texSummon = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel.png", NULL);
-	spriteSummon = sfSprite_create(texSummon);
-	sfSprite_setTextureRect(spriteSummon, irectSummon);
-	sfSprite_setScale(spriteSummon, (sfVector2f) { 0.1, 0.1 });
-
-	// créer une preview du sprite rituel a afficher en EDITOR au niveau du curseur
-	previewSummon = sfSprite_create(texSummon);
-	sfSprite_setScale(previewSummon, (sfVector2f) { 0.1, 0.1 });
-
-
+	// initialise les couches 1 et 2 de la tilemap a -1 pour pouvoir afficher la couche 0 sans avoir une map toute noir.
+	for (int l = 1; l < NB_LAYERS; l++)
+		for (int y = 0; y < MAP_HEIGHT; y++)
+			for (int x = 0; x < MAP_WIDTH; x++)
+				map[l][y][x] = -1; // permet d'afficher une case invisible plutot qu'une case noire si c'était égale à 0.
+	
 	// ouverture en mode lecture du fichier contenant la carte 
 	fichier = fopen("../Data/Map/map.txt", "rt");
 	if (fichier)
 	{
 		int tile_initMap = 0;
 
-		for (int y = 0; y < MAP_WIDTH; y++)
+		for (int l = 0; l < NB_LAYERS; l++)
 		{
-			for (int x = 0; x < MAP_HEIGHT; x++)
+			for (int y = 0; y < MAP_WIDTH; y++)
 			{
-				fscanf(fichier, "%d", &tile_initMap) == 1;
-				map[x][y] = tile_initMap;
-				fgetc(fichier);
+				for (int x = 0; x < MAP_HEIGHT; x++)
+				{
+					if (fscanf(fichier, "%d", &tile_initMap) == 1)
+						map[l][x][y] = tile_initMap;
+					fgetc(fichier);
+				}
+				tile_initMap = fgetc(fichier);
 			}
-			tile_initMap = fgetc(fichier);
 		}
 	}
 	else
@@ -109,27 +82,17 @@ void initMapBin()
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"tileset1.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
 
-	// récupère le sprite du cercueil (spawn) 
-	texSpawn = sfTexture_createFromFile(TEXTURE_PATH"/tilesetPlayer/coffin_open.jpg", NULL);
-	spSpawn = sfSprite_create(texSpawn);
-	sfSprite_setTextureRect(spSpawn, irectSpawn);
-	sfSprite_setScale(spSpawn, (sfVector2f) { 0.1, 0.1 });
 
-	// récupère le sprite du rituel
-	texSummon = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel.png", NULL);
-	spriteSummon = sfSprite_create(texSummon);
-	sfSprite_setTextureRect(spriteSummon, irectSpawn);
-
-	// créer une preview du sprite rituel a afficher en EDITOR au niveau du curseur
-	previewSummon = sfSprite_create(texSummon);
-	sfSprite_setScale(previewSummon, (sfVector2f) { 0.1, 0.1 });
-
+	for (int l = 1; l < NB_LAYERS; l++)
+		for (int y = 0; y < MAP_HEIGHT; y++)
+			for (int x = 0; x < MAP_WIDTH; x++)
+				map[l][y][x] = -1;
 
 	// ouverture en mode lecture du fichier contenant la carte 
 	fichier = fopen("../Data/MAP/map_bin.bin", "rb");
 	if (fichier)
 	{
-		fread(map, sizeof(int), MAP_HEIGHT * MAP_WIDTH, fichier);
+		fread(map, sizeof(int), NB_LAYERS * MAP_HEIGHT * MAP_WIDTH, fichier);
 	}
 	else
 	{
@@ -146,8 +109,6 @@ void updateMap(sfRenderWindow* _window)
 	
 	if (state == GAME)
 	{
-		sfSprite_setPosition(spriteSummon, positionSummon); // pose le sprite aux coordonnées de positionSummon
-
 		// passe en mode EDITOR
 		if (sfKeyboard_isScancodePressed(sfScanE) && keyTimer >= 0.2f)
 		{
@@ -178,64 +139,48 @@ void updateMap(sfRenderWindow* _window)
 			keyTimer = 0.0f;
 		}
 
+		// gestion des différentes couches de la map
+		if (sfKeyboard_isKeyPressed(sfKeyF1)) 
+			currentLayer = 0;
+
+		if (sfKeyboard_isKeyPressed(sfKeyF2))
+			currentLayer = 1;
+
+		if (sfKeyboard_isKeyPressed(sfKeyF3))
+			currentLayer = 2;
+
 		// choix des tiles en fonction du spritesheet de la map sur la ligne sélectionner
 		if (sfKeyboard_isKeyPressed(sfKeyNum1) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 0;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum2) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 1;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum3) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 2;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum4) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 3;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum5) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 4;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum6) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 5;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum7) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 6;
-			tileSpawn = false;
-			tileSummon = false;
 		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum8) && !sfKeyboard_isKeyPressed(sfKeyLControl))
 		{
 			tileTypeX = 7;
-			tileSpawn = false;
-			tileSummon = false;
-		}
-		if (sfKeyboard_isScancodePressed(sfScanR) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
-			tileSpawn = false;
-			tileSummon = true;
-		}
-		if (sfKeyboard_isScancodePressed(sfScanO) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
-			tileSpawn = true;
-			tileSummon = false;
 		}
 
 
@@ -258,7 +203,10 @@ void updateMap(sfRenderWindow* _window)
 
 			int x = (mousePos.x) * 2 / TILE_SIZE; // *2 pour adapter la position de la souris a la taille de la map
 			int y = (mousePos.y) * 2 / TILE_SIZE; // /TILE_SIZE pour récupérer le numéro de la tile 
-			map[y][x] = 32; // numéro de la tile noir (supprime un élément de la map)
+			if (currentLayer == 0) 
+				map[currentLayer][y][x] = 32; // case noir 
+			else
+				map[currentLayer][y][x] = -1; // case transparente
 		}
 
 		if (sfMouse_isButtonPressed(sfMouseLeft))
@@ -266,51 +214,11 @@ void updateMap(sfRenderWindow* _window)
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
 			sfVector2f pos = { (float)mousePos.x * 2 - (tileRect.size.x / 2), (float)mousePos.y * 2 - (tileRect.size.y / 2) };
 
+			//permet de poser la tile sélectionner
+			int x = (mousePos.x * 2) / TILE_SIZE;
+			int y = (mousePos.y * 2) / TILE_SIZE;
 
-			if(!tileSummon)
-			{
-				//permet de poser la tile sélectionner
-				sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
-				int x = (mousePos.x * 2) / TILE_SIZE;
-				int y = (mousePos.y * 2) / TILE_SIZE;
-
-				map[y][x] = tileTypeX + (8 * tileTypeY); // 8 * tileTypeY permet de récupérer la tile correspondantes a la ligne du tableau sélectionner 
-			}
-			else if (keyTimer > 0.2f && summonCount < MAX_SUMMON)
-			{
-				if (!summonOrigin) // place le rituel originale
-				{
-					keyTimer = 0.0f;
-
-					positionSummon = pos;
-					sfSprite_setPosition(spriteSummon, positionSummon);
-					summonOrigin = true;
-				}
-				else if (summonCount < MAX_SUMMON)
-				{
-					// pose une copie du sprite rituel à la position de la souris
-					keyTimer = 0.0f;
-
-					summons[summonCount] = sfSprite_copy(spriteSummon);
-					sfSprite_setPosition(summons[summonCount], pos);
-					summonCount++;
-				}
-			}
-			else if (tileSpawn)
-			{
-				keyTimer = 0.0f;
-
-				positionCoffin = pos;
-				sfSprite_setPosition(spSpawn, positionCoffin);
-			}
-		}
-
-		if (sfKeyboard_isScancodePressed(sfScanD) && keyTimer > 0.1f) // détruis les copies de summon et permet de toutes les replacer
-		{
-			for (int i = 0; i < summonCount; i++)
-				sfSprite_destroy(summons[i]);
-			summonCount = 0;
-			summonOrigin = false;
+			map[currentLayer][y][x] = tileTypeX + (8 * tileTypeY); // 8 * tileTypeY permet de récupérer la tile correspondantes a la ligne du tableau sélectionner 
 		}
 
 		if (sfMouse_isButtonPressed(sfMouseMiddle))
@@ -320,8 +228,12 @@ void updateMap(sfRenderWindow* _window)
 			int x = (mousePos.x) * 2 / TILE_SIZE;
 			int y = (mousePos.y) * 2 / TILE_SIZE;
 
-			tileTypeX = (map[y][x] % 8); // map[y][x] récupère le numéro de la tile aux coordonnées {y,x}, le divise par 8 et récupère le reste de cette division ( donne la colonne )
-			tileTypeY = (map[y][x]/8); // récupère la valeur de la tile, la divise par 8 arrondi à l'inférieur ( donne la ligne )
+
+			if (map[currentLayer][y][x] >= 0)
+			{
+				tileTypeX = (map[currentLayer][y][x] % 8); // map[y][x] récupère le numéro de la tile aux coordonnées {y,x}, le divise par 8 et récupère le reste de cette division ( donne la colonne )
+				tileTypeY = (map[currentLayer][y][x] / 8); // récupère la valeur de la tile, la divise par 8 arrondi à l'inférieur ( donne la ligne )
+			}
 		}
 
 		// zoom dans le mode EDITOR
@@ -361,33 +273,36 @@ void updateMap(sfRenderWindow* _window)
 // affichage des tiles dans la map en fonction de leur emplacement dans la tilesheet
 void displayMap(sfRenderWindow* _window)
 {
-	for (int y = 0; y < MAP_HEIGHT; y++)
+	for (int l = 0; l < NB_LAYERS; l++)
 	{
-		for (int x = 0; x < MAP_WIDTH; x++)
+		for (int y = 0; y < MAP_HEIGHT; y++)
 		{
-			if(map[y][x] < 8)
+			for (int x = 0; x < MAP_WIDTH; x++)
 			{
-				tileRect.position.x = map[y][x] * tileRect.size.x;
+				if (map[l][y][x] < 0) continue; // continue == break d'un switch mais pour le if, passse à l'itération suivante (prochaine boucle du for)
+			if(map[l][y][x] < 8)
+			{
+				tileRect.position.x = map[l][y][x] * tileRect.size.x;
 				tileRect.position.y = 0;
 			}
-			if (map[y][x] >= 8 && map[y][x] < 16) 
+			if (map[l][y][x] >= 8 && map[l][y][x] < 16)
 			{
-				tileRect.position.x = (map[y][x] - 8) * tileRect.size.x;
+				tileRect.position.x = (map[l][y][x] - 8) * tileRect.size.x;
 				tileRect.position.y = tileRect.size.y;
 			}
-			if (map[y][x] >= 16 && map[y][x] < 24)
+			if (map[l][y][x] >= 16 && map[l][y][x] < 24)
 			{
-				tileRect.position.x = (map[y][x] - 16) * tileRect.size.x;
+				tileRect.position.x = (map[l][y][x] - 16) * tileRect.size.x;
 				tileRect.position.y = tileRect.size.y*2;
 			}
-			if (map[y][x] >= 24 && map[y][x] < 32)
+			if (map[l][y][x] >= 24 && map[l][y][x] < 32)
 			{
-				tileRect.position.x = (map[y][x] - 24) * tileRect.size.x;
+				tileRect.position.x = (map[l][y][x] - 24) * tileRect.size.x;
 				tileRect.position.y = tileRect.size.y*3;
 			}
-			if (map[y][x] >= 32 && map[y][x] < 40)
+			if (map[l][y][x] >= 32 && map[l][y][x] < 40)
 			{
-				tileRect.position.x = (map[y][x] - 32) * tileRect.size.x;
+				tileRect.position.x = (map[l][y][x] - 32) * tileRect.size.x;
 				tileRect.position.y = tileRect.size.y*4;
 			}
 
@@ -395,6 +310,7 @@ void displayMap(sfRenderWindow* _window)
 			sfVector2f pos = { x * tileRect.size.x, y * tileRect.size.y };
 			sfSprite_setPosition(tileSprite, pos);
 			sfRenderWindow_drawSprite(_window, tileSprite, NULL);
+			}
 		}
 	}
 
@@ -407,51 +323,19 @@ void displayMap(sfRenderWindow* _window)
 
 	if (state == EDITOR)
 	{
-		if (!tileSummon && !tileSpawn)
-		{
-			tileRect.position.x = tileTypeX * tileRect.size.x;
-			tileRect.position.y = tileTypeY * tileRect.size.y;
-			sfSprite_setTextureRect(tileSprite, tileRect);
-			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
-			iMousePos.x *= 2;
-			iMousePos.y *= 2;
-			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
-			sfSprite_setPosition(tileSprite, fMousePos);
-			sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
-			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
-		}
-		else if (tileSummon)
-		{
-			sfSprite_setTexture(spriteSummon, texSummon, NULL);
-			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
-			iMousePos.x *= 2;
-			iMousePos.y *= 2;
-			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
-			sfSprite_setPosition(previewSummon, fMousePos);
-			sfRenderWindow_drawSprite(_window, previewSummon, NULL); // affiche le sprite choisi au niveau du curseur
-			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
-		}
-		else
-		{
-			sfSprite_setTexture(spSpawn, texSpawn, NULL);
-			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
-			iMousePos.x *= 2;
-			iMousePos.y *= 2;
-			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
-			sfSprite_setPosition(spSpawn, fMousePos);
-			sfRenderWindow_drawSprite(_window, spSpawn, NULL); // affiche le sprite choisi au niveau du curseur
-			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
-		}
+		tileRect.position.x = tileTypeX * tileRect.size.x;
+		tileRect.position.y = tileTypeY * tileRect.size.y;
+		sfSprite_setTextureRect(tileSprite, tileRect);
+		sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
+		iMousePos.x *= 2;
+		iMousePos.y *= 2;
+		sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
+		sfSprite_setPosition(tileSprite, fMousePos);
+		sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
+		sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
 	}
 }
 
-void displaySummon(sfRenderWindow* _window)
-{
-	sfRenderWindow_drawSprite(_window, spriteSummon, NULL); // affiche le sprite rituel
-
-	for (int i = 0; i < summonCount; i++)
-		sfRenderWindow_drawSprite(_window, summons[i], NULL); // dessine les copies de spriteSummon
-}
 
 /////////////////////////////////////////////////////
 ////                                             ////
@@ -494,12 +378,14 @@ bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _v
 		nextPosInTab2.y = (_sprite.position.y + _sprite.size.y) / 32;
 	}
 	// Si la ou les case(s) est une case non traversable ( entre 3 et 39 )
-	if (map[nextPosInTab.y][nextPosInTab.x] >= 3 && map[nextPosInTab.y][nextPosInTab.x] <= 39 ||
-		map[nextPosInTab2.y][nextPosInTab2.x] >= 3 && map[nextPosInTab2.y][nextPosInTab2.x] <= 39)
+	for (int l = 0; l < NB_LAYERS; l++)
 	{
-		return true; // retourne sfTrue si collision
+		if (map[l][nextPosInTab.y][nextPosInTab.x] >= 3 && map[l][nextPosInTab.y][nextPosInTab.x] <= 39 ||
+			map[l][nextPosInTab2.y][nextPosInTab2.x] >= 3 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 39)
+		{
+			return true; // retourne sfTrue si collision
+		}
 	}
-
 	return false; // retourne sfFalse si pas de collision
 }
 
@@ -514,11 +400,15 @@ void saveMap()
 {
 	fichier = fopen("../Data/MAP/map.txt", "wt");
 
-	for (int y = 0; y < MAP_WIDTH; y++)
+	for (int l = 0; l < NB_LAYERS; l++)
 	{
-		for (int x = 0;x < MAP_HEIGHT; x++)
-			fprintf(fichier, "%d ", map[x][y]);
-		fprintf(fichier, "\n");
+		for (int y = 0; y < MAP_WIDTH; y++)
+		{
+			for (int x = 0; x < MAP_HEIGHT; x++)
+				fprintf(fichier, "%d ", map[l][x][y]);
+			fprintf(fichier, "\n");
+		}
+		fprintf(fichier, "\n"); // ligne vide entre deux couches
 	}
 	fclose(fichier);
 	return true;
@@ -528,7 +418,7 @@ void saveMapBin()
 {
 	fichier = fopen("../Data/MAP/map_bin.bin", "wb");
 
-	fwrite(map, sizeof(int), MAP_HEIGHT * MAP_WIDTH, fichier);
+	fwrite(map, sizeof(int), NB_LAYERS * MAP_HEIGHT * MAP_WIDTH, fichier);
 
 	fclose(fichier);
 	return true;
@@ -536,4 +426,5 @@ void saveMapBin()
 
 void destroyMap()
 {
+
 }

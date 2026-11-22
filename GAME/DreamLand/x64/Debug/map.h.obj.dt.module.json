@@ -3,7 +3,7 @@
     "revision": 0,
     "rules": [
         {
-            "primary-output": "x64\\Debug\\map.obj",
+            "primary-output": "x64\\Debug\\map.h.obj.dt.obj",
             "outputs": [
                 "x64\\Debug\\map.h.obj.dt.module.json",
                 "x64\\Debug\\map.h.obj.dt.d.json"
