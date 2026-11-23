@@ -1,4 +1,5 @@
 #include "map.h"
+#include "tools.h"
 
 /////////////////////////////////////////////////////
 ////                                             ////
@@ -15,21 +16,24 @@ sfSprite* tileSprite;
 sfIntRect tileRect = { 0, 0, 32, 32 };
 extern sfVector2f position;
 
+// texture cavern
+sfTexture* caveTexture;
+sfSprite* caveSprite;
+static sfView* paletteTile = NULL;
+
 
 float keyTimer = 0.0f;
-
-
-//view
-extern sfVector2f posEditorView;
-
 
 //chest
 extern Chest chest[20];
 sfVector2i chestPos;
 bool chestAlreadyexist = false;
 
+//view
+extern sfVector2f posEditorView;
+sfView* view; 
 
-int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH]; // remplace l'ancien map[MAP_HEIGHT][MAP_WIDTH]
+int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH]; 
 int currentLayer = 0;
 int tileTypeX = 0;
 int tileTypeY = 0;
@@ -45,6 +49,14 @@ static bool mouseOnPalette(sfRenderWindow* _window)
 // initialise la map en fichier .txt
 void initMap()
 {
+	// création de la palette de sélection des tiles
+	paletteTile = sfView_create();
+	sfView_setViewport(paletteTile, (sfFloatRect) { { 1.0f - PALETTE_RATIO, 0.0f }, { PALETTE_RATIO, 1.0f } });
+
+	// récupère le tileset Cave_objects
+	caveTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/cave_objects.png", NULL);
+	caveSprite = sfSprite_create(caveTexture);
+
 	// récupère le tileSheet de la map
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Document.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
@@ -204,6 +216,38 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum5))
 			tileTypeY = 4;
 
+		// zoom dans le mode EDITOR
+		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
+		{
+			sfView_zoom(editorView, 0.999f);
+		}
+
+		if (sfKeyboard_isScancodePressed(sfScanNumpadMinus))
+		{
+			sfView_zoom(editorView, 1.001f);
+		}
+
+		// déplacement de la view dans le mode EDITOR
+		if (sfKeyboard_isScancodePressed(sfScanUp) && posEditorView.y > ((HEIGHT_WINDOW_GAME / 2)))
+		{
+			posEditorView.y -= 0.4f;
+		}
+
+		if (sfKeyboard_isScancodePressed(sfScanDown) && posEditorView.y < ((HEIGHT_WINDOW_GAME/2)))
+		{
+			posEditorView.y += 0.4f;
+		}
+
+		if (sfKeyboard_isScancodePressed(sfScanRight) && posEditorView.x < ((WIDTH_WINDOW_GAME / 2) + WIDTH_WINDOW_GAME * PALETTE_RATIO))
+		{
+			posEditorView.x += 0.4f;
+		}
+
+		if (sfKeyboard_isScancodePressed(sfScanLeft) && posEditorView.x > ((WIDTH_WINDOW_GAME / 2)))
+		{
+			posEditorView.x -= 0.4f;
+		}
+
 		bool onPalette = mouseOnPalette(_window);
 
 		// clic sur le panneau : sélectionne la tile cliquée
@@ -262,38 +306,6 @@ void updateMap(sfRenderWindow* _window)
 				tileTypeY = (map[currentLayer][y][x] / 8); // récupère la valeur de la tile, la divise par 8 arrondi à l'inférieur ( donne la ligne )
 			}
 		}
-
-		// zoom dans le mode EDITOR
-		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
-		{
-			sfView_zoom(editorView, 0.999f);
-		}
-
-		if (sfKeyboard_isScancodePressed(sfScanNumpadMinus))
-		{
-			sfView_zoom(editorView, 1.001f);
-		}
-
-		// déplacement de la view dans le mode EDITOR
-		if (sfKeyboard_isScancodePressed(sfScanUp))
-		{
-			posEditorView.y -= 0.4f;
-		}
-
-		if (sfKeyboard_isScancodePressed(sfScanDown))
-		{
-			posEditorView.y += 0.4f;
-		}
-
-		if (sfKeyboard_isScancodePressed(sfScanRight))
-		{
-			posEditorView.x += 0.4f;
-		}
-
-		if (sfKeyboard_isScancodePressed(sfScanLeft))
-		{
-			posEditorView.x -= 0.4f;
-		}
 	}
 }
 
@@ -302,12 +314,12 @@ void displayTilePalette(sfRenderWindow* _window)
 {
 	if (state != EDITOR) return;
 
-	static sfRectangleShape* bg = NULL;
+	static sfRectangleShape* palette_bg = NULL;
 	static sfRectangleShape* selection = NULL;
-	if (!bg)
+	if (!palette_bg)
 	{
-		bg = sfRectangleShape_create();
-		sfRectangleShape_setFillColor(bg, (sfColor) { 30, 30, 30, 255 });
+		palette_bg = sfRectangleShape_create();
+		sfRectangleShape_setFillColor(palette_bg, (sfColor) { 30, 30, 30, 255 });
 
 		selection = sfRectangleShape_create();
 		sfRectangleShape_setFillColor(selection, sfTransparent);
@@ -316,42 +328,34 @@ void displayTilePalette(sfRenderWindow* _window)
 	}
 
 	sfVector2u winSize = sfRenderWindow_getSize(_window);
-	float panelW = winSize.x * PALETTE_RATIO;
-	float panelX = winSize.x - panelW;
-	float tileSize = panelW / TILESHEET_COLS; // taille d'une tile à l'écran
+	sfVector2u texSize = sfTexture_getSize(caveTexture);
 
-	// vue fixe qui couvre toute la fenêtre (on garde l'ancienne pour la remettre après)
+	// largeur de la vue = largeur de la texture, hauteur adaptée pour ne pas déformer l'image
+	float viewW = (float)texSize.x;
+	float viewH = viewW * ((float)winSize.y / ((float)winSize.x * PALETTE_RATIO));
+	sfView_setSize(paletteTile, (sfVector2f) { viewW, viewH });
+	sfView_setCenter(paletteTile, (sfVector2f) { viewW / 2.0f, viewH / 2.0f }); // coin haut gauche de la vue = (0,0)
+
+	// on garde la vue actuelle pour la remettre après
 	sfView* oldView = sfView_copy(sfRenderWindow_getView(_window));
-	sfView* uiView = sfView_createFromRect((sfFloatRect) { { 0.0f, 0.0f }, { (float)winSize.x, (float)winSize.y } });
-	sfRenderWindow_setView(_window, uiView);
+	sfRenderWindow_setView(_window, paletteTile);
 
-	// fond du panneau
-	sfRectangleShape_setPosition(bg, (sfVector2f) { panelX, 0.0f });
-	sfRectangleShape_setSize(bg, (sfVector2f) { panelW, (float)winSize.y });
-	sfRenderWindow_drawRectangleShape(_window, bg, NULL);
+	// fond de la palette
+	sfRectangleShape_setPosition(palette_bg, (sfVector2f) { 0.0f, 0.0f });
+	sfRectangleShape_setSize(palette_bg, (sfVector2f) { viewW, viewH });
+	sfRenderWindow_drawRectangleShape(_window, palette_bg, NULL);
 
-	// toutes les tiles du tileset
-	sfSprite_setScale(tileSprite, (sfVector2f) { tileSize / 32.0f, tileSize / 32.0f });
-	for (int r = 0; r < TILESHEET_ROWS; r++)
-	{
-		for (int c = 0; c < TILESHEET_COLS; c++)
-		{
-			sfIntRect rect = { { c * 32, r * 32 },{ 32, 32 } };
-			sfSprite_setTextureRect(tileSprite, rect);
-			sfSprite_setPosition(tileSprite, (sfVector2f) { panelX + c * tileSize, r* tileSize });
-			sfRenderWindow_drawSprite(_window, tileSprite, NULL);
-		}
-	}
-	sfSprite_setScale(tileSprite, (sfVector2f) { 1.0f, 1.0f }); // remet l'échelle normale
+	// tileset cave_objects
+	sfSprite_setPosition(caveSprite, (sfVector2f) { 0.0f, 0.0f });
+	sfRenderWindow_drawSprite(_window, caveSprite, NULL);
 
-	// contour jaune autour de la tile sélectionnée
-	sfRectangleShape_setPosition(selection, (sfVector2f) { panelX + tileTypeX * tileSize, tileTypeY* tileSize });
-	sfRectangleShape_setSize(selection, (sfVector2f) { tileSize, tileSize });
-	sfRenderWindow_drawRectangleShape(_window, selection, NULL);
+	//// contour jaune autour de la tile sélectionnée
+	//sfRectangleShape_setPosition(selection, (sfVector2f) { panelX + tileTypeX * tileSize, tileTypeY* tileSize });
+	//sfRectangleShape_setSize(selection, (sfVector2f) { tileSize, tileSize });
+	//sfRenderWindow_drawRectangleShape(_window, selection, NULL);
 
 	// on remet la vue d'origine
 	sfRenderWindow_setView(_window, oldView);
-	sfView_destroy(uiView);
 	sfView_destroy(oldView);
 }
 
@@ -402,7 +406,7 @@ void displayMap(sfRenderWindow* _window)
 
 	/////////////////////////////////////////////////////
 	////                                             ////
-	////   GESTION DU SPRITE SELECTIONNER AFICHER    ////
+	////   GESTION DU SPRITE SELECTIONNER AFFICHER   ////
 	////                                             ////
 	/////////////////////////////////////////////////////
 
@@ -518,5 +522,9 @@ void saveMapBin()
 
 void destroyMap()
 {
-
+	if (paletteTile)
+	{
+		sfView_destroy(paletteTile);
+		paletteTile = NULL;
+	}
 }

@@ -18,3 +18,4 @@ void saveMapBin();
 void destroyMap();
 
 bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _vitesse);
+bool mouseOnPalette(sfRenderWindow* _window);

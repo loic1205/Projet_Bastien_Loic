@@ -33,9 +33,14 @@ int main()
 
 	editorView = sfView_createFromRect((sfFloatRect) { 0.0f, 0.0f, MAP_WIDTH* TILE_SIZE, MAP_HEIGHT* TILE_SIZE });
 
+	// fond noir pour la minimap
+	sfRectangleShape* Minimap_bg = sfRectangleShape_create();
+	sfRectangleShape_setFillColor(Minimap_bg, sfBlack);
+
 	sfView* viewMinimap = sfView_createFromRect((sfFloatRect) { 0.0f, 0.0f, MAP_WIDTH* TILE_SIZE, MAP_HEIGHT* TILE_SIZE });
 	sfVector2f posViewMinimap = { 0.f, 0.f };
 	sfView_setViewport(viewMinimap, (sfFloatRect) { 0.75f, 0.0f, 0.25f, 0.25f });
+
 
 
 	sfView* view = sfView_createFromRect((sfFloatRect) { HEIGHT_WINDOW_GAME / 2, WIDTH_WINDOW_GAME / 2, 100.f, 50.f });
@@ -143,6 +148,7 @@ int main()
 			//View minimap
 			sfView_setCenter(view, posViewMinimap);
 			sfRenderWindow_setView(window, viewMinimap);
+			sfRenderWindow_drawRectangleShape(window, Minimap_bg, NULL);
 			displayMap(window);
 			//displayChest(window);
 			//displayPNJ(window);
