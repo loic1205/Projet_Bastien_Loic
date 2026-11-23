@@ -4,6 +4,7 @@
 #include "map.h"
 #include "PNJ.h"
 #include "menu.h"
+#include "music.h"
 
 
 int main()
@@ -24,6 +25,7 @@ int main()
 	initMap();
 	initPNJ();
 	initMenu();
+	initMusic();
 	state = MENU;
 
 
@@ -68,6 +70,7 @@ int main()
 		updateMap(window);
 		updatePlayer();
 		updatePNJ();
+		updateMusic();
 
 		if(state == MENU)
 			updateMenu(window);
@@ -137,7 +140,7 @@ int main()
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
 			//displayChest(window);
-			//displayPNJ(window);
+			displayPNJ(window);
 			displayPlayer(window);
 
 			//View minimap
@@ -145,7 +148,6 @@ int main()
 			sfRenderWindow_setView(window, viewMinimap);
 			displayMap(window);
 			//displayChest(window);
-			//displayPNJ(window);
 			displayPlayer(window);
 		}
 		if (state == EDITOR)
