@@ -1,43 +1,44 @@
 #include "menu.h"
 
 int menu[22][42] =
-{ { 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63 },
-{63,4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 63},
-{ 63,10, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 3, 63 },
-{ 63,8, 56, 56, 56, 4, 2, 0, 0, 0, 0, 0, 0, 5, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 10, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 8, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 12, 11, 9, 9, 9, 9, 9, 9, 13, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 4, 2, 0, 0, 0, 0, 0, 0, 5, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 10, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 8, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1 ,63 },
-{ 63,8, 56, 56, 56, 12, 11, 9, 9, 9, 9, 9, 9, 13, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 4, 2, 0, 0, 0, 0, 0, 0, 5, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 10, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 8, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 12, 11, 9, 9, 9, 9, 9, 9, 13, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
-{ 63,12, 11, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 13, 63 },
-{ 63,63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63 } };
+{	{ 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63 },
+	{63,4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 63},
+	{ 63,10, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 3, 63 },
+	{ 63,8, 56, 56, 56, 4, 2, 0, 0, 0, 0, 0, 0, 5, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 10, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 8, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 12, 11, 9, 9, 9, 9, 9, 9, 13, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 4, 2, 0, 0, 0, 0, 0, 0, 5, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 10, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 8, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1 ,63 },
+	{ 63,8, 56, 56, 56, 12, 11, 9, 9, 9, 9, 9, 9, 13, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 4, 2, 0, 0, 0, 0, 0, 0, 5, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 10, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 8, 56, 56, 56, 56, 56, 56, 56, 1, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 12, 11, 9, 9, 9, 9, 9, 9, 13, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,8, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 1, 63 },
+	{ 63,12, 11, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 13, 63 },
+	{ 63,63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63 } 
+};
 
 
 int menuSettings[8][7] =
 {	{ 63, 63, 32, 33, 34, 63, 63},
-		{ 4, 0, 40, 41, 42, 0, 5},
-		{ 10, 56, 56, 56, 56, 56, 3},
-		{ 8, 56, 56, 56, 56, 56, 1},
-		{ 8, 56, 56, 56, 56, 56, 1},
-		{ 8, 56, 56, 56, 56, 56, 1},
-		{ 8, 56, 56, 56, 56, 56, 1},
-		{ 12, 11, 9, 9, 9, 9, 13}
+	{ 4, 0, 40, 41, 42, 0, 5},
+	{ 10, 56, 56, 56, 56, 56, 3},
+	{ 8, 56, 56, 56, 56, 56, 1},
+	{ 8, 56, 56, 56, 56, 56, 1},
+	{ 8, 56, 56, 56, 56, 56, 1},
+	{ 8, 56, 56, 56, 56, 56, 1},
+	{ 12, 11, 9, 9, 9, 9, 13}
 };
 
 int menuPause[9][8][2] =
-{ { 63, 63, 32, 33, 34, 63, 63},
+{	{ 63, 63, 32, 33, 34, 63, 63},
 	{ 4, 0, 40, 41, 42, 0, 5},
 	{ 10, 56, 56, 56, 56, 56, 3},
 	{ 8, 56, 56, 56, 56, 56, 1},
@@ -66,7 +67,7 @@ sfText* gameNameText;
 sfTexture* texSettingsButtonPressed;
 sfSprite* spSettingsButton;
 sfIntRect irectSettingsButton = { 32 * 4, 32 * 3, 32, 32 };
-sfVector2f scaleTextMenu = { 0.3, 0.3 };
+sfVector2f scaleTextMenu = { 0.3f, 0.3f };
 
 // inits sprite background fenêtre de jeu state = MENU
 sfTexture* texBackground_MenuWindow;
@@ -74,7 +75,12 @@ sfSprite* spBackground_MenuWindow;
 sfIntRect irectBackground_MenuWindow = { 0, 0, 1200, 700 };
 
 
+
+
+// inits sprite fenêtre de jeu state = PAUSE_MENU
+
 sfTexture* texButtonPM;
+sfTexture* texButtonPressedPM;
 sfIntRect irectButtonPM = { 0, 0, 690, 260 };
 sfFont* font;
 
@@ -89,6 +95,18 @@ sfText* textMenuButtonPM;
 sfText* textLeaveButtonPM;
 
 
+
+// inits sprite fenêtre de jeu state = SETTINGS
+
+sfSprite* spMenuButtonSM;
+sfText* textSettingsButtonSM;
+
+
+// inits des musique
+
+
+
+
 float butonPressedTimer = 0.0f;
 
 void initMenu()
@@ -97,7 +115,7 @@ void initMenu()
 	texBackground_MenuWindow = sfTexture_createFromFile(TEXTURE_PATH"background/background_menu.jpg", NULL);
 	spBackground_MenuWindow = sfSprite_create(texBackground_MenuWindow);
 	sfSprite_setTextureRect(spBackground_MenuWindow, irectBackground_MenuWindow);
-	sfSprite_setScale(spBackground_MenuWindow, (sfVector2f) { 1.1, 1.1 });
+	sfSprite_setScale(spBackground_MenuWindow, (sfVector2f) { 1.1f, 1.1f });
 
 
 	texMenuBackground = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/tilesetMenu.png", NULL);
@@ -111,7 +129,7 @@ void initMenu()
 	spSettingsLogo = sfSprite_create(texSettingsLogo);
 	sfSprite_setTextureRect(spSettingsLogo, irectSettingsLogo);
 	sfSprite_setPosition(spSettingsLogo, (sfVector2f) { 900, 425 });
-	sfSprite_setScale(spSettingsLogo, (sfVector2f) { 1.2, 1.2 });
+	sfSprite_setScale(spSettingsLogo, (sfVector2f) { 1.2f, 1.2f });
 
 
 	fontMenu = sfFont_createFromFile(FONT_PATH"fontMenu.ttf");
@@ -148,8 +166,8 @@ void initMenu()
 	sfSprite_setScale(spSettingsButton, (sfVector2f) { 1.5, 1.5 });
 
 
-
-	texButtonPM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/buttonPM.png", NULL);
+	texButtonPM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/ButtonPM.png", NULL);
+	texButtonPressedPM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/ButtonPressedPM.png", NULL);
 	font = sfFont_createFromFile(FONT_PATH"fontMenu.ttf");
 	
 	spPlayButtonPM = sfSprite_create(texButtonPM);
@@ -174,7 +192,7 @@ void initMenu()
 	sfText_setString(textSettingsButtonPM, "PARAMETRE");
 	sfText_setPosition(textSettingsButtonPM, (sfVector2f) { 570, 272 });
 	sfText_setFillColor(textSettingsButtonPM, (sfColor) { 0, 0, 0, 255 });
-	sfText_setScale(textSettingsButtonPM, (sfVector2f) { 0.8, 0.8});
+	sfText_setScale(textSettingsButtonPM, (sfVector2f) { 0.8f, 0.8f});
 
 
 
@@ -203,6 +221,24 @@ void initMenu()
 
 
 
+
+
+
+
+	
+
+	spMenuButtonSM = sfSprite_create(texButtonPM);
+	sfSprite_setTextureRect(spMenuButtonSM, irectButtonPM);
+	sfSprite_setPosition(spMenuButtonSM, (sfVector2f) { 547, 430 });
+	sfSprite_setScale(spMenuButtonSM, (sfVector2f) { 0.25, 0.25 });
+
+	textSettingsButtonSM = sfText_create(font);
+	sfText_setString(textSettingsButtonSM, "MENU");
+	sfText_setPosition(textSettingsButtonSM, (sfVector2f) { 597, 437 });
+	sfText_setFillColor(textSettingsButtonSM, (sfColor) { 0, 0, 0, 255 });
+
+
+	
 }
 
 void initPauseMenu()
@@ -233,6 +269,14 @@ void initSettings()
 
 void updateMenu(sfRenderWindow* _window)
 {
+	
+
+
+
+
+
+
+
 	sfVector2i mousePos = sfMouse_getPosition(_window);
 	//printf("%d %d\n", mousePos.x, mousePos.y);
 
@@ -288,6 +332,8 @@ void updateMenu(sfRenderWindow* _window)
 		sfSprite_setTexture(spSettingsButton, texMenuBackground, NULL);
 		sfSprite_setTextureRect(spSettingsButton, irectSettingsButton);
 	}
+
+	
 }
 
 void updatePauseMenu(sfRenderWindow* _window)
@@ -297,29 +343,35 @@ void updatePauseMenu(sfRenderWindow* _window)
 	butonPressedTimer += getDeltaTime();
 
 
-	if (sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
-	{
-		printf("%d %d\n", mousePos.x, mousePos.y);
-		butonPressedTimer = 0.0f;
-	}
-
-
 	sfText_setOutlineThickness(textPlayButtonPM, 0);
 	sfText_setOutlineThickness(textSettingsButtonPM, 0);
 	sfText_setOutlineThickness(textMenuButtonPM, 0);
 	sfText_setOutlineThickness(textLeaveButtonPM, 0);
 
 
-	if (mousePos.x > 385 && mousePos.x < 528 && mousePos.y > 193 && mousePos.y < 256)
+	if (mousePos.x > 547 && mousePos.x < 719 && mousePos.y > 175 && mousePos.y < 240 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
 	{
-
+		butonPressedTimer = 0.0f;
+		state = GAME;
 	}
 
+	if (mousePos.x > 547 && mousePos.x < 719 && mousePos.y > 260 && mousePos.y < 325 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		state = SETTINGS;
+	}
 
+	if (mousePos.x > 547 && mousePos.x < 719 && mousePos.y > 345 && mousePos.y < 410 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		state = MENU;
+	}
 
-
-
-
+	if (mousePos.x > 547 && mousePos.x < 719 && mousePos.y > 430 && mousePos.y < 495 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+		butonPressedTimer = 0.0f;
+		sfRenderWindow_close(_window);
+	}
 
 
 
@@ -328,15 +380,21 @@ void updatePauseMenu(sfRenderWindow* _window)
 void updateSettings(sfRenderWindow* _window)
 {
 
+	sfVector2i mousePos = sfMouse_getPosition(_window);
+	butonPressedTimer += getDeltaTime();
 
+	sfSprite_setTexture(spMenuButtonSM, texButtonPM, NULL);
 
-
-
-
-
-
-
-
+	
+	if (mousePos.x > 547 && mousePos.x < 719 && mousePos.y > 430 && mousePos.y < 495)
+	{
+		sfSprite_setTexture(spMenuButtonSM, texButtonPressedPM, NULL);
+		if (sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+		{
+			butonPressedTimer = 0.0f;
+			state = MENU;
+		}
+	}
 
 }
 
@@ -405,8 +463,8 @@ void displayMenu(sfRenderWindow* _window)
 				sfSprite_setTextureRect(spMenuBackground, irectMenuBackground);
 				sfVector2f pos = { ((x * irectMenuBackground.size.x) / 2) + 305, ((y * irectMenuBackground.size.y) / 2) + 145 };
 				sfSprite_setPosition(spMenuBackground, pos);
+				sfSprite_setScale(spMenuBackground, (sfVector2f) { 0.5, 0.5 });
 				sfRenderWindow_drawSprite(_window, spMenuBackground, NULL);
-
 			}
 		}
 		
@@ -484,6 +542,10 @@ void displayMenu(sfRenderWindow* _window)
 			}
 
 		}
+		sfRenderWindow_drawSprite(_window, spMenuButtonSM, NULL);
+		sfRenderWindow_drawText(_window, textSettingsButtonSM, NULL);
+		
+
 	}
 	if (state == PAUSE_MENU)
 	{
