@@ -3,10 +3,10 @@
     "revision": 0,
     "rules": [
         {
-            "primary-output": "x64\\Debug\\Music.obj",
+            "primary-output": "x64\\Debug\\music.obj",
             "outputs": [
-                "x64\\Debug\\Music.h.obj.dt.module.json",
-                "x64\\Debug\\Music.h.obj.dt.d.json"
+                "x64\\Debug\\music.h.obj.dt.module.json",
+                "x64\\Debug\\music.h.obj.dt.d.json"
             ],
             "requires": []
         }

@@ -1,27 +1,2 @@
-﻿  menu.c
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(69,30): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(69,35): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(119,60): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(119,65): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(133,51): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(133,56): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(196,55): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(196,60): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(289,44): warning C4133: 'fonction' : types incompatibles - de 'sfRenderWindow *' à 'const sfWindow *'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(331,67): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(331,67): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(341,60): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(341,60): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(349,44): warning C4133: 'fonction' : types incompatibles - de 'sfRenderWindow *' à 'const sfWindow *'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(394,44): warning C4133: 'fonction' : types incompatibles - de 'sfRenderWindow *' à 'const sfWindow *'
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(397,51): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(397,51): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(402,59): warning C4047: 'fonction' : les niveaux d'indirection de 'bool' et de 'void *' sont différents
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(402,59): warning C4024: 'sfSprite_setTexture' : types différents pour le paramètre formel et réel 3
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(475,63): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(475,109): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(546,65): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(546,110): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(613,65): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\menu.c(613,110): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-  DreamLand.vcxproj -> C:\Users\basti\OneDrive\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
+﻿  main.c
+  DreamLand.vcxproj -> C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
