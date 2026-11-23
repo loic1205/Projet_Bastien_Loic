@@ -98,8 +98,24 @@ sfText* textLeaveButtonPM;
 
 // inits sprite fenêtre de jeu state = SETTINGS
 
+sfTexture* texButtonOnSM;
+sfTexture* texButtonOffSM;
+sfIntRect irectButtonSM = { 0, 0, 12, 12 };
+
 sfSprite* spMenuButtonSM;
+sfSprite* spGeneralSoundSM;
+sfSprite* spSfxSoundSM;
+sfSprite* spMusicSoundSM;
+
 sfText* textSettingsButtonSM;
+sfText* textSoundSM;
+sfText* textGeneralSoundSM;
+sfText* textSfxSoundSM;
+sfText* textMusicSoundSM;
+
+sfRectangleShape* rectangleSM;
+
+
 
 
 // inits des musique
@@ -188,6 +204,7 @@ void initMenu()
 	sfSprite_setPosition(spSettingsButtonPM, (sfVector2f) { 547, 260 });
 	sfSprite_setScale(spSettingsButtonPM, (sfVector2f) { 0.25, 0.25 });
 
+
 	textSettingsButtonPM = sfText_create(font);
 	sfText_setString(textSettingsButtonPM, "PARAMETRE");
 	sfText_setPosition(textSettingsButtonPM, (sfVector2f) { 570, 272 });
@@ -225,20 +242,66 @@ void initMenu()
 
 
 
-	
+	texButtonOnSM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/Button_on.png", NULL);
+	texButtonOffSM = sfTexture_createFromFile(TEXTURE_PATH"tilesetMenu/Button_off.png", NULL);
+
+
 
 	spMenuButtonSM = sfSprite_create(texButtonPM);
 	sfSprite_setTextureRect(spMenuButtonSM, irectButtonPM);
 	sfSprite_setPosition(spMenuButtonSM, (sfVector2f) { 547, 430 });
 	sfSprite_setScale(spMenuButtonSM, (sfVector2f) { 0.25, 0.25 });
 
+	spGeneralSoundSM = sfSprite_create(texButtonOnSM);
+	sfSprite_setTextureRect(spGeneralSoundSM, irectButtonSM);
+	sfSprite_setPosition(spGeneralSoundSM, (sfVector2f) { 680, 211 });
+	sfSprite_setScale(spGeneralSoundSM, (sfVector2f) { 1.5, 1.5 });
+
+	spSfxSoundSM = sfSprite_create(texButtonOnSM);
+	sfSprite_setTextureRect(spSfxSoundSM, irectButtonSM);
+	sfSprite_setPosition(spSfxSoundSM, (sfVector2f) { 580, 261 });
+	sfSprite_setScale(spSfxSoundSM, (sfVector2f) { 1.5, 1.5 });
+
+	spMusicSoundSM = sfSprite_create(texButtonOnSM);
+	sfSprite_setTextureRect(spMusicSoundSM, irectButtonSM);
+	sfSprite_setPosition(spMusicSoundSM, (sfVector2f) { 740, 261 });
+	sfSprite_setScale(spMusicSoundSM, (sfVector2f) { 1.5, 1.5 });
+
+
+
+
+
 	textSettingsButtonSM = sfText_create(font);
 	sfText_setString(textSettingsButtonSM, "MENU");
 	sfText_setPosition(textSettingsButtonSM, (sfVector2f) { 597, 437 });
 	sfText_setFillColor(textSettingsButtonSM, (sfColor) { 0, 0, 0, 255 });
 
+	textSoundSM = sfText_create(font);
+	sfText_setString(textSoundSM, "SOUNDS");
+	sfText_setPosition(textSoundSM, (sfVector2f) {585, 150});
+	sfText_setFillColor(textSoundSM, (sfColor) { 0, 0, 0, 255 });
 
-	
+	textGeneralSoundSM = sfText_create(font);
+	sfText_setString(textGeneralSoundSM, "GENERAL");
+	sfText_setPosition(textGeneralSoundSM, (sfVector2f) { 550, 200});
+	sfText_setFillColor(textGeneralSoundSM, (sfColor) { 0, 0, 0, 255 });
+
+	textSfxSoundSM = sfText_create(font);
+	sfText_setString(textSfxSoundSM, "SFX");
+	sfText_setPosition(textSfxSoundSM, (sfVector2f) { 525, 250});
+	sfText_setFillColor(textSfxSoundSM, (sfColor) { 0, 0, 0, 255 });
+
+
+	textMusicSoundSM = sfText_create(font);
+	sfText_setString(textMusicSoundSM, "MUSIC");
+	sfText_setPosition(textMusicSoundSM, (sfVector2f) { 650, 250});
+	sfText_setFillColor(textMusicSoundSM, (sfColor) { 0, 0, 0, 255 });
+
+
+	rectangleSM = sfRectangleShape_create();
+	sfRectangleShape_setFillColor(rectangleSM, sfWhite);
+	sfRectangleShape_setPosition(rectangleSM, (sfVector2f){485.0f, 192.0f});
+	sfRectangleShape_setSize(rectangleSM, (sfVector2f) { 300.0f, 1.0f });
 }
 
 void initPauseMenu()
@@ -271,14 +334,7 @@ void updateMenu(sfRenderWindow* _window)
 {
 	
 
-
-
-
-
-
-
 	sfVector2i mousePos = sfMouse_getPosition(_window);
-	//printf("%d %d\n", mousePos.x, mousePos.y);
 
 	butonPressedTimer += getDeltaTime();
 
@@ -384,7 +440,6 @@ void updateSettings(sfRenderWindow* _window)
 	butonPressedTimer += getDeltaTime();
 
 	sfSprite_setTexture(spMenuButtonSM, texButtonPM, NULL);
-
 	
 	if (mousePos.x > 547 && mousePos.x < 719 && mousePos.y > 430 && mousePos.y < 495)
 	{
@@ -394,6 +449,53 @@ void updateSettings(sfRenderWindow* _window)
 			butonPressedTimer = 0.0f;
 			state = MENU;
 		}
+	}
+	
+	if (mousePos.x >= 680 && mousePos.x <= 697 && mousePos.y >= 211 && mousePos.y <= 229 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+
+		if (sfSprite_getTexture(spGeneralSoundSM) == texButtonOnSM)
+		{
+			sfSprite_setTexture(spGeneralSoundSM, texButtonOffSM, NULL);
+			currentSettings &= ~GENERAL_SOUND;
+		}
+		else if (sfSprite_getTexture(spGeneralSoundSM) == texButtonOffSM)
+		{
+			sfSprite_setTexture(spGeneralSoundSM, texButtonOnSM, NULL);
+		}
+
+
+		butonPressedTimer = 0.0f;
+	}
+
+	if (mousePos.x >= 580 && mousePos.x <= 597 && mousePos.y >= 261 && mousePos.y <= 278 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+
+		if (sfSprite_getTexture(spSfxSoundSM) == texButtonOnSM)
+		{
+			sfSprite_setTexture(spSfxSoundSM, texButtonOffSM, NULL);
+		}
+		else if (sfSprite_getTexture(spSfxSoundSM) == texButtonOffSM)
+		{
+			sfSprite_setTexture(spSfxSoundSM, texButtonOnSM, NULL);
+		}
+
+		butonPressedTimer = 0.0f;
+	}
+
+	if (mousePos.x >= 740 && mousePos.x <= 757 && mousePos.y >= 261 && mousePos.y <=278 && sfMouse_isButtonPressed(sfMouseLeft) && butonPressedTimer > 0.2f)
+	{
+
+		if (sfSprite_getTexture(spMusicSoundSM) == texButtonOnSM)
+		{
+			sfSprite_setTexture(spMusicSoundSM, texButtonOffSM, NULL);
+		}
+		else if (sfSprite_getTexture(spMusicSoundSM) == texButtonOffSM)
+		{
+			sfSprite_setTexture(spMusicSoundSM, texButtonOnSM, NULL);
+		}
+
+		butonPressedTimer = 0.0f;
 	}
 
 }
@@ -542,8 +644,24 @@ void displayMenu(sfRenderWindow* _window)
 			}
 
 		}
+
+
+
+
+		
+		sfRenderWindow_drawSprite(_window, spGeneralSoundSM, NULL);
+		sfRenderWindow_drawSprite(_window, spSfxSoundSM, NULL);
+		sfRenderWindow_drawSprite(_window, spMusicSoundSM, NULL);
 		sfRenderWindow_drawSprite(_window, spMenuButtonSM, NULL);
+
 		sfRenderWindow_drawText(_window, textSettingsButtonSM, NULL);
+		sfRenderWindow_drawText(_window, textSoundSM, NULL);
+		sfRenderWindow_drawText(_window, textGeneralSoundSM, NULL);
+		sfRenderWindow_drawText(_window, textSfxSoundSM, NULL);
+		sfRenderWindow_drawText(_window, textMusicSoundSM, NULL);
+
+		sfRenderWindow_drawRectangleShape(_window, rectangleSM, NULL);
+		
 		
 
 	}

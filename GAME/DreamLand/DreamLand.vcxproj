@@ -158,7 +158,6 @@
     <ClCompile Include="music.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="pnj.c" />
-    <ClCompile Include="settings.c" />
     <ClCompile Include="tools.c" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +167,6 @@
     <ClInclude Include="music.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="pnj.h" />
-    <ClInclude Include="settings.h" />
     <ClInclude Include="tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
