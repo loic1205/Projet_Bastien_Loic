@@ -31,23 +31,18 @@ struct Chest
 	sfVector2f position;
 };
 
-typedef enum Settings Settings;
-enum Settings
-{
-	GENERAL_SOUND = 1,
-	SFX_SOUND = 2,
-	MUSIC_SOUND = 4,
-	FULLSCREEN = 8
+bool generalSound;
+bool sfxSound;
+bool musicSound;
 
-};
+
 
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
 typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS}State;
 State state;
 FILE* fichier;
-sfView* editorView;
-Settings currentSettings;
 
+sfView* editorView;
 sfVector2f posView;
 sfVector2f posEditorView;
 

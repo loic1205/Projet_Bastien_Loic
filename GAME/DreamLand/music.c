@@ -30,7 +30,7 @@ void updateMusic()
 			if (sfMusic_getStatus(musiqueGame) == sfPlaying)
 				sfMusic_stop(musiqueGame);
 
-			if (sfMusic_getStatus(musiqueMenu) != sfPlaying)
+			if (sfMusic_getStatus(musiqueMenu) != sfPlaying && musicSound)
 				sfMusic_play(musiqueMenu);
 
 			break;
@@ -40,7 +40,7 @@ void updateMusic()
 			if (sfMusic_getStatus(musiqueMenu) == sfPlaying)
 				sfMusic_stop(musiqueMenu);
 
-			if (sfMusic_getStatus(musiqueGame) != sfPlaying)
+			if (sfMusic_getStatus(musiqueGame) != sfPlaying && musicSound)
 				sfMusic_play(musiqueGame);
 
 			break;
@@ -50,14 +50,14 @@ void updateMusic()
 			if (sfMusic_getStatus(musiqueMenu) == sfPlaying)
 				sfMusic_stop(musiqueMenu);
 
-			if (sfMusic_getStatus(musiqueGame) != sfPlaying)
+			if (sfMusic_getStatus(musiqueGame) != sfPlaying && musicSound)
 				sfMusic_play(musiqueGame);
 
 			break;
 
 		case PAUSE_MENU:
 
-			if (sfMusic_getStatus(musiqueGame) != sfPlaying)
+			if (sfMusic_getStatus(musiqueGame) != sfPlaying && musicSound)
 				sfMusic_play(musiqueGame);
 
 			break;
@@ -67,8 +67,12 @@ void updateMusic()
 			if (sfMusic_getStatus(musiqueGame) == sfPlaying)
 				sfMusic_stop(musiqueGame);
 
-			if (sfMusic_getStatus(musiqueMenu) != sfPlaying)
+			if (sfMusic_getStatus(musiqueMenu) != sfPlaying && musicSound)
 				sfMusic_play(musiqueMenu);
+
+			if(!musicSound)
+				sfMusic_stop(musiqueMenu);
+
 
 
 			break;

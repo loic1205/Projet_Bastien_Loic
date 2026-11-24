@@ -457,11 +457,15 @@ void updateSettings(sfRenderWindow* _window)
 		if (sfSprite_getTexture(spGeneralSoundSM) == texButtonOnSM)
 		{
 			sfSprite_setTexture(spGeneralSoundSM, texButtonOffSM, NULL);
-			currentSettings &= ~GENERAL_SOUND;
+			sfxSound = false;
+			musicSound = false;
+
 		}
 		else if (sfSprite_getTexture(spGeneralSoundSM) == texButtonOffSM)
 		{
 			sfSprite_setTexture(spGeneralSoundSM, texButtonOnSM, NULL);
+			sfxSound = true;
+			musicSound = true;
 		}
 
 
@@ -474,10 +478,12 @@ void updateSettings(sfRenderWindow* _window)
 		if (sfSprite_getTexture(spSfxSoundSM) == texButtonOnSM)
 		{
 			sfSprite_setTexture(spSfxSoundSM, texButtonOffSM, NULL);
+			sfxSound = false;
 		}
 		else if (sfSprite_getTexture(spSfxSoundSM) == texButtonOffSM)
 		{
 			sfSprite_setTexture(spSfxSoundSM, texButtonOnSM, NULL);
+			sfxSound = true;
 		}
 
 		butonPressedTimer = 0.0f;
@@ -489,10 +495,12 @@ void updateSettings(sfRenderWindow* _window)
 		if (sfSprite_getTexture(spMusicSoundSM) == texButtonOnSM)
 		{
 			sfSprite_setTexture(spMusicSoundSM, texButtonOffSM, NULL);
+			musicSound = false;
 		}
 		else if (sfSprite_getTexture(spMusicSoundSM) == texButtonOffSM)
 		{
 			sfSprite_setTexture(spMusicSoundSM, texButtonOnSM, NULL);
+			musicSound = true;
 		}
 
 		butonPressedTimer = 0.0f;
