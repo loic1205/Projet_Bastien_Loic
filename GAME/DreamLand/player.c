@@ -19,7 +19,6 @@ sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur ( posit
 
 bool hasMoved = false;
 bool player_attack = false;
-bool player_Gmode = false;
 
 sfVector2f position = { 50.0f, 50.0f };
 sfVector2f velocity = { 80.0f,80.0f };
@@ -29,6 +28,7 @@ sfVector2f velocity = { 80.0f,80.0f };
 
 void initPlayer()
 {
+	player_Gmode = false;
 	// initialisations des textures du joueur
 	texPlayer_fly = sfTexture_createFromFile(TEXTURE_PATH"tilesetPlayer/player_fly.png", NULL);
 	texPlayer_idle = sfTexture_createFromFile(TEXTURE_PATH"tilesetPlayer/player_idle.png", NULL);

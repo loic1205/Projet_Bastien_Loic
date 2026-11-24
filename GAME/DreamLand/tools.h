@@ -36,10 +36,9 @@ bool generalSound;
 bool sfxSound;
 bool musicSound;
 
-
-
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
 typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS}State;
+bool player_Gmode;
 State state;
 FILE* fichier;
 
