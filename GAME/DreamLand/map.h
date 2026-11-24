@@ -8,6 +8,8 @@
 extern int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH];
 extern int currentLayer;
 
+sfVector2i chestPos;
+
 void initMap();
 void initMapBin();
 void updateMap(sfRenderWindow* _window);

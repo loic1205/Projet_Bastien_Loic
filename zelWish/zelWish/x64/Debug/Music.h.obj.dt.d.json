@@ -1,0 +1,35 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\music.h",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\export.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\config.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdbool.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdint.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vcruntime.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\sal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\concurrencysal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vadefs.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\effectprocessor.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\soundchannel.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\soundsourcecone.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\soundstatus.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\audio\\types.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\system\\inputstream.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\system\\export.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stdlib.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_malloc.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_search.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\stddef.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_wstdlib.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\limits.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\system\\time.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\system\\vector3.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

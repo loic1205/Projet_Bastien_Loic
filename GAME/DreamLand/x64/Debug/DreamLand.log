@@ -1,22 +1,24 @@
 ﻿  map.c
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(323,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(323,46): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(367,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(368,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(369,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(370,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(374,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(375,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(376,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(377,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(381,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(382,41): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(383,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(384,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(388,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(389,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(390,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(391,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(427,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(437,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(217,20): warning C4047: '==' : les niveaux d'indirection de 'int [80]' et de 'int' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(383,17): warning C4047: '==' : les niveaux d'indirection de 'sfSprite *' et de 'int' sont différents
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(367,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(367,46): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(433,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(434,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(435,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(436,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(440,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(441,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(442,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(443,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(447,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(448,41): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(449,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(450,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(454,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(455,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(456,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(457,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(493,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(503,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
   DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe

@@ -1,0 +1,178 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\map.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\map.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\tools.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\tools.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\chest.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\chest.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\player.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\player.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\tools.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\tools.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\chest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\chest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CF4E06A5-D34D-4313-B3A3-1511950069EA}|zelWish\\zelWish.vcxproj|solutionrelative:zelWish\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "main.c",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\main.c",
+              "RelativeDocumentMoniker": "zelWish\\main.c",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\main.c",
+              "RelativeToolTip": "zelWish\\main.c",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAmwEkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-10-14T09:21:28.157Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "chest.c",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\chest.c",
+              "RelativeDocumentMoniker": "zelWish\\chest.c",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\chest.c",
+              "RelativeToolTip": "zelWish\\chest.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-11-04T07:35:43.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "chest.h",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\chest.h",
+              "RelativeDocumentMoniker": "zelWish\\chest.h",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\chest.h",
+              "RelativeToolTip": "zelWish\\chest.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-04T07:35:53.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "tools.h",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\tools.h",
+              "RelativeDocumentMoniker": "zelWish\\tools.h",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\tools.h",
+              "RelativeToolTip": "zelWish\\tools.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-10-14T09:41:23.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "tools.c",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\tools.c",
+              "RelativeDocumentMoniker": "zelWish\\tools.c",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\tools.c",
+              "RelativeToolTip": "zelWish\\tools.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-10-14T09:41:12.072Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "player.h",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\player.h",
+              "RelativeDocumentMoniker": "zelWish\\player.h",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\player.h",
+              "RelativeToolTip": "zelWish\\player.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-10-26T08:24:06.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "player.c",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\player.c",
+              "RelativeDocumentMoniker": "zelWish\\player.c",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\player.c",
+              "RelativeToolTip": "zelWish\\player.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-10-26T08:23:55.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "map.h",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\map.h",
+              "RelativeDocumentMoniker": "zelWish\\map.h",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\map.h",
+              "RelativeToolTip": "zelWish\\map.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-04T09:29:10.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "map.c",
+              "DocumentMoniker": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\map.c",
+              "RelativeDocumentMoniker": "zelWish\\map.c",
+              "ToolTip": "C:\\Users\\l.begue\\Documents\\GitHub\\Projet_Bastien_Loic\\zelWish\\zelWish\\map.c",
+              "RelativeToolTip": "zelWish\\map.c",
+              "ViewState": "AgIAAAIBAAAAAAAAAAAAAA0BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-10-15T06:56:02.162Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

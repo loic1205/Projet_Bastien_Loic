@@ -1,0 +1,29 @@
+﻿  chest.c
+  main.c
+  map.c
+  player.c
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(243,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(243,46): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(282,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(292,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(303,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(304,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(305,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(306,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(310,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(311,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(312,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(313,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(317,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(318,41): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(319,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(320,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(324,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(325,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(326,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\map.c(327,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+  tools.c
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\zelWish\tools.c(63,8): warning C4244: 'fonction' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  Génération de code en cours...
+  LINK : C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\\Debug\zelWish.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+  zelWish.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\zelWish\Debug\zelWish.exe
