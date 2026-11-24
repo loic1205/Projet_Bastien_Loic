@@ -19,7 +19,7 @@ int main()
 	posView = (sfVector2f){ 100.f, 50.f };
 	posEditorView = (sfVector2f){ (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 	sfxSound = true;
-	musicSound = true;
+	musicSound = false;
 
 	initTools();
 	initPlayer();
@@ -27,6 +27,7 @@ int main()
 	initPNJ();
 	initMenu();
 	initMusic();
+
 	state = MENU;
 
 
