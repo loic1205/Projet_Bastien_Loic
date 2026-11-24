@@ -157,7 +157,7 @@ int main()
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
 			//displayChest(window);
-			//displayPNJ(window);
+			displayPNJ(window);
 			displayPlayer(window);
 			displayItems(window);
 			displayItems(window);
