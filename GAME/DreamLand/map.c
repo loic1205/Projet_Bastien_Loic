@@ -38,13 +38,6 @@ int currentLayer = 0;
 int tileTypeX = 0;
 int tileTypeY = 0;
 
-// renvoie true si la souris est au-dessus du panneau de tiles
-static bool mouseOnPalette(sfRenderWindow* _window)
-{
-	sfVector2u winSize = sfRenderWindow_getSize(_window);
-	sfVector2i m = sfMouse_getPositionRenderWindow(_window);
-	return m.x >= winSize.x * (1.0f - PALETTE_RATIO);
-}
 
 // initialise la map en fichier .txt
 void initMap()
@@ -248,27 +241,8 @@ void updateMap(sfRenderWindow* _window)
 			posEditorView.x -= 0.4f;
 		}
 
-		bool onPalette = mouseOnPalette(_window);
 
-		// clic sur le panneau : sélectionne la tile cliquée
-		if (onPalette && sfMouse_isButtonPressed(sfMouseLeft))
-		{
-			sfVector2u winSize = sfRenderWindow_getSize(_window);
-			sfVector2i m = sfMouse_getPositionRenderWindow(_window);
-			float panelW = winSize.x * PALETTE_RATIO;
-			float tileSize = panelW / TILESHEET_COLS;
-
-			int col = (m.x - (winSize.x - panelW)) / tileSize;
-			int row = m.y / tileSize;
-
-			if (col >= 0 && col < TILESHEET_COLS && row >= 0 && row < TILESHEET_ROWS)
-			{
-				tileTypeX = col;
-				tileTypeY = row;
-			}
-		}
-
-		if (!onPalette && sfMouse_isButtonPressed(sfMouseRight))
+		if (sfMouse_isButtonPressed(sfMouseRight))
 		{
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
 
@@ -280,7 +254,7 @@ void updateMap(sfRenderWindow* _window)
 				map[currentLayer][y][x] = -1; // case transparente
 		}
 
-		if (!onPalette && sfMouse_isButtonPressed(sfMouseLeft))
+		if (sfMouse_isButtonPressed(sfMouseLeft))
 		{ 
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
 			sfVector2f pos = { (float)mousePos.x * 2 - (tileRect.size.x / 2), (float)mousePos.y * 2 - (tileRect.size.y / 2) };
@@ -292,7 +266,7 @@ void updateMap(sfRenderWindow* _window)
 			map[currentLayer][y][x] = tileTypeX + (8 * tileTypeY); // 8 * tileTypeY permet de récupérer la tile correspondantes a la ligne du tableau sélectionner 
 		}
 
-		if (!onPalette && sfMouse_isButtonPressed(sfMouseMiddle))
+		if (sfMouse_isButtonPressed(sfMouseMiddle))
 		{
 			// récupère la tile de la map pour en poser une copie ailleurss
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
@@ -307,56 +281,6 @@ void updateMap(sfRenderWindow* _window)
 			}
 		}
 	}
-}
-
-// affiche le panneau de sélection des tiles à droite de l'écran (mode EDITOR)
-void displayTilePalette(sfRenderWindow* _window)
-{
-	if (state != EDITOR) return;
-
-	static sfRectangleShape* palette_bg = NULL;
-	static sfRectangleShape* selection = NULL;
-	if (!palette_bg)
-	{
-		palette_bg = sfRectangleShape_create();
-		sfRectangleShape_setFillColor(palette_bg, (sfColor) { 30, 30, 30, 255 });
-
-		selection = sfRectangleShape_create();
-		sfRectangleShape_setFillColor(selection, sfTransparent);
-		sfRectangleShape_setOutlineColor(selection, sfYellow);
-		sfRectangleShape_setOutlineThickness(selection, 2.0f);
-	}
-
-	sfVector2u winSize = sfRenderWindow_getSize(_window);
-	sfVector2u texSize = sfTexture_getSize(caveTexture);
-
-	// largeur de la vue = largeur de la texture, hauteur adaptée pour ne pas déformer l'image
-	float viewW = (float)texSize.x;
-	float viewH = viewW * ((float)winSize.y / ((float)winSize.x * PALETTE_RATIO));
-	sfView_setSize(paletteTile, (sfVector2f) { viewW, viewH });
-	sfView_setCenter(paletteTile, (sfVector2f) { viewW / 2.0f, viewH / 2.0f }); // coin haut gauche de la vue = (0,0)
-
-	// on garde la vue actuelle pour la remettre après
-	sfView* oldView = sfView_copy(sfRenderWindow_getView(_window));
-	sfRenderWindow_setView(_window, paletteTile);
-
-	// fond de la palette
-	sfRectangleShape_setPosition(palette_bg, (sfVector2f) { 0.0f, 0.0f });
-	sfRectangleShape_setSize(palette_bg, (sfVector2f) { viewW, viewH });
-	sfRenderWindow_drawRectangleShape(_window, palette_bg, NULL);
-
-	// tileset cave_objects
-	sfSprite_setPosition(caveSprite, (sfVector2f) { 0.0f, 0.0f });
-	sfRenderWindow_drawSprite(_window, caveSprite, NULL);
-
-	//// contour jaune autour de la tile sélectionnée
-	//sfRectangleShape_setPosition(selection, (sfVector2f) { panelX + tileTypeX * tileSize, tileTypeY* tileSize });
-	//sfRectangleShape_setSize(selection, (sfVector2f) { tileSize, tileSize });
-	//sfRenderWindow_drawRectangleShape(_window, selection, NULL);
-
-	// on remet la vue d'origine
-	sfRenderWindow_setView(_window, oldView);
-	sfView_destroy(oldView);
 }
 
 // affichage des tiles dans la map en fonction de leur emplacement dans la tilesheet
@@ -412,23 +336,16 @@ void displayMap(sfRenderWindow* _window)
 
 	if (state == EDITOR)
 	{
-		if (mouseOnPalette(_window))
-		{
-			sfRenderWindow_setMouseCursorVisible(_window, true); // curseur normal sur le panneau
-		}
-		else
-		{
-			tileRect.position.x = tileTypeX * tileRect.size.x;
-			tileRect.position.y = tileTypeY * tileRect.size.y;
-			sfSprite_setTextureRect(tileSprite, tileRect);
-			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
-			iMousePos.x *= 2;
-			iMousePos.y *= 2;
-			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
-			sfSprite_setPosition(tileSprite, fMousePos);
-			sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
-			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
-		}
+		tileRect.position.x = tileTypeX * tileRect.size.x;
+		tileRect.position.y = tileTypeY * tileRect.size.y;
+		sfSprite_setTextureRect(tileSprite, tileRect);
+		sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
+		iMousePos.x *= 2;
+		iMousePos.y *= 2;
+		sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
+		sfSprite_setPosition(tileSprite, fMousePos);
+		sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
+		sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
 	}
 }
 
@@ -522,9 +439,5 @@ void saveMapBin()
 
 void destroyMap()
 {
-	if (paletteTile)
-	{
-		sfView_destroy(paletteTile);
-		paletteTile = NULL;
-	}
+
 }

@@ -163,7 +163,6 @@ int main()
 			sfRenderWindow_setView(window, editorView);
 			//displayChest(window);
 			displayMap(window);
-			displayTilePalette(window);
 		}
 		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)
 		{
