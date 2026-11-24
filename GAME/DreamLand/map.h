@@ -8,16 +8,12 @@
 extern int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH];
 extern int currentLayer;
 
-sfVector2i chestPos;
-
 void initMap();
 void initMapBin();
 void updateMap(sfRenderWindow* _window);
 void displayMap(sfRenderWindow* _window);
-void displayTilePalette(sfRenderWindow* _window);
 void saveMap();
 void saveMapBin();
 void destroyMap();
 
 bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _vitesse);
-bool mouseOnPalette(sfRenderWindow* _window);
