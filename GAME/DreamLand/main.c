@@ -19,11 +19,12 @@ int main()
 	posView = (sfVector2f){ 100.f, 50.f };
 	posEditorView = (sfVector2f){ (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 	sfxSound = true;
-	musicSound = true;
+	musicSound = false; 
 
 	initTools();
-	initPlayer();
 	initMap();
+	initPlayer();
+	initChest();
 	initPNJ();
 	initMenu();
 	initMusic();
@@ -75,6 +76,7 @@ int main()
 
 		updateMap(window);
 		updatePlayer();
+		updateChest();
 		updatePNJ();
 		updateMusic();
 
@@ -145,7 +147,7 @@ int main()
 			sfView_setCenter(view, playerCenter);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
-			//displayChest(window);
+			displayChest(window);
 			displayPNJ(window);
 			displayPlayer(window);
 
@@ -154,7 +156,7 @@ int main()
 			sfRenderWindow_setView(window, viewMinimap);
 			sfRenderWindow_drawRectangleShape(window, Minimap_bg, NULL);
 			displayMap(window);
-			//displayChest(window);
+			displayChest(window);
 			displayPlayer(window);
 		}
 		if (state == EDITOR)
@@ -162,7 +164,7 @@ int main()
 			//View editor
 			sfView_setCenter(editorView, posEditorView);
 			sfRenderWindow_setView(window, editorView);
-			//displayChest(window);
+			displayChest(window);
 			displayMap(window);
 		}
 		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)

@@ -1,5 +1,6 @@
 #include "map.h"
 #include "tools.h"
+#include "chest.h"
 
 /////////////////////////////////////////////////////
 ////                                             ////
@@ -16,17 +17,19 @@ sfSprite* tileSprite;
 sfIntRect tileRect = { 0, 0, 32, 32 };
 extern sfVector2f position;
 
-// texture cavern
-sfTexture* caveTexture;
-sfSprite* caveSprite;
-static sfView* paletteTile = NULL;
+// texture rituel
+sfTexture* rituelTexture;
+sfSprite* rituelSprite;
+
+// texture chest
+sfTexture* tileTextureChest;
+sfSprite* tileSpriteChest;
 
 
 float keyTimer = 0.0f;
 
 //chest
 extern Chest chest[20];
-sfVector2i chestPos;
 bool chestAlreadyexist = false;
 
 //view
@@ -42,13 +45,13 @@ int tileTypeY = 0;
 // initialise la map en fichier .txt
 void initMap()
 {
-	// création de la palette de sélection des tiles
-	paletteTile = sfView_create();
-	sfView_setViewport(paletteTile, (sfFloatRect) { { 1.0f - PALETTE_RATIO, 0.0f }, { PALETTE_RATIO, 1.0f } });
+	// récupère le sprite rituel
+	rituelTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel_darkShadow.png", NULL);
+	rituelSprite = sfSprite_create(rituelTexture);
 
-	// récupère le tileset Cave_objects
-	caveTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/cave_objects.png", NULL);
-	caveSprite = sfSprite_create(caveTexture);
+	// sprite du coffre avec l'animations
+	tileTextureChest = sfTexture_createFromFile(TEXTURE_PATH"tilesetChest/ChestAnim.png", NULL);
+	tileSpriteChest = sfSprite_create(tileTextureChest);
 
 	// récupère le tileSheet de la map
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Document.png", NULL);
@@ -152,6 +155,11 @@ void updateMap(sfRenderWindow* _window)
 			keyTimer = 0.0f;
 		}
 
+
+	/////////////////////////////////////////////////////
+	////             TILESHEET COMMANDS              ////
+	/////////////////////////////////////////////////////
+
 		// gestion des différentes couches de la map
 		if (sfKeyboard_isKeyPressed(sfKeyF1)) 
 			currentLayer = 0;
@@ -164,37 +172,21 @@ void updateMap(sfRenderWindow* _window)
 
 		// choix des tiles en fonction du spritesheet de la map sur la ligne sélectionner
 		if (sfKeyboard_isKeyPressed(sfKeyNum1) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 0;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum2) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 1;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum3) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 2;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum4) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 3;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum5) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 4;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum6) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 5;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum7) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 6;
-		}
 		if (sfKeyboard_isKeyPressed(sfKeyNum8) && !sfKeyboard_isKeyPressed(sfKeyLControl))
-		{
 			tileTypeX = 7;
-		}
 
 
 		// permet de changer la ligne sélectionner du spritesheet de la map 
@@ -209,6 +201,54 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum5))
 			tileTypeY = 4;
 
+		// sélection du coffre 
+		if (sfKeyboard_isKeyPressed(sfKeyF) && keyTimer > 0.2f)
+		{
+			int i = 0;
+			for (int z = 0; z < sizeof(chest) / sizeof(chest[0]); z++)
+			{
+				if (chest[z].coo.x)
+					i++;
+			}
+			for (int y = 0; y < MAP_HEIGHT; y++)
+			{
+				for (int x = 0; x < MAP_WIDTH; x++)
+				{
+					if (map[x][y] == 6)
+					{
+						keyTimer = 0.0f;
+						chestPos = (sfVector2i){ (y * tileRect.size.y), (x * tileRect.size.x) };
+						float distance = (float)sqrt(pow((chestPos.x - (position.x) + 17 / 2), 2) + pow((chestPos.y - 5 - (position.y) + 23 / 2), 2));
+
+						chestAlreadyexist = false;
+
+						for (int z = 0; z < sizeof(chest) / sizeof(chest[0]); z++)
+						{
+							if (chest[z].coo.x == chestPos.x && chest[z].coo.y == chestPos.y)
+								chestAlreadyexist = true;
+						}
+
+
+						if (distance <= 40.0f && !chestAlreadyexist)
+						{
+							chest[i].coo = chestPos;
+							chest[i].isOpen = false;
+							chest[i].ChestanimTimer = 0.0f;
+							chest[i].ChestframeX = 0;
+							chest[i].irectChest = (sfIntRect){ 0, 0, 32, 32 };
+							chest[i].position = (sfVector2f){ (float)chestPos.x, (float)chestPos.y };
+							i++;
+						}
+					}
+				}
+			}
+		}
+
+
+		/////////////////////////////////////////////////////
+		////             DEPLACEMENT EDITOR              ////
+		/////////////////////////////////////////////////////
+
 		// zoom dans le mode EDITOR
 		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
 		{
@@ -219,6 +259,7 @@ void updateMap(sfRenderWindow* _window)
 		{
 			sfView_zoom(editorView, 1.001f);
 		}
+
 
 		// déplacement de la view dans le mode EDITOR
 		if (sfKeyboard_isScancodePressed(sfScanUp) && posEditorView.y > ((HEIGHT_WINDOW_GAME / 2)))
@@ -241,6 +282,9 @@ void updateMap(sfRenderWindow* _window)
 			posEditorView.x -= 0.4f;
 		}
 
+		/////////////////////////////////////////////////////
+		////               MOUSE CONTROLS                ////
+		/////////////////////////////////////////////////////
 
 		if (sfMouse_isButtonPressed(sfMouseRight))
 		{
@@ -336,16 +380,38 @@ void displayMap(sfRenderWindow* _window)
 
 	if (state == EDITOR)
 	{
-		tileRect.position.x = tileTypeX * tileRect.size.x;
-		tileRect.position.y = tileTypeY * tileRect.size.y;
-		sfSprite_setTextureRect(tileSprite, tileRect);
-		sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
-		iMousePos.x *= 2;
-		iMousePos.y *= 2;
-		sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
-		sfSprite_setPosition(tileSprite, fMousePos);
-		sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
-		sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
+		if(tileSprite == 6)
+		{
+			// récupère la bonne tile a afficher selon celle qu'on à sélectionner
+			tileRect.position.x = tileTypeX * tileRect.size.x;
+			tileRect.position.y = tileTypeY * tileRect.size.y;
+			sfSprite_setTextureRect(tileSpriteChest, tileRect);
+
+			// récupère la position de la souris pour positionner la tile
+			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
+			iMousePos.x *= 2;
+			iMousePos.y *= 2;
+			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
+			sfSprite_setPosition(tileSprite, fMousePos);
+			sfRenderWindow_drawSprite(_window, tileSpriteChest, NULL); // affiche la tile choisi au niveau du curseur
+			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
+		}
+		else
+		{
+			// récupère la bonne tile a afficher selon celle qu'on à sélectionner
+			tileRect.position.x = tileTypeX * tileRect.size.x;
+			tileRect.position.y = tileTypeY * tileRect.size.y;
+			sfSprite_setTextureRect(tileSprite, tileRect);
+
+			// récupère la position de la souris pour positionner la tile
+			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
+			iMousePos.x *= 2;
+			iMousePos.y *= 2;
+			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
+			sfSprite_setPosition(tileSprite, fMousePos);
+			sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
+			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
+		}
 	}
 }
 
