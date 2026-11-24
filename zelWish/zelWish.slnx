@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="zelWish/zelWish.vcxproj" Id="cf4e06a5-d34d-4313-b3a3-1511950069ea" />
+</Solution>

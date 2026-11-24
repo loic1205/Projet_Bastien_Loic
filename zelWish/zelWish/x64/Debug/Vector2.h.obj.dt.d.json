@@ -1,0 +1,19 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\system\\vector2.h",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\system\\export.h",
+            "c:\\users\\b.bourret\\source\\repos\\zelwish\\csfml3\\include\\csfml\\config.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdbool.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\stdint.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vcruntime.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\sal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\concurrencysal.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vadefs.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
