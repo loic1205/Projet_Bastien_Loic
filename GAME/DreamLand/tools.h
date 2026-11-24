@@ -19,6 +19,7 @@
 #define HEIGHT_WINDOW_GAME MAP_HEIGHT * TILE_SIZE
 
 
+
 typedef struct Chest Chest;
 struct Chest 
 {
@@ -35,7 +36,8 @@ struct Chest
 bool generalSound;
 bool sfxSound;
 bool musicSound;
-
+bool isTalking;
+bool player_Gmode;
 
 
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;

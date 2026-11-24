@@ -19,7 +19,7 @@ sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur ( posit
 
 bool hasMoved = false;
 bool player_attack = false;
-bool player_Gmode = false;
+player_Gmode = false;
 
 sfVector2f position = { 50.0f, 50.0f };
 sfVector2f velocity = { 80.0f,80.0f };
@@ -87,9 +87,9 @@ void updatePlayer()
 
 		// déplacement vers le haut
 
-		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0)
+		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking)
 		{
-			if (!collisionMapPlayer(playerfrect, HAUT, velocity) && !player_attack)
+			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{
 				position.y -= velocity.y * getDeltaTime();
 				if(!player_Gmode) hb_Player.position.y -= velocity.y * getDeltaTime();
@@ -103,7 +103,7 @@ void updatePlayer()
 
 		// déplacement vers le bas
 
-		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack)
+		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack && !isTalking)
 		{
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
 			{
@@ -119,7 +119,7 @@ void updatePlayer()
 
 		// déplacement vers la gauche
 
-		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack)
+		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack && !isTalking)
 		{
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
 			{
@@ -135,7 +135,7 @@ void updatePlayer()
 
 		// déplacement vers la droite
 
-		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack )
+		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack && !isTalking)
 		{
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{

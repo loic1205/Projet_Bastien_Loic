@@ -1,24 +1,5 @@
-﻿  map.c
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(217,20): warning C4047: '==' : les niveaux d'indirection de 'int [80]' et de 'int' sont différents
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(383,17): warning C4047: '==' : les niveaux d'indirection de 'sfSprite *' et de 'int' sont différents
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(367,25): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(367,46): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(433,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(434,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(435,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(436,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(440,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(441,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(442,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(443,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(447,71): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(448,41): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(449,72): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(450,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(454,88): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(455,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(456,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(457,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(493,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(503,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+﻿  pnj.c
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\pnj.c(10,26): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\pnj.c(10,31): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\pnj.c(15,37): warning C4305: 'initialisation' : troncation de 'double' à 'float'
   DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe
