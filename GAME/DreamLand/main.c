@@ -5,6 +5,7 @@
 #include "PNJ.h"
 #include "menu.h"
 #include "music.h"
+#include "items.h"
 
 
 int main()
@@ -16,7 +17,6 @@ int main()
 	sfVideoMode mode = { WIDTH_WINDOW_GAME / 2, HEIGHT_WINDOW_GAME / 2, 32 }; // fenêtre de jeu 
 	sfRenderWindow* window = sfRenderWindow_create(mode, "CSFML Window", sfResize | sfClose, sfWindowed, NULL);
 	sfEvent event;
-	posView = (sfVector2f){ 100.f, 50.f };
 	posEditorView = (sfVector2f){ (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 	sfxSound = true;
 	musicSound = false;
@@ -27,6 +27,7 @@ int main()
 	initPNJ();
 	initMenu();
 	initMusic();
+	initsItems();
 
 	state = MENU;
 
@@ -49,14 +50,15 @@ int main()
 
 	sfView* view = sfView_createFromRect((sfFloatRect) { HEIGHT_WINDOW_GAME / 2, WIDTH_WINDOW_GAME / 2, 100.f, 50.f });
 	sfView_zoom(view, 3.2f);
-
+	float clock = 0.0f;
+	int i = 0;
 	//////////////////////////
 	//      Game Loop		//
 	//////////////////////////
 	while (sfRenderWindow_isOpen(window))
 	{
 		restartClock();
-
+		clock += getDeltaTime();
 		// Dimensions de la map
 		sfVector2f mapSize = { MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE };
 
@@ -74,10 +76,20 @@ int main()
 		//		  Update		//
 		//////////////////////////
 
+		if (clock >= 0.2f && sfKeyboard_isScancodePressed(sfScanR))
+		{
+			keys[i].hasItem = true;
+			clock = 0.0f;
+			i++;
+		}
+
+
+
 		updateMap(window);
 		updatePlayer();
 		updatePNJ();
 		updateMusic();
+		updateItems();
 
 		if(state == MENU)
 			updateMenu(window);
@@ -104,9 +116,7 @@ int main()
 			/////////////////////////////////////////////////////
 
 			// Récupération de la position du joueur
-			sfVector2f playerCenter = { 0.0f, 0.0f };
-			playerCenter.x = position.x + irectPlayer.size.x / 2.0f;
-			playerCenter.y = position.y + irectPlayer.size.y / 2.0f;
+			posView = (sfVector2f){ position.x + irectPlayer.size.x / 2.0f, position.y + irectPlayer.size.y / 2.0f };
 
 			// Récupération de la taille de la vue
 			sfVector2f viewSize = sfView_getSize(view);
@@ -117,38 +127,40 @@ int main()
 
 			// Limite gauche et droite
 			if (viewSize.x >= mapSize.x) // vérifie si la map est plus petite que la vue (on l'affiche au centre)
-				playerCenter.x = mapSize.x / 2.0f;
+				posView.x = mapSize.x / 2.0f;
 			else
 			{
-				if (playerCenter.x < halfWidth) // si le joueur est trop proche du bord gauche on arrête la caméra a la moitié de la taille de la vue pour pas dépasser
-					playerCenter.x = halfWidth;
+				if (posView.x < halfWidth) // si le joueur est trop proche du bord gauche on arrête la caméra a la moitié de la taille de la vue pour pas dépasser
+					posView.x = halfWidth;
 
-				if (playerCenter.x > mapSize.x - halfWidth) // pareil pour la droite
-					playerCenter.x = mapSize.x - halfWidth;
+				if (posView.x > mapSize.x - halfWidth) // pareil pour la droite
+					posView.x = mapSize.x - halfWidth;
 			}
 
 			// Limite haut et bas
 			if (viewSize.y >= mapSize.y) // idem pour la map trop petite en hauteur (on la met au centre)
-				playerCenter.y = mapSize.y / 2.0f;
+				posView.y = mapSize.y / 2.0f;
 			else
 			{
-				if (playerCenter.y < halfHeight) // la limite en haut
-					playerCenter.y = halfHeight;
+				if (posView.y < halfHeight) // la limite en haut
+					posView.y = halfHeight;
 
-				if (playerCenter.y > mapSize.y - halfHeight) // la limite en bas
-					playerCenter.y = mapSize.y - halfHeight;
+				if (posView.y > mapSize.y - halfHeight) // la limite en bas
+					posView.y = mapSize.y - halfHeight;
 			}
 
 			// Mise à jour de la caméra
-			sfView_setCenter(view, playerCenter);
+			sfView_setCenter(view, posView);
 
 			//View player
-			sfView_setCenter(view, playerCenter);
+			sfView_setCenter(view, posView);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
 			//displayChest(window);
-			displayPNJ(window);
+			//displayPNJ(window);
 			displayPlayer(window);
+			displayItems(window);
+			displayItems(window);
 
 			//View minimap
 			sfView_setCenter(view, posViewMinimap);
@@ -170,9 +182,9 @@ int main()
 		{
 			sfRenderWindow_setView(window, sfRenderWindow_getDefaultView(window));
 
-			if (state != SETTINGS)
-				displayBackground(window);
 
+
+			displayBackground(window);
 			displayMenu(window);
 		}
 

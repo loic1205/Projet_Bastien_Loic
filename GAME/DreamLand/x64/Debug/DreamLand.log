@@ -1,2 +1,4 @@
-﻿  main.c
+﻿  items.c
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\items.c(16,52): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\items.c(16,57): warning C4305: 'initializing': truncation from 'double' to 'float'
   DreamLand.vcxproj -> C:\Users\b.bourret\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe

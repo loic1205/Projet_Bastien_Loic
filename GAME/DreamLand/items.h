@@ -2,15 +2,21 @@
 #include "tools.h"
 
 
-typedef struct KeyItems keyItems;
-struct keyItems {
+typedef struct KeyItems KeyItems;
+struct KeyItems {
 	sfSprite* sprite;
-
-	bool hasItems;
+	sfVector2f position;
+	bool hasItem;
 };
 
-
-
+KeyItems keys[4];
 
 
 void initsItems();
+void updateItems();
+void displayItems(sfRenderWindow* _window);
+
+
+
+
+

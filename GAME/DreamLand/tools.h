@@ -8,6 +8,7 @@
 #include <math.h>
 
 #define TEXTURE_PATH "..\\Data\\textures\\"
+#define ITEMS_PATH "..\\Data\\textures\\items\\"
 #define MAP_PATH "..\\Data\\maps\\"
 #define FONT_PATH "..\\Data\\font\\"
 #define SOUND_PATH "..\\Data\\sounds\\"
