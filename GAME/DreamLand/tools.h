@@ -19,7 +19,8 @@
 
 
 typedef struct Chest Chest;
-struct Chest {
+struct Chest 
+{
 	sfVector2i coo;
 	bool isOpen;
 	float ChestanimTimer;
@@ -30,14 +31,18 @@ struct Chest {
 	sfVector2f position;
 };
 
+bool generalSound;
+bool sfxSound;
+bool musicSound;
+
 
 
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
 typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS}State;
 State state;
 FILE* fichier;
-sfView* editorView;
 
+sfView* editorView;
 sfVector2f posView;
 sfVector2f posEditorView;
 
