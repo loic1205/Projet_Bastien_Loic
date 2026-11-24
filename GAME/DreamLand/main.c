@@ -76,7 +76,7 @@ int main()
 		//		  Update		//
 		//////////////////////////
 
-		if (clock >= 0.2f && sfKeyboard_isScancodePressed(sfScanR))
+		if (clock >= 0.2f && sfKeyboard_isScancodePressed(sfScanR) && player_Gmode)
 		{
 			keys[i].hasItem = true;
 			clock = 0.0f;

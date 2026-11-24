@@ -1,6 +1,7 @@
 #include "map.h"
 #include "tools.h"
 #include "chest.h"
+#include "items.h"
 
 /////////////////////////////////////////////////////
 ////                                             ////
@@ -19,18 +20,21 @@ extern sfVector2f position;
 
 // texture rituel
 sfTexture* rituelTexture;
-sfSprite* rituelSprite;
+size_t compteur=0;
 
-// texture chest
-sfTexture* tileTextureChest;
-sfSprite* tileSpriteChest;
+typedef struct Rituel Rituel;
+struct Rituel {
+	sfSprite* sprite;
+	bool isPickedUp;
+};
+Rituel rituel[4];
 
+
+
+extern KeyItems keys[4];
+increment = false;
 
 float keyTimer = 0.0f;
-
-//chest
-extern Chest chest[20];
-bool chestAlreadyexist = false;
 
 //view
 extern sfVector2f posEditorView;
@@ -47,15 +51,18 @@ void initMap()
 {
 	// récupère le sprite rituel
 	rituelTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel_darkShadow.png", NULL);
-	rituelSprite = sfSprite_create(rituelTexture);
 
-	// sprite du coffre avec l'animations
-	tileTextureChest = sfTexture_createFromFile(TEXTURE_PATH"tilesetChest/ChestAnim.png", NULL);
-	tileSpriteChest = sfSprite_create(tileTextureChest);
+	for (int i = 0; i < 4; i++)
+	{
+		rituel[i].sprite = sfSprite_create(rituelTexture);
+		sfSprite_setPosition(rituel[i].sprite, (sfVector2f){100 + 500*i, 100});
+		rituel[i].isPickedUp = false;
+	}
 
 	// récupère le tileSheet de la map
 	tileTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Document.png", NULL);
 	tileSprite = sfSprite_create(tileTexture);
+
 
 
 	// initialise les couches 1 et 2 de la tilemap a -1 pour pouvoir afficher la couche 0 sans avoir une map toute noir.
@@ -118,6 +125,7 @@ void initMapBin()
 }
 
 
+
 void updateMap(sfRenderWindow* _window)
 {
 
@@ -132,13 +140,40 @@ void updateMap(sfRenderWindow* _window)
 			keyTimer = 0.0f;
 		}
 
-		// récupère les coordonnées de la souris dans la fenêtre de jeu
-		if (sfMouse_isButtonPressed(sfMouseLeft) && keyTimer > 0.2f)
+
+
+		if (sfKeyboard_isScancodePressed(sfScanF) && keyTimer >= 0.2f)
 		{
+			for (int i = 0; i < 4; i++)
+			{
+				if (sfSprite_getPosition(rituel[i].sprite).x - position.x <= 20 && sfSprite_getPosition(rituel[i].sprite).y - position.y <= 20 && !rituel[i].isPickedUp)
+				{
+					increment = true;
+					rituel[i].isPickedUp = true;
+				}
+			}
+			for (int y = 0; y < 4; y++)
+			{
+				if (increment && !keys[y].hasItem)
+				{
+					keys[y].hasItem = true;
+					increment = false;
+				}
+			}
 			keyTimer = 0.0f;
-			sfVector2i mouseCoo = sfMouse_getPositionRenderWindow(_window);
 		}
+
+
+
+
+
+
+
+
+
+
 	}
+
 
 	/////////////////////////////////////////////////////
 	////                                             ////
@@ -152,6 +187,26 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isScancodePressed(sfScanE) && keyTimer >= 0.2f)
 		{
 			state = GAME;
+			keyTimer = 0.0f;
+		}
+
+		
+
+		if (sfKeyboard_isScancodePressed(sfScanR) && keyTimer >= 0.2f)
+		{
+			if (compteur < 4)
+			{
+				sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+				sfSprite_setPosition(rituel[compteur].sprite, (sfVector2f) { mousePos.x*2 - 65, mousePos.y*2 - 65 });
+				compteur++;
+			}
+			else
+			{
+				compteur = 0;
+				sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+				sfSprite_setPosition(rituel[compteur].sprite, (sfVector2f) { mousePos.x * 2 - 65, mousePos.y * 2 - 65 });
+				compteur++;
+			}
 			keyTimer = 0.0f;
 		}
 
@@ -201,48 +256,7 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isKeyPressed(sfKeyLControl) && sfKeyboard_isKeyPressed(sfKeyNum5))
 			tileTypeY = 4;
 
-		// sélection du coffre 
-		if (sfKeyboard_isKeyPressed(sfKeyF) && keyTimer > 0.2f)
-		{
-			int i = 0;
-			for (int z = 0; z < sizeof(chest) / sizeof(chest[0]); z++)
-			{
-				if (chest[z].coo.x)
-					i++;
-			}
-			for (int y = 0; y < MAP_HEIGHT; y++)
-			{
-				for (int x = 0; x < MAP_WIDTH; x++)
-				{
-					if (map[x][y] == 6)
-					{
-						keyTimer = 0.0f;
-						chestPos = (sfVector2i){ (y * tileRect.size.y), (x * tileRect.size.x) };
-						float distance = (float)sqrt(pow((chestPos.x - (position.x) + 17 / 2), 2) + pow((chestPos.y - 5 - (position.y) + 23 / 2), 2));
-
-						chestAlreadyexist = false;
-
-						for (int z = 0; z < sizeof(chest) / sizeof(chest[0]); z++)
-						{
-							if (chest[z].coo.x == chestPos.x && chest[z].coo.y == chestPos.y)
-								chestAlreadyexist = true;
-						}
-
-
-						if (distance <= 40.0f && !chestAlreadyexist)
-						{
-							chest[i].coo = chestPos;
-							chest[i].isOpen = false;
-							chest[i].ChestanimTimer = 0.0f;
-							chest[i].ChestframeX = 0;
-							chest[i].irectChest = (sfIntRect){ 0, 0, 32, 32 };
-							chest[i].position = (sfVector2f){ (float)chestPos.x, (float)chestPos.y };
-							i++;
-						}
-					}
-				}
-			}
-		}
+		
 
 
 		/////////////////////////////////////////////////////
@@ -293,7 +307,7 @@ void updateMap(sfRenderWindow* _window)
 			int x = (mousePos.x) * 2 / TILE_SIZE; // *2 pour adapter la position de la souris a la taille de la map
 			int y = (mousePos.y) * 2 / TILE_SIZE; // /TILE_SIZE pour récupérer le numéro de la tile 
 			if (currentLayer == 0) 
-				map[currentLayer][y][x] = 32; // case noir 
+				map[currentLayer][y][x] = -1; // case noir 
 			else
 				map[currentLayer][y][x] = -1; // case transparente
 		}
@@ -371,6 +385,9 @@ void displayMap(sfRenderWindow* _window)
 		}
 	}
 
+	for(int i = 0; i<4; i++)
+		sfRenderWindow_drawSprite(_window, rituel[i].sprite, NULL);
+
 
 	/////////////////////////////////////////////////////
 	////                                             ////
@@ -385,7 +402,6 @@ void displayMap(sfRenderWindow* _window)
 			// récupère la bonne tile a afficher selon celle qu'on à sélectionner
 			tileRect.position.x = tileTypeX * tileRect.size.x;
 			tileRect.position.y = tileTypeY * tileRect.size.y;
-			sfSprite_setTextureRect(tileSpriteChest, tileRect);
 
 			// récupère la position de la souris pour positionner la tile
 			sfVector2i iMousePos = sfMouse_getPositionRenderWindow(_window);
@@ -393,7 +409,6 @@ void displayMap(sfRenderWindow* _window)
 			iMousePos.y *= 2;
 			sfVector2f fMousePos = { (float)iMousePos.x - (tileRect.size.x / 2) ,(float)iMousePos.y - (tileRect.size.x / 2) };
 			sfSprite_setPosition(tileSprite, fMousePos);
-			sfRenderWindow_drawSprite(_window, tileSpriteChest, NULL); // affiche la tile choisi au niveau du curseur
 			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
 		}
 		else
