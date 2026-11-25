@@ -86,7 +86,7 @@ int main()
 
 		updateMap(window);
 		updatePlayer();
-		//updatePNJ();
+		updatePNJ();
 		updateMusic();
 		updateItems();
 
