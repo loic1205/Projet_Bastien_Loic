@@ -91,7 +91,7 @@ void updatePlayer()
 
 		// déplacement vers le haut
 
-		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity) && !collision)
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{

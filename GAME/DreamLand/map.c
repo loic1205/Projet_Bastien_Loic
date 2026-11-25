@@ -185,7 +185,7 @@ void updateMap(sfRenderWindow* _window)
 				}
 			}
 
-			if (abs(sfSprite_getPosition(spPortal).x+32 - position.x) <= 30 && abs(sfSprite_getPosition(spPortal).y+64 - position.y) <= 10 && !showNoEndText)
+			if (abs(sfSprite_getPosition(spPortal).x - position.x) <= 30 && abs(sfSprite_getPosition(spPortal).y+25 - position.y) <= 10 && !showNoEndText)
 			{
 				if (keys[3].hasItem)
 				{
