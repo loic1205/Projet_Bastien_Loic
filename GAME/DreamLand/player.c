@@ -1,6 +1,5 @@
 #include "player.h"
 #include "map.h"
-#include "pnj.h"
 
 sfTexture* texPlayer;
 sfTexture* texPlayer_fly;
@@ -24,7 +23,10 @@ bool player_attack = false;
 
 sfVector2f velocity = { 80.0f,80.0f };
 
-//extern sfVector2f posView;
+extern sfVector2f posView;
+extern sfVector2f positionPNJ;
+extern sfVector2f posGate;
+
 
 
 
@@ -93,7 +95,7 @@ void updatePlayer()
 
 		// déplacement vers le haut
 
-		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity) && !collisionPlayer_Portal(position, HAUT, portalfrect, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity) && !collisionPlayer_PNJ(position, HAUT, posGate, velocity) )
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{

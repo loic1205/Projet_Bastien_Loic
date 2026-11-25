@@ -140,9 +140,10 @@ void displayPNJ(sfRenderWindow* _window)
 
 }
 
-bool collisionPlayer_PNJ(sfVector2f _position, Direction _direction, sfVector2f positionPNJ, sfVector2f _vitesse)
+bool collisionPlayer_PNJ(sfVector2f _position, Direction _direction, sfVector2f _positionPNJ, sfVector2f _vitesse,sfVector2f _size)
 {
 	sfVector2f nextPosInMap = _position;
+	sfVector2f _zone = { _size.x, _size.y / 2 };
 	const float zone = 20.0f;
 
 	// calcul la prochaine position du joueur selon la direction qu'il prend
@@ -155,17 +156,17 @@ bool collisionPlayer_PNJ(sfVector2f _position, Direction _direction, sfVector2f 
 	else if (_direction == DROITE)
 		nextPosInMap.x += _vitesse.x * getDeltaTime();
 
-	float distxNow = fabsf(_position.x - positionPNJ.x); // calcul la distance entre le jouer et le PNJ
-	float distyNow = fabsf(_position.y - positionPNJ.y);
-	float distxNext = fabsf(nextPosInMap.x - positionPNJ.x); // calcul la distance prévue entre le joueur et le PNJ après le déplacement
-	float distyNext = fabsf(nextPosInMap.y - positionPNJ.y);
+	float distXNow = fabsf(_position.x - _positionPNJ.x); // calcul la distance entre le jouer et le PNJ
+	float distYNow = fabsf(_position.y - _positionPNJ.y);
+	float distXNext = fabsf(nextPosInMap.x - _positionPNJ.x); // calcul la distance prévue entre le joueur et le PNJ après le déplacement
+	float distYNext = fabsf(nextPosInMap.y - _positionPNJ.y);
 
 	// le prochain pas reste hors de la zone : pas de collision
-	if (distxNext > zone || distyNext > zone)
+	if (distXNext > _zone.x|| distYNext > _zone.y)
 		return false;
 
 	// collision avec le PNJ
-	if (distxNext < distxNow || distyNext < distyNow)
+	if (distXNext < distXNow || distYNext < distYNow)
 		return true;
 
 	return false; // pas de collision
