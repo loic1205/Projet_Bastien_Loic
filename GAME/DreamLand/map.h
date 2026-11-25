@@ -15,5 +15,5 @@ void displayMap(sfRenderWindow* _window);
 void saveMap();
 void saveMapBin();
 void destroyMap();
-bool collisionPlayer_Portal(sfVector2f _position, Direction _direction, sfIntRect iRectPortal, sfVector2f _vitesse);
+bool collisionPlayer_Portal(sfVector2f _position, Direction _direction, sfFloatRect hb_portal, sfVector2f _vitesse);
 bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _vitesse);

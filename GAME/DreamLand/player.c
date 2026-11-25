@@ -9,6 +9,8 @@ sfTexture* texPlayer_hurt;
 sfTexture* texPlayer_death;
 sfTexture* texPlayer_attack;
 
+extern sfFloatRect portalfrect;
+
 float animtime = 0.0f;
 int frameX = 0;
 int frameY = 0;
@@ -91,7 +93,7 @@ void updatePlayer()
 
 		// déplacement vers le haut
 
-		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity) && collisionPlayer_Portal(position, HAUT,  iRectPortal, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity) && !collisionPlayer_Portal(position, HAUT, portalfrect, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{
@@ -107,7 +109,7 @@ void updatePlayer()
 
 		// déplacement vers le bas
 
-		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack && !isTalking && !collisionPlayer_PNJ(position, BAS, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack && !isTalking && !collisionPlayer_Portal(position, BAS, portalfrect, velocity) && !collisionPlayer_PNJ(position, BAS, positionPNJ, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
 			{
@@ -123,7 +125,7 @@ void updatePlayer()
 
 		// déplacement vers la gauche
 
-		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, GAUCHE, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack && !isTalking && !collisionPlayer_Portal(position, GAUCHE, portalfrect, velocity) && !collisionPlayer_PNJ(position, GAUCHE, positionPNJ, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
 			{
@@ -139,7 +141,7 @@ void updatePlayer()
 
 		// déplacement vers la droite
 
-		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack && !isTalking && !collisionPlayer_PNJ(position, DROITE, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack && !isTalking && !collisionPlayer_Portal(position, DROITE, portalfrect, velocity) && !collisionPlayer_PNJ(position, DROITE, positionPNJ, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{
