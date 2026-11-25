@@ -92,6 +92,7 @@ void updatePNJ()
 				}
 			}
 		}
+		sfSprite_setPosition(spPNJ, positionPNJ);
 	}
 
 	// nouvelle réplique : on repart de zéro

@@ -76,9 +76,12 @@ void updateMusic()
 
 
 			break;
+		case END:
+
+			break;
 
 		default:
-			printf("Erreur state");
+			printf("Erreur state dans music.c\n");
 	}
 
 

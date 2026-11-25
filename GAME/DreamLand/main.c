@@ -28,7 +28,7 @@ int main()
 	initMusic();
 	initsItems();
 
-	state = MENU;
+	state = GAME;
 
 
 	//////////////////////////
@@ -86,7 +86,8 @@ int main()
 
 		updateMap(window);
 		updatePlayer();
-		updatePNJ();
+		if(!player_Gmode)
+			updatePNJ();
 		updateMusic();
 		updateItems();
 
@@ -192,6 +193,12 @@ int main()
 			displayBackground(window);
 			displayMenu(window);
 		}
+		if (state == END)
+		{
+			sfRenderWindow_setView(window, sfRenderWindow_getDefaultView(window));
+			displayEnd(window);
+		}
+
 
 		sfRenderWindow_display(window);
 	}	
