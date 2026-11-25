@@ -162,16 +162,6 @@ void updateMap(sfRenderWindow* _window)
 			}
 			keyTimer = 0.0f;
 		}
-
-
-
-
-
-
-
-
-
-
 	}
 
 

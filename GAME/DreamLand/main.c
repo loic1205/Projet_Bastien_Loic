@@ -156,11 +156,17 @@ int main()
 			sfView_setCenter(view, posView);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
-			//displayChest(window);
-			displayPNJ(window);
-			displayPlayer(window);
-			displayItems(window);
-			displayItems(window);
+			if (position.y > positionPNJ.y)
+			{
+				displayPNJ(window);
+				displayPlayer(window);
+			}
+			else
+			{
+				displayPlayer(window);
+				displayPNJ(window);
+			}
+				displayItems(window);
 
 			//View minimap
 			sfView_setCenter(view, posViewMinimap);

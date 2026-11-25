@@ -3,7 +3,7 @@
 
 sfTexture* texPNJ;
 sfSprite* spPNJ;
-sfIntRect irectPNJ = { 0, 0, 64, 64 };
+sfIntRect irectPNJ = { 0, 0, 64, 64};
 sfVector2f positionPNJ = {30.0f, 30.0f};
 sfRectangleShape* hb_PNJ;
 
@@ -16,7 +16,7 @@ sfSprite* spDialogue;
 sfIntRect irectDialogue = { 0, 0, 10000, 10000 };
 sfVector2f scaleDialogue = { 0.125, 0.08 };
 
-#define TYPE_SPEED 25.0f // lettres par seconde 
+#define TYPE_SPEED 20.0f // lettres par seconde 
 
 float typeTimer = 0.0f;  // temps écoulé depuis le début de la réplique
 int lastDialog = 0;      // réplique de la frame précédente (pour détecter un changement)
@@ -43,7 +43,7 @@ void initPNJ()
 	sfSprite_setPosition(spPNJ, positionPNJ);
 	hb_PNJ = sfRectangleShape_create(); // hitbox du PNJ
 	sfRectangleShape_setPosition(hb_PNJ, positionPNJ); // place la hitbox du PNJ sur le sprite du PNJ
-	sfRectangleShape_setSize(hb_PNJ, positionPNJ);
+	sfRectangleShape_setTextureRect(hb_PNJ, irectPNJ); 
 
 	font = sfFont_createFromFile(FONT_PATH"fontPNJ.ttf");
 	text = sfText_create(font);
@@ -64,7 +64,7 @@ void updatePNJ()
 		pnjTimer += getDeltaTime();
 
 		// interactions avec le pnj pour initier le dialogue
-		if (sfKeyboard_isScancodePressed(sfScanF) && pnjTimer > 0.2f)
+		if (sfKeyboard_isScancodePressed(sfScanF) && pnjTimer > 0.2f && abs(position.x - positionPNJ.x) <= 20 && abs(position.y - positionPNJ.y) <= 20)
 		{
 			pnjTimer = 0.0f;
 			isTalking = true;
@@ -130,4 +130,37 @@ void displayPNJ(sfRenderWindow* _window)
 	}
 
 	sfRenderWindow_drawSprite(_window, spPNJ, NULL);
+
+
+}
+
+bool collisionPlayer_PNJ(sfVector2f _position, Direction _direction, sfVector2f positionPNJ, sfVector2f _vitesse)
+{
+	sfVector2f nextPosInMap = _position;
+	const float zone = 20.0f;
+
+	// calcul la prochaine position du joueur selon la direction qu'il prend
+	if (_direction == HAUT)
+		nextPosInMap.y -= _vitesse.y * getDeltaTime();
+	else if (_direction == BAS)
+		nextPosInMap.y += _vitesse.y * getDeltaTime();
+	else if (_direction == GAUCHE)
+		nextPosInMap.x -= _vitesse.x * getDeltaTime();
+	else if (_direction == DROITE)
+		nextPosInMap.x += _vitesse.x * getDeltaTime();
+
+	float distxNow = fabsf(_position.x - positionPNJ.x); // calcul la distance entre le jouer et le PNJ
+	float distyNow = fabsf(_position.y - positionPNJ.y);
+	float distxNext = fabsf(nextPosInMap.x - positionPNJ.x); // calcul la distance prévue entre le joueur et le PNJ après le déplacement
+	float distyNext = fabsf(nextPosInMap.y - positionPNJ.y);
+
+	// le prochain pas reste hors de la zone : pas de collision
+	if (distxNext > zone || distyNext > zone)
+		return false;
+
+	// collision avec le PNJ
+	if (distxNext < distxNow || distyNext < distyNow)
+		return true;
+
+	return false; // pas de collision
 }
