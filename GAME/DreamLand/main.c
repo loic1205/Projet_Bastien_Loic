@@ -1,7 +1,7 @@
 #include "tools.h"
 #include "player.h"
 #include "map.h"
-#include "PNJ.h"
+#include "pnj.h"
 #include "menu.h"
 #include "music.h"
 #include "items.h"
@@ -19,6 +19,8 @@ int main()
 	posEditorView = (sfVector2f){ (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 	sfxSound = true;
 	musicSound = false;
+	debugMode = false;
+
 
 	initTools();
 	initPlayer();
@@ -196,7 +198,7 @@ int main()
 		if (state == END)
 		{
 			sfRenderWindow_setView(window, sfRenderWindow_getDefaultView(window));
-			//displayEnd(window);
+			displayEnd(window);
 		}
 
 

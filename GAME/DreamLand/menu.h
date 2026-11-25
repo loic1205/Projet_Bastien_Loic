@@ -10,5 +10,5 @@ void updatePauseMenu(sfRenderWindow* _window);
 void updateSettings(sfRenderWindow* _window);
 void displayBackground(sfRenderWindow* _window);
 void displayMenu(sfRenderWindow* _window);
-//void displayEnd(sfRenderWindow* _window);
+void displayEnd(sfRenderWindow* _window);
 

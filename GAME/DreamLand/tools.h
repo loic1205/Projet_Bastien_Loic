@@ -27,6 +27,7 @@ bool sfxSound;
 bool musicSound;
 bool isTalking;
 bool player_Gmode;
+bool debugMode;
 bool endGame;
 
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
@@ -37,13 +38,15 @@ FILE* fichier;
 sfView* editorView;
 sfVector2f posView;
 sfVector2f posEditorView;
-sfVector2f position;
 
 sfSprite* spPlayer;
-
+sfVector2f position;
+sfFloatRect hb_Player;
+sfFloatRect hb_portal;
+sfFloatRect hb_pnj;
 
 void initTools();
 void restartClock();
 float getDeltaTime();
-
+bool collisionPlayer_Sprite(sfFloatRect _fRectPlayer, sfFloatRect _fRectSprite, Direction _direction, sfVector2f _vitesse);
 

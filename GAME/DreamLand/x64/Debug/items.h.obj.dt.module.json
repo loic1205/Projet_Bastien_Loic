@@ -3,7 +3,7 @@
     "revision": 0,
     "rules": [
         {
-            "primary-output": "x64\\Debug\\items.h.obj.dt.obj",
+            "primary-output": "x64\\Debug\\items.obj",
             "outputs": [
                 "x64\\Debug\\items.h.obj.dt.module.json",
                 "x64\\Debug\\items.h.obj.dt.d.json"

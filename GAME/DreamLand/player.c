@@ -16,7 +16,7 @@ int frameY = 0;
 int animLenght = 0;
 
 sfIntRect irectPlayer = { 0,0,64,64 }; // rectangle du sprite du joueur
-sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur ( position.x , position.y , taille.x , taille.y )
+sfRectangleShape* hbPlayerRect;
 
 bool hasMoved = false;
 bool player_attack = false;
@@ -33,9 +33,13 @@ extern sfVector2f posGate;
 
 void initPlayer()
 {
-
-
 	position = (sfVector2f){ 50.0f, 50.0f };
+	hb_Player = (sfFloatRect){ position.x+20.0f,position.y + 40.0f,25.0f,10.0f };
+	hbPlayerRect = sfRectangleShape_create();
+	sfRectangleShape_setFillColor(hbPlayerRect, sfTransparent);
+	sfRectangleShape_setOutlineColor(hbPlayerRect, sfRed);
+	sfRectangleShape_setOutlineThickness(hbPlayerRect, 1.0f);
+
 	player_Gmode = false;
 	// initialisations des textures du joueur
 	texPlayer_fly = sfTexture_createFromFile(TEXTURE_PATH"tilesetPlayer/player_fly.png", NULL);
@@ -55,9 +59,14 @@ void updatePlayer()
 		animtime = 0.0f;
 	if (state == GAME)
 	{
+		animtime += getDeltaTime();
+
+
 		// place le joueur sur la map (sprite du joueur, position du joueur)
 		sfSprite_setPosition(spPlayer, position);
-		animtime += getDeltaTime();
+		hb_Player = (sfFloatRect){ position.x + 19.0f,position.y + 40.0f,25.0f,10.0f };
+		sfRectangleShape_setPosition(hbPlayerRect, hb_Player.position);
+		sfRectangleShape_setSize(hbPlayerRect, hb_Player.size);
 
 
 		/////////////////////////////////////////////////////
@@ -74,7 +83,6 @@ void updatePlayer()
 		if (sfKeyboard_isScancodePressed(sfScanSpace) && sfKeyboard_isScancodePressed(sfScanLControl) && animtime > 0.1f && !player_Gmode)
 		{
 			player_Gmode = true;
-			hb_Player = (sfFloatRect) { 70.0f,90.0f,25.0f,10.0f };
 			velocity = (sfVector2f){ 300.0f, 300.0f };
 			sfSprite_setTexture(spPlayer, texPlayer_fly, NULL);
 		}
@@ -95,12 +103,13 @@ void updatePlayer()
 
 		// déplacement vers le haut
 
-		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_PNJ(position, HAUT, positionPNJ, velocity) && !collisionPlayer_PNJ(position, HAUT, posGate, velocity) )
+		if (sfKeyboard_isScancodePressed(sfScanW) && position.y > 0 && !player_attack && !isTalking && !collisionPlayer_Sprite(hb_Player, hb_pnj, HAUT, velocity) && !collisionPlayer_Sprite(hb_Player, hb_portal, HAUT, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, HAUT, velocity))
 			{
 				position.y -= velocity.y * getDeltaTime();
-				if(!player_Gmode) hb_Player.position.y -= velocity.y * getDeltaTime();
+				if(!player_Gmode) 
+					hb_Player.position.y -= velocity.y * getDeltaTime();
 				if (posView.y > 80 && posView.y >= position.y)
 					posView.y -= velocity.y * getDeltaTime();
 			}
@@ -111,12 +120,13 @@ void updatePlayer()
 
 		// déplacement vers le bas
 
-		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack && !isTalking && !collisionPlayer_Portal(position, BAS, portalfrect, velocity) && !collisionPlayer_PNJ(position, BAS, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanS) && position.y < (HEIGHT_WINDOW_GAME - irectPlayer.size.y) && !player_attack && !isTalking && !collisionPlayer_Sprite(hb_Player, hb_pnj, BAS, velocity) && !collisionPlayer_Sprite(hb_Player, hb_portal, BAS, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, BAS, velocity))
 			{
 				position.y += velocity.y * getDeltaTime();
-				if (!player_Gmode) hb_Player.position.y += velocity.y * getDeltaTime();
+				if (!player_Gmode) 
+					hb_Player.position.y += velocity.y * getDeltaTime();
 				if (posView.y < HEIGHT_WINDOW_GAME - 80 && posView.y <= position.y)
 					posView.y += velocity.y * getDeltaTime();
 			}
@@ -127,12 +137,13 @@ void updatePlayer()
 
 		// déplacement vers la gauche
 
-		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack && !isTalking && !collisionPlayer_Portal(position, GAUCHE, portalfrect, velocity) && !collisionPlayer_PNJ(position, GAUCHE, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanA) && position.x > 0 && !player_attack && !isTalking && !collisionPlayer_Sprite(hb_Player, hb_pnj, GAUCHE, velocity) && !collisionPlayer_Sprite(hb_Player, hb_portal, GAUCHE, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, GAUCHE, velocity))
 			{
 				position.x -= velocity.x * getDeltaTime();
-				if (!player_Gmode) hb_Player.position.x -= velocity.x * getDeltaTime();
+				if (!player_Gmode) 
+					hb_Player.position.x -= velocity.x * getDeltaTime();
 				if (posView.x > 160 && posView.x >= position.x)
 					posView.x -= velocity.x * getDeltaTime();
 			}
@@ -143,12 +154,13 @@ void updatePlayer()
 
 		// déplacement vers la droite
 
-		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack && !isTalking && !collisionPlayer_Portal(position, DROITE, portalfrect, velocity) && !collisionPlayer_PNJ(position, DROITE, positionPNJ, velocity))
+		if (sfKeyboard_isScancodePressed(sfScanD) && position.x < (WIDTH_WINDOW_GAME - irectPlayer.size.x) && !player_attack && !isTalking && !collisionPlayer_Sprite(hb_Player, hb_pnj, DROITE, velocity) && !collisionPlayer_Sprite(hb_Player, hb_portal, DROITE, velocity))
 		{
 			if (!collisionMapPlayer(playerfrect, DROITE, velocity))
 			{
 				position.x += velocity.x * getDeltaTime();
-				if (!player_Gmode) hb_Player.position.x += velocity.x * getDeltaTime();
+				if (!player_Gmode) 
+					hb_Player.position.x += velocity.x * getDeltaTime();
 				if (posView.x < WIDTH_WINDOW_GAME - 160 && posView.x <= position.x)
 					posView.x += velocity.x * getDeltaTime();
 			}
@@ -239,6 +251,8 @@ void updatePlayer()
 void displayPlayer(sfRenderWindow* _window)
 {
 	sfRenderWindow_drawSprite(_window, spPlayer, NULL);
+	if (debugMode)
+		sfRenderWindow_drawRectangleShape(_window, hbPlayerRect, NULL);
 }
 
 void destroyPLayer()
