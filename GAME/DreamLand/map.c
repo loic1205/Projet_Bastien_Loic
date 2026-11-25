@@ -1,5 +1,4 @@
 #include "map.h"
-#include "tools.h"
 #include "items.h"
 
 /////////////////////////////////////////////////////
@@ -29,10 +28,13 @@ struct Rituel {
 };
 Rituel rituel[4];
 
-//teture portail
-
+//texture portail
 sfTexture* texPortal;
 sfSprite* spPortal;
+sfIntRect irectPortal = {10, 10, 100, 100};
+sfVector2f posGate = { 100.0f, 200.0f };
+sfRectangleShape* hb_Portal;
+
 
 //texture clee
 extern KeyItems keys[4];
@@ -59,15 +61,26 @@ int tileTypeY = 0;
 // initialise la map en fichier .txt
 void initMap()
 {
+	// init message portail
 	font = sfFont_createFromFile(FONT_PATH"fontMenu.ttf");
 	textNoEnd = sfText_create(font);
 	sfText_setString(textNoEnd, "Vous avez besoin de toutes les clees pour passer le portail");
 	sfText_setScale(textNoEnd, (sfVector2f) { 0.15, 0.15 });
 
 	// récupère le sprite du portail
-	texPortal = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Gates_dark_shadow3.png", NULL);
+
+	texPortal = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Gate_End.png", NULL);
 	spPortal = sfSprite_create(texPortal);
-	sfSprite_setPosition(spPortal, (sfVector2f) {100 , 200 });
+	sfSprite_setPosition(spPortal, posGate);
+
+
+	hb_Portal = sfRectangleShape_create(); // hitbox du portail
+	sfRectangleShape_setPosition(hb_Portal, (sfVector2f) { 100.0f,240.0f }); // place la hitbox du portail sur le sprite du portail
+	sfRectangleShape_setTextureRect(hb_Portal, irectPortal);
+	sfRectangleShape_setSize(hb_Portal, (sfVector2f) { 68.0f, 20.0f });
+	sfRectangleShape_setOutlineColor(hb_Portal, sfRed);
+	sfRectangleShape_setOutlineThickness(hb_Portal, 1.0f);
+	sfRectangleShape_setFillColor(hb_Portal, (sfColor){255, 0, 0, 100});
 
 
 	// récupère le sprite rituel
@@ -163,9 +176,13 @@ void updateMap(sfRenderWindow* _window)
 		}
 
 
-
+		/////////////////////////////////////////////////////
+		////             TOUCHE D'INTERACTION            ////
+		/////////////////////////////////////////////////////
+		
 		if (sfKeyboard_isScancodePressed(sfScanF) && keyTimer >= 0.2f)
 		{
+			// interaction rituel
 			for (int i = 0; i < 4; i++)
 			{
 				if (abs(sfSprite_getPosition(rituel[i].sprite).x+32 - position.x) <= 20 && abs(sfSprite_getPosition(rituel[i].sprite).y+32 - position.y) <= 20 && !rituel[i].isPickedUp)
@@ -184,20 +201,23 @@ void updateMap(sfRenderWindow* _window)
 				}
 			}
 
+			// interaction portail
 			if (abs(sfSprite_getPosition(spPortal).x+32 - position.x) <= 30 && abs(sfSprite_getPosition(spPortal).y+64 - position.y) <= 10 && !showNoEndText)
 			{
 				if (keys[3].hasItem)
 				{
-					state = END;
+					state = END; // affiche l'écran de fin du jeu
 				}
 				else
 				{
-					showNoEndText = true;
+					showNoEndText = true; // affiche le message du portail
 					sfText_setPosition(textNoEnd, (sfVector2f) { posView.x-60, posView.y-20 });
 				}
 			}
 			keyTimer = 0.0f;
 		}
+
+		// dessine le message du portail dans la fenêtre de jeu
 		if (showNoEndText)
 		{
 			timerText += getDeltaTime();
@@ -227,7 +247,7 @@ void updateMap(sfRenderWindow* _window)
 		}
 
 		
-
+		// permet de placer les rituel sur la map
 		if (sfKeyboard_isScancodePressed(sfScanR) && keyTimer >= 0.2f)
 		{
 			if (compteur < 4)
@@ -236,7 +256,7 @@ void updateMap(sfRenderWindow* _window)
 				sfSprite_setPosition(rituel[compteur].sprite, (sfVector2f) { mousePos.x*2 - 65, mousePos.y*2 - 65 });
 				compteur++;
 			}
-			else
+			else // si 4 rituels poser, repose les rituels à partir du premier
 			{
 				compteur = 0;
 				sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
@@ -246,7 +266,7 @@ void updateMap(sfRenderWindow* _window)
 			keyTimer = 0.0f;
 		}
 
-
+		// pose le portail de fin
 		if (sfKeyboard_isScancodePressed(sfScanT) && keyTimer >= 0.2f)
 		{
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
@@ -256,7 +276,7 @@ void updateMap(sfRenderWindow* _window)
 		}
 
 
-
+		// pose le spawn du joueur
 		if (sfKeyboard_isScancodePressed(sfScanY) && keyTimer >= 0.2f)
 		{
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
@@ -492,7 +512,10 @@ void displayMap(sfRenderWindow* _window)
 			sfRenderWindow_drawSprite(_window, tileSprite, NULL); // affiche la tile choisi au niveau du curseur
 			sfRenderWindow_setMouseCursorVisible(_window, false); // fait disparaitre le curseur pour mieux voir la tile
 		}
+
 	}
+	printf("x = %f  y = %f\n", position.x, position.y);
+	sfRenderWindow_drawRectangleShape(_window, hb_Portal, NULL);
 }
 
 
@@ -548,6 +571,26 @@ bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _v
 	return false; // retourne sfFalse si pas de collision
 }
 
+bool collisionPlayer_Portal(sfVector2f _position, Direction _direction,   sfIntRect iRectPortal, sfVector2f _vitesse)
+{
+	sfVector2f nextPosInMap = _position;
+
+	// calcul la prochaine position du joueur selon la direction qu'il prend
+	if (_direction == HAUT)
+		nextPosInMap.y -= _vitesse.y * getDeltaTime();
+	else if (_direction == BAS)
+		nextPosInMap.y += _vitesse.y * getDeltaTime();
+	else if (_direction == GAUCHE)
+		nextPosInMap.x -= _vitesse.x * getDeltaTime();
+	else if (_direction == DROITE)
+		nextPosInMap.x += _vitesse.x * getDeltaTime();
+
+	// prochain déplacmeent dans la hitbox du portail = collision
+	if ((nextPosInMap.x > iRectPortal.size.x && nextPosInMap.x < iRectPortal.size.x) && (nextPosInMap.y > iRectPortal.size.y && nextPosInMap.y < iRectPortal.size.y))
+		return true;
+	else
+		return false; // pas de collision
+}
 
 /////////////////////////////////////////////////////
 ////                                             ////

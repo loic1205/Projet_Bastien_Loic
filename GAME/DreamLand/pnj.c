@@ -37,20 +37,24 @@ static const char* lines[5] =
 
 void initPNJ()
 {
+	// init du PNJ
 	texPNJ = sfTexture_createFromFile(TEXTURE_PATH"tilesetPNJ/sbire_idle.png", NULL);
 	spPNJ = sfSprite_create(texPNJ);
 	sfSprite_setTextureRect(spPNJ, irectPNJ);
 	sfSprite_setPosition(spPNJ, positionPNJ);
 	hb_PNJ = sfRectangleShape_create(); // hitbox du PNJ
 	sfRectangleShape_setPosition(hb_PNJ, positionPNJ); // place la hitbox du PNJ sur le sprite du PNJ
-	sfRectangleShape_setTextureRect(hb_PNJ, irectPNJ); 
+	sfRectangleShape_setTextureRect(hb_PNJ, irectPNJ);
+	sfRectangleShape_setOutlineColor(hb_PNJ, sfRed);
+	sfRectangleShape_setOutlineThickness(hb_PNJ, 10.0f);
 
+	// init du texte
 	font = sfFont_createFromFile(FONT_PATH"fontPNJ.ttf");
 	text = sfText_create(font);
 	sfText_setCharacterSize(text, 100);
 	sfText_scale(text, scaleText);
 
-
+	// init de la bulle de dialogue
 	texDialogue = sfTexture_createFromFile(TEXTURE_PATH"dialogue_text.png", NULL);
 	spDialogue = sfSprite_create(texDialogue);
 	sfSprite_setTextureRect(spDialogue, irectDialogue);
@@ -121,7 +125,7 @@ void displayPNJ(sfRenderWindow* _window)
 		int shown = (int)(typeTimer * TYPE_SPEED);
 		if (shown > total) shown = total;
 
-		memcpy(buffer, lines[dialog], shown); // copie les `shown` premières lettres
+		memcpy(buffer, lines[dialog], shown); //  memcpy( copy, array, length )
 		buffer[shown] = '\0';
 
 		sfText_setString(text, buffer);
@@ -130,6 +134,7 @@ void displayPNJ(sfRenderWindow* _window)
 	}
 
 	sfRenderWindow_drawSprite(_window, spPNJ, NULL);
+	sfRenderWindow_drawRectangleShape(_window, hb_PNJ, NULL);
 
 
 }
