@@ -30,7 +30,7 @@ bool player_Gmode;
 bool endGame;
 
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
-typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS, END}State;
+typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS, END }State;
 State state;
 FILE* fichier;
 

@@ -25,8 +25,12 @@ sfVector2f velocity = { 80.0f,80.0f };
 //extern sfVector2f posView;
 
 
+
+
 void initPlayer()
 {
+
+
 	position = (sfVector2f){ 50.0f, 50.0f };
 	player_Gmode = false;
 	// initialisations des textures du joueur
@@ -41,7 +45,7 @@ void initPlayer()
 	sfSprite_setTextureRect(spPlayer, irectPlayer);
 }
 
-void updatePlayer()  
+void updatePlayer()
 {
 	if (state == PAUSE_MENU)
 		animtime = 0.0f;

@@ -116,6 +116,11 @@ sfText* textMusicSoundSM;
 sfRectangleShape* rectangleSM;
 
 
+//inits de la fin
+
+
+sfText* endingText;
+
 
 
 // inits des musique
@@ -127,6 +132,7 @@ float butonPressedTimer = 0.0f;
 
 void initMenu()
 {
+
 	// background de la fenêtre de jeu dans le state MENU
 	texBackground_MenuWindow = sfTexture_createFromFile(TEXTURE_PATH"background/background_menu.jpg", NULL);
 	spBackground_MenuWindow = sfSprite_create(texBackground_MenuWindow);
@@ -297,38 +303,19 @@ void initMenu()
 	sfText_setPosition(textMusicSoundSM, (sfVector2f) { 650, 250});
 	sfText_setFillColor(textMusicSoundSM, (sfColor) { 0, 0, 0, 255 });
 
-
 	rectangleSM = sfRectangleShape_create();
 	sfRectangleShape_setFillColor(rectangleSM, sfWhite);
 	sfRectangleShape_setPosition(rectangleSM, (sfVector2f){485.0f, 192.0f});
 	sfRectangleShape_setSize(rectangleSM, (sfVector2f) { 300.0f, 1.0f });
-}
 
-void initPauseMenu()
-{
-	
-	 
-
-	/*
-	-play
-	-parametre
-	-retour menu
-	-quitter
-	*/
-
+	//inits ending
+	endingText = sfText_create(font);
+	sfText_setString(endingText, "Merci d avoir jouer a BLOODY BLOODLINE\n\n   ceci est la fin de la version alpha\n\n\n\n				CREDIT\n	_______________________________\n\n			Developer par:\n		-Begue Loic\n		-Bourret Colomban Bastien");
+	sfText_setPosition(endingText, (sfVector2f){350, 100});
 
 }
 
-void initSettings()
-{
-	/*
-	-volume jeu
-	-volume music
-	-volume sfx
-	_bind touche
-	*/
 
-}
 
 void updateMenu(sfRenderWindow* _window)
 {
@@ -763,5 +750,15 @@ void displayMenu(sfRenderWindow* _window)
 	}
 
 }
+
+void displayEnd(sfRenderWindow* _window)
+{
+
+	sfRenderWindow_drawSprite(_window, spBackground_MenuWindow, NULL);
+	sfRenderWindow_drawText(_window, endingText, NULL);
+
+}
+
+
 
 

@@ -15,6 +15,7 @@ sfTexture* tileTexture;
 sfSprite* tileSprite;
 sfIntRect tileRect = { 0, 0, 32, 32 };
 extern sfVector2f position;
+extern sfVector2f positionPNJ;
 
 // texture rituel
 sfTexture* rituelTextureDark;
@@ -68,7 +69,6 @@ void initMap()
 	sfText_setScale(textNoEnd, (sfVector2f) { 0.15, 0.15 });
 
 	// récupère le sprite du portail
-
 	texPortal = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Gate_End.png", NULL);
 	spPortal = sfSprite_create(texPortal);
 	sfSprite_setPosition(spPortal, posGate);
@@ -286,6 +286,13 @@ void updateMap(sfRenderWindow* _window)
 		}
 
 
+		if (sfKeyboard_isScancodePressed(sfScanU) && keyTimer >= 0.2f)
+		{
+			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+			positionPNJ = (sfVector2f){ mousePos.x * 2 - 65, mousePos.y * 2 - 65 };
+
+			keyTimer = 0.0f;
+		}
 
 
 
