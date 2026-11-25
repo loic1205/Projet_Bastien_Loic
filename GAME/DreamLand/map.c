@@ -168,7 +168,7 @@ void updateMap(sfRenderWindow* _window)
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				if (abs(sfSprite_getPosition(rituel[i].sprite).x - position.x) <= 20 && abs(sfSprite_getPosition(rituel[i].sprite).y - position.y) <= 20 && !rituel[i].isPickedUp)
+				if (abs(sfSprite_getPosition(rituel[i].sprite).x+32 - position.x) <= 20 && abs(sfSprite_getPosition(rituel[i].sprite).y+32 - position.y) <= 20 && !rituel[i].isPickedUp)
 				{
 					increment = true;
 					rituel[i].isPickedUp = true;
@@ -184,7 +184,7 @@ void updateMap(sfRenderWindow* _window)
 				}
 			}
 
-			if (abs(sfSprite_getPosition(spPortal).x - position.x) <= 20 && abs(sfSprite_getPosition(spPortal).y - position.y) <= 20 && !showNoEndText)
+			if (abs(sfSprite_getPosition(spPortal).x+32 - position.x) <= 30 && abs(sfSprite_getPosition(spPortal).y+64 - position.y) <= 10 && !showNoEndText)
 			{
 				if (keys[3].hasItem)
 				{
@@ -451,7 +451,6 @@ void displayMap(sfRenderWindow* _window)
 	if (showNoEndText)
 	{
 		sfRenderWindow_drawText(_window, textNoEnd, NULL);
-		printf("text2\n");
 	}
 
 
