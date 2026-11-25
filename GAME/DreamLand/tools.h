@@ -37,6 +37,7 @@ FILE* fichier;
 sfView* editorView;
 sfVector2f posView;
 sfVector2f posEditorView;
+sfVector2f position;
 
 sfSprite* spPlayer;
 

@@ -198,8 +198,6 @@ void updateMap(sfRenderWindow* _window)
 			}
 			keyTimer = 0.0f;
 		}
-
-
 		if (showNoEndText)
 		{
 			timerText += getDeltaTime();
@@ -210,7 +208,6 @@ void updateMap(sfRenderWindow* _window)
 				timerText = 0.0f;
 			}
 		}
-
 	}
 
 
