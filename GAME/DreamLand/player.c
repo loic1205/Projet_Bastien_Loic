@@ -13,7 +13,6 @@ int frameX = 0;
 int frameY = 0;
 int animLenght = 0;
 
-sfSprite* spPlayer;
 sfIntRect irectPlayer = { 0,0,64,64 }; // rectangle du sprite du joueur
 sfFloatRect hb_Player = { 70.0f,90.0f,25.0f,10.0f }; // hitbox du joueur ( position.x , position.y , taille.x , taille.y )
 

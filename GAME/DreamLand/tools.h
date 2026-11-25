@@ -20,28 +20,17 @@
 
 
 
-typedef struct Chest Chest;
-struct Chest 
-{
-	sfVector2i coo;
-	bool isOpen;
-	float ChestanimTimer;
-	int ChestframeX;
-	sfTexture* texChest;
-	sfSprite* spChest;
-	sfIntRect irectChest;
-	sfVector2f position;
-};
+
 
 bool generalSound;
 bool sfxSound;
 bool musicSound;
 bool isTalking;
 bool player_Gmode;
-
+bool endGame;
 
 typedef enum { BAS, HAUT, GAUCHE, DROITE }Direction;
-typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS}State;
+typedef enum { MENU, GAME, EDITOR, PAUSE_MENU, SETTINGS, END}State;
 State state;
 FILE* fichier;
 
@@ -49,7 +38,7 @@ sfView* editorView;
 sfVector2f posView;
 sfVector2f posEditorView;
 
-
+sfSprite* spPlayer;
 
 
 void initTools();
