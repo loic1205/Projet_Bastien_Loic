@@ -27,9 +27,6 @@
     <ClCompile Include="player.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="chest.c">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="pnj.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="chest.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="pnj.h">

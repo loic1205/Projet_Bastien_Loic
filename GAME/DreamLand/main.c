@@ -1,6 +1,5 @@
 #include "tools.h"
 #include "player.h"
-#include "chest.h"
 #include "map.h"
 #include "PNJ.h"
 #include "menu.h"
@@ -87,7 +86,7 @@ int main()
 
 		updateMap(window);
 		updatePlayer();
-		updatePNJ();
+		//updatePNJ();
 		updateMusic();
 		updateItems();
 
@@ -157,9 +156,8 @@ int main()
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
 			//displayChest(window);
-			displayPNJ(window);
+			//displayPNJ(window);
 			displayPlayer(window);
-			displayItems(window);
 			displayItems(window);
 
 			//View minimap

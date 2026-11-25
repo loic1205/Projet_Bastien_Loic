@@ -1,6 +1,5 @@
 #include "map.h"
 #include "tools.h"
-#include "chest.h"
 #include "items.h"
 
 /////////////////////////////////////////////////////
@@ -19,7 +18,8 @@ sfIntRect tileRect = { 0, 0, 32, 32 };
 extern sfVector2f position;
 
 // texture rituel
-sfTexture* rituelTexture;
+sfTexture* rituelTextureDark;
+sfTexture* rituelTextureLight;
 size_t compteur=0;
 
 typedef struct Rituel Rituel;
@@ -29,10 +29,20 @@ struct Rituel {
 };
 Rituel rituel[4];
 
+//teture portail
 
+sfTexture* texPortal;
+sfSprite* spPortal;
 
+//texture clee
 extern KeyItems keys[4];
 increment = false;
+
+//texte si le joueur n'a pas toute les clee et essaie de prendre le portail
+sfFont* font;
+sfText* textNoEnd;
+bool showNoEndText;
+float timerText;
 
 float keyTimer = 0.0f;
 
@@ -49,12 +59,24 @@ int tileTypeY = 0;
 // initialise la map en fichier .txt
 void initMap()
 {
+	font = sfFont_createFromFile(FONT_PATH"fontMenu.ttf");
+	textNoEnd = sfText_create(font);
+	sfText_setString(textNoEnd, "Vous avez besoin de toutes les clees pour passer le portail");
+	sfText_setScale(textNoEnd, (sfVector2f) { 0.15, 0.15 });
+
+	// récupère le sprite du portail
+	texPortal = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Gates_dark_shadow3.png", NULL);
+	spPortal = sfSprite_create(texPortal);
+	sfSprite_setPosition(spPortal, (sfVector2f) {100 , 200 });
+
+
 	// récupère le sprite rituel
-	rituelTexture = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel_darkShadow.png", NULL);
+	rituelTextureDark = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel_darkShadow.png", NULL);
+	rituelTextureLight = sfTexture_createFromFile(TEXTURE_PATH"/tileset/rituel_lightShadow.png", NULL);
 
 	for (int i = 0; i < 4; i++)
 	{
-		rituel[i].sprite = sfSprite_create(rituelTexture);
+		rituel[i].sprite = sfSprite_create(rituelTextureDark);
 		sfSprite_setPosition(rituel[i].sprite, (sfVector2f){100 + 500*i, 100});
 		rituel[i].isPickedUp = false;
 	}
@@ -146,10 +168,11 @@ void updateMap(sfRenderWindow* _window)
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				if (sfSprite_getPosition(rituel[i].sprite).x - position.x <= 20 && sfSprite_getPosition(rituel[i].sprite).y - position.y <= 20 && !rituel[i].isPickedUp)
+				if (abs(sfSprite_getPosition(rituel[i].sprite).x - position.x) <= 20 && abs(sfSprite_getPosition(rituel[i].sprite).y - position.y) <= 20 && !rituel[i].isPickedUp)
 				{
 					increment = true;
 					rituel[i].isPickedUp = true;
+					sfSprite_setTexture(rituel[i].sprite, rituelTextureLight, NULL);
 				}
 			}
 			for (int y = 0; y < 4; y++)
@@ -160,17 +183,33 @@ void updateMap(sfRenderWindow* _window)
 					increment = false;
 				}
 			}
+
+			if (abs(sfSprite_getPosition(spPortal).x - position.x) <= 20 && abs(sfSprite_getPosition(spPortal).y - position.y) <= 20 && !showNoEndText)
+			{
+				if (keys[3].hasItem)
+				{
+					state = END;
+				}
+				else
+				{
+					showNoEndText = true;
+					sfText_setPosition(textNoEnd, (sfVector2f) { posView.x-60, posView.y-20 });
+				}
+			}
 			keyTimer = 0.0f;
 		}
 
 
-
-
-
-
-
-
-
+		if (showNoEndText)
+		{
+			timerText += getDeltaTime();
+			sfText_setPosition(textNoEnd, (sfVector2f) { sfText_getPosition(textNoEnd).x, sfText_getPosition(textNoEnd).y-0.01});
+			if (timerText >= 1)
+			{
+				showNoEndText = false;
+				timerText = 0.0f;
+			}
+		}
 
 	}
 
@@ -209,6 +248,28 @@ void updateMap(sfRenderWindow* _window)
 			}
 			keyTimer = 0.0f;
 		}
+
+
+		if (sfKeyboard_isScancodePressed(sfScanT) && keyTimer >= 0.2f)
+		{
+			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+			sfSprite_setPosition(spPortal, (sfVector2f) { mousePos.x * 2 - 65, mousePos.y * 2 - 65 });
+
+			keyTimer = 0.0f;
+		}
+
+
+
+		if (sfKeyboard_isScancodePressed(sfScanY) && keyTimer >= 0.2f)
+		{
+			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
+			position= (sfVector2f){ mousePos.x * 2 - 65, mousePos.y * 2 - 65 };
+
+			keyTimer = 0.0f;
+		}
+
+
+
 
 
 	/////////////////////////////////////////////////////
@@ -387,6 +448,14 @@ void displayMap(sfRenderWindow* _window)
 
 	for(int i = 0; i<4; i++)
 		sfRenderWindow_drawSprite(_window, rituel[i].sprite, NULL);
+
+	sfRenderWindow_drawSprite(_window,spPortal, NULL);
+
+	if (showNoEndText)
+	{
+		sfRenderWindow_drawText(_window, textNoEnd, NULL);
+		printf("text2\n");
+	}
 
 
 	/////////////////////////////////////////////////////

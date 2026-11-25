@@ -151,7 +151,6 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="chest.c" />
     <ClCompile Include="items.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="map.c" />
@@ -162,7 +161,6 @@
     <ClCompile Include="tools.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="chest.h" />
     <ClInclude Include="items.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="menu.h" />
