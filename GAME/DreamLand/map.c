@@ -35,7 +35,8 @@ sfSprite* spPortal;
 sfIntRect irectPortal = {10, 10, 100, 100};
 sfVector2f posGate = { 100.0f, 200.0f };
 sfRectangleShape* hb_Portal;
-
+sfFloatRect hb_portal = { 100.0f,240.0f,68.0f,20.0f }; // hitbox du joueur ( position.x , position.y , taille.x , taille.y );
+sfFloatRect portalfrect;
 
 //texture clee
 extern KeyItems keys[4];
@@ -165,9 +166,11 @@ void updateMap(sfRenderWindow* _window)
 {
 
 	keyTimer += getDeltaTime();
-	
+
 	if (state == GAME)
 	{
+		portalfrect = hb_portal; // récupère les dimensions du sprite du joueur avec ses coordonnées
+
 		// passe en mode EDITOR
 		if (sfKeyboard_isScancodePressed(sfScanE) && keyTimer >= 0.2f)
 		{
@@ -578,7 +581,7 @@ bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _v
 	return false; // retourne sfFalse si pas de collision
 }
 
-bool collisionPlayer_Portal(sfVector2f _position, Direction _direction,   sfIntRect iRectPortal, sfVector2f _vitesse)
+bool collisionPlayer_Portal(sfVector2f _position, Direction _direction, sfFloatRect hb_portal, sfVector2f _vitesse)
 {
 	sfVector2f nextPosInMap = _position;
 
@@ -593,7 +596,7 @@ bool collisionPlayer_Portal(sfVector2f _position, Direction _direction,   sfIntR
 		nextPosInMap.x += _vitesse.x * getDeltaTime();
 
 	// prochain déplacmeent dans la hitbox du portail = collision
-	if ((nextPosInMap.x > iRectPortal.size.x && nextPosInMap.x < iRectPortal.size.x) && (nextPosInMap.y > iRectPortal.size.y && nextPosInMap.y < iRectPortal.size.y))
+	if ((nextPosInMap.x > hb_portal.position.x && nextPosInMap.x < hb_portal.size.x) && (nextPosInMap.y > hb_portal.position.y && nextPosInMap.y < hb_portal.size.y))
 		return true;
 	else
 		return false; // pas de collision

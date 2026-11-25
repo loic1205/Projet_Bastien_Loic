@@ -196,7 +196,7 @@ int main()
 		if (state == END)
 		{
 			sfRenderWindow_setView(window, sfRenderWindow_getDefaultView(window));
-			displayEnd(window);
+			//displayEnd(window);
 		}
 
 

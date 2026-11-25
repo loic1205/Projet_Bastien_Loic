@@ -751,13 +751,13 @@ void displayMenu(sfRenderWindow* _window)
 
 }
 
-void displayEnd(sfRenderWindow* _window)
-{
-
-	sfRenderWindow_drawSprite(_window, spBackground_MenuWindow, NULL);
-	sfRenderWindow_drawText(_window, endingText, NULL);
-
-}
+//void displayEnd(sfRenderWindow* _window)
+//{
+//
+//	sfRenderWindow_drawSprite(_window, spBackground_MenuWindow, NULL);
+//	sfRenderWindow_drawText(_window, endingText, NULL);
+//
+//}
 
 
 
