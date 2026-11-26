@@ -34,9 +34,9 @@ sfTexture* texPortal;
 sfSprite* spPortal;
 sfIntRect irectPortal = {10, 10, 100, 100};
 sfVector2f posGate = { 100.0f, 200.0f };
-sfRectangleShape* hb_Portal;
-sfFloatRect hb_portal = { 100.0f,240.0f,68.0f,20.0f }; // hitbox du joueur ( position.x , position.y , taille.x , taille.y );
-sfFloatRect portalfrect;
+sfRectangleShape* hb_portalRect;
+
+
 
 //texture clee
 extern KeyItems keys[4];
@@ -75,13 +75,11 @@ void initMap()
 	sfSprite_setPosition(spPortal, posGate);
 
 
-	hb_Portal = sfRectangleShape_create(); // hitbox du portail
-	sfRectangleShape_setPosition(hb_Portal, (sfVector2f) { 100.0f,240.0f }); // place la hitbox du portail sur le sprite du portail
-	sfRectangleShape_setTextureRect(hb_Portal, irectPortal);
-	sfRectangleShape_setSize(hb_Portal, (sfVector2f) { 68.0f, 20.0f });
-	sfRectangleShape_setOutlineColor(hb_Portal, sfRed);
-	sfRectangleShape_setOutlineThickness(hb_Portal, 1.0f);
-	sfRectangleShape_setFillColor(hb_Portal, (sfColor){255, 0, 0, 100});
+	hb_portal = (sfFloatRect){posGate.x +6.5,posGate.y + 45.0f ,55.0f,15.0f };
+	hb_portalRect = sfRectangleShape_create(); // hitbox du portail
+	sfRectangleShape_setOutlineColor(hb_portalRect, sfRed);
+	sfRectangleShape_setOutlineThickness(hb_portalRect, 1.0f);
+	sfRectangleShape_setFillColor(hb_portalRect, (sfColor){255, 0, 0, 100});
 
 
 	// récupère le sprite rituel
@@ -167,9 +165,15 @@ void updateMap(sfRenderWindow* _window)
 
 	keyTimer += getDeltaTime();
 
+
+	hb_portal = (sfFloatRect){ posGate.x + 6.5,posGate.y + 45.0f ,55.0f,15.0f };
+	sfRectangleShape_setPosition(hb_portalRect, hb_portal.position);
+	sfRectangleShape_setSize(hb_portalRect, hb_portal.size);
+
+
+
 	if (state == GAME)
 	{
-		portalfrect = hb_portal; // récupère les dimensions du sprite du joueur avec ses coordonnées
 
 		// passe en mode EDITOR
 		if (sfKeyboard_isScancodePressed(sfScanE) && keyTimer >= 0.2f)
@@ -213,7 +217,7 @@ void updateMap(sfRenderWindow* _window)
 				else
 				{
 					showNoEndText = true; // affiche le message du portail
-					sfText_setPosition(textNoEnd, (sfVector2f) { posView.x-60, posView.y-20 });
+					sfText_setPosition(textNoEnd, (sfVector2f) { position.x-30.0f, position.y+10.0f });
 				}
 			}
 			keyTimer = 0.0f;
@@ -272,11 +276,11 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isScancodePressed(sfScanT) && keyTimer >= 0.2f)
 		{
 			sfVector2i mousePos = sfMouse_getPositionRenderWindow(_window);
-			sfSprite_setPosition(spPortal, (sfVector2f) { mousePos.x * 2 - 65, mousePos.y * 2 - 65 });
-
+			posGate = (sfVector2f){ mousePos.x * 2 - 65, mousePos.y * 2 - 65 };
+			
 			keyTimer = 0.0f;
 		}
-
+		
 
 		// pose le spawn du joueur
 		if (sfKeyboard_isScancodePressed(sfScanY) && keyTimer >= 0.2f)
@@ -394,7 +398,7 @@ void updateMap(sfRenderWindow* _window)
 			int x = (mousePos.x) * 2 / TILE_SIZE; // *2 pour adapter la position de la souris a la taille de la map
 			int y = (mousePos.y) * 2 / TILE_SIZE; // /TILE_SIZE pour récupérer le numéro de la tile 
 			if (currentLayer == 0) 
-				map[currentLayer][y][x] = -1; // case noir 
+				map[currentLayer][y][x] = 32; // case noir 
 			else
 				map[currentLayer][y][x] = -1; // case transparente
 		}
@@ -474,8 +478,9 @@ void displayMap(sfRenderWindow* _window)
 
 	for(int i = 0; i<4; i++)
 		sfRenderWindow_drawSprite(_window, rituel[i].sprite, NULL);
-
 	sfRenderWindow_drawSprite(_window,spPortal, NULL);
+	if(debugMode)
+		sfRenderWindow_drawRectangleShape(_window, hb_portalRect, NULL);
 
 	if (showNoEndText)
 	{
@@ -523,8 +528,6 @@ void displayMap(sfRenderWindow* _window)
 		}
 
 	}
-	printf("x = %f  y = %f\n", position.x, position.y);
-	sfRenderWindow_drawRectangleShape(_window, hb_Portal, NULL);
 }
 
 
@@ -580,26 +583,7 @@ bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _v
 	return false; // retourne sfFalse si pas de collision
 }
 
-bool collisionPlayer_Portal(sfVector2f _position, Direction _direction, sfFloatRect hb_portal, sfVector2f _vitesse)
-{
-	sfVector2f nextPosInMap = _position;
 
-	// calcul la prochaine position du joueur selon la direction qu'il prend
-	if (_direction == HAUT)
-		nextPosInMap.y -= _vitesse.y * getDeltaTime();
-	else if (_direction == BAS)
-		nextPosInMap.y += _vitesse.y * getDeltaTime();
-	else if (_direction == GAUCHE)
-		nextPosInMap.x -= _vitesse.x * getDeltaTime();
-	else if (_direction == DROITE)
-		nextPosInMap.x += _vitesse.x * getDeltaTime();
-
-	// prochain déplacmeent dans la hitbox du portail = collision
-	if ((nextPosInMap.x > hb_portal.position.x && nextPosInMap.x < hb_portal.size.x) && (nextPosInMap.y > hb_portal.position.y && nextPosInMap.y < hb_portal.size.y))
-		return true;
-	else
-		return false; // pas de collision
-}
 
 /////////////////////////////////////////////////////
 ////                                             ////
