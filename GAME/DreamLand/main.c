@@ -19,7 +19,7 @@ int main()
 	posEditorView = (sfVector2f){ (MAP_WIDTH * TILE_SIZE) / 2, (MAP_HEIGHT * TILE_SIZE) / 2 };
 	sfxSound = true;
 	musicSound = false;
-	debugMode = false;
+	debugMode = true; // true affiche les hitbox
 
 
 	initTools();
@@ -175,7 +175,6 @@ int main()
 			sfRenderWindow_setView(window, viewMinimap);
 			sfRenderWindow_drawRectangleShape(window, Minimap_bg, NULL);
 			displayMap(window);
-			//displayChest(window);
 			displayPlayer(window);
 		}
 		if (state == EDITOR)
@@ -183,7 +182,6 @@ int main()
 			//View editor
 			sfView_setCenter(editorView, posEditorView);
 			sfRenderWindow_setView(window, editorView);
-			//displayChest(window);
 			displayMap(window);
 		}
 		if (state == MENU || state == SETTINGS || state == PAUSE_MENU)

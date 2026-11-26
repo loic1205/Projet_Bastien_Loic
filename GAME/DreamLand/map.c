@@ -36,7 +36,7 @@ sfIntRect irectPortal = {10, 10, 100, 100};
 sfVector2f posGate = { 100.0f, 200.0f };
 sfRectangleShape* hb_portalRect;
 
-
+sfEvent event;
 
 //texture clee
 extern KeyItems keys[4];
@@ -53,6 +53,7 @@ float keyTimer = 0.0f;
 //view
 extern sfVector2f posEditorView;
 sfView* view; 
+float editorZoom = 1.0f;
 
 int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH]; 
 int currentLayer = 0;
@@ -72,7 +73,7 @@ void initMap()
 	// récupère le sprite du portail
 	texPortal = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Gate_End.png", NULL);
 	spPortal = sfSprite_create(texPortal);
-	sfSprite_setPosition(spPortal, posGate);
+	sfSprite_setPosition(spPortal, posGate); // position de base du portail au lancement 
 
 
 	hb_portal = (sfFloatRect){posGate.x +6.5,posGate.y + 45.0f ,55.0f,15.0f };
@@ -165,8 +166,8 @@ void updateMap(sfRenderWindow* _window)
 
 	keyTimer += getDeltaTime();
 
-
 	hb_portal = (sfFloatRect){ posGate.x + 6.5,posGate.y + 45.0f ,55.0f,15.0f };
+	sfSprite_setPosition(spPortal, posGate);
 	sfRectangleShape_setPosition(hb_portalRect, hb_portal.position);
 	sfRectangleShape_setSize(hb_portalRect, hb_portal.size);
 
@@ -358,33 +359,44 @@ void updateMap(sfRenderWindow* _window)
 		if (sfKeyboard_isScancodePressed(sfScanNumpadPlus))
 		{
 			sfView_zoom(editorView, 0.999f);
+			posEditorView = sfView_getCenter(editorView);
 		}
 
 		if (sfKeyboard_isScancodePressed(sfScanNumpadMinus))
 		{
 			sfView_zoom(editorView, 1.001f);
+			posEditorView = sfView_getCenter(editorView);
 		}
+
 
 
 		// déplacement de la view dans le mode EDITOR
-		if (sfKeyboard_isScancodePressed(sfScanUp) && posEditorView.y > ((HEIGHT_WINDOW_GAME / 2)))
+		if (sfKeyboard_isScancodePressed(sfScanUp) && posEditorView.y + sfView_getSize(editorView).y/2 > HEIGHT_WINDOW_GAME / 2)
 		{
 			posEditorView.y -= 0.4f;
+			sfView_setCenter(editorView, posEditorView);
+			printf("posEditorView.y = %f\n", posEditorView.y);
 		}
 
-		if (sfKeyboard_isScancodePressed(sfScanDown) && posEditorView.y < ((HEIGHT_WINDOW_GAME/2)))
+		if (sfKeyboard_isScancodePressed(sfScanDown) && posEditorView.y - sfView_getSize(editorView).y / 2 < (HEIGHT_WINDOW_GAME/2))
 		{
 			posEditorView.y += 0.4f;
+			sfView_setCenter(editorView, posEditorView);
+			printf("posEditorView.y = %f\n", posEditorView.y);
 		}
 
-		if (sfKeyboard_isScancodePressed(sfScanRight) && posEditorView.x < ((WIDTH_WINDOW_GAME / 2) + WIDTH_WINDOW_GAME * PALETTE_RATIO))
+		if (sfKeyboard_isScancodePressed(sfScanRight) && posEditorView.x - sfView_getSize(editorView).x / 2 < (WIDTH_WINDOW_GAME/2))
 		{
 			posEditorView.x += 0.4f;
+			sfView_setCenter(editorView, posEditorView);
+			printf("posEditorView.x = %f\n", posEditorView.x);
 		}
 
-		if (sfKeyboard_isScancodePressed(sfScanLeft) && posEditorView.x > ((WIDTH_WINDOW_GAME / 2)))
+		if (sfKeyboard_isScancodePressed(sfScanLeft) && posEditorView.x + sfView_getSize(editorView).x / 2 > WIDTH_WINDOW_GAME/2)
 		{
 			posEditorView.x -= 0.4f;
+			sfView_setCenter(editorView, posEditorView);
+			printf("posEditorView.x = %f\n", posEditorView.x);
 		}
 
 		/////////////////////////////////////////////////////
@@ -574,8 +586,13 @@ bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _v
 	// Si la ou les case(s) est une case non traversable ( entre 3 et 39 )
 	for (int l = 0; l < NB_LAYERS; l++)
 	{
-		if (map[l][nextPosInTab.y][nextPosInTab.x] >= 3 && map[l][nextPosInTab.y][nextPosInTab.x] <= 39 ||
-			map[l][nextPosInTab2.y][nextPosInTab2.x] >= 3 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 39)
+		if (map[l][nextPosInTab.y][nextPosInTab.x] >= 4 && map[l][nextPosInTab.y][nextPosInTab.x] <= 4 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 4 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 4 
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 6 && map[l][nextPosInTab.y][nextPosInTab.x] <= 6 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 6 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 6
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 11 && map[l][nextPosInTab.y][nextPosInTab.x] <= 15 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 11 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 15
+			|| map[l][nextPosInTab.y][nextPosInTab.x] == 21 && map[l][nextPosInTab.y][nextPosInTab.x] == 21 || map[l][nextPosInTab2.y][nextPosInTab2.x] == 21 && map[l][nextPosInTab2.y][nextPosInTab2.x] == 21
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 23 && map[l][nextPosInTab.y][nextPosInTab.x] <= 24 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 23 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 24
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 31 && map[l][nextPosInTab.y][nextPosInTab.x] <= 33 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 31 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 33
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 39 && map[l][nextPosInTab.y][nextPosInTab.x] <= 40 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 39 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 40)
 		{
 			return true; // retourne sfTrue si collision
 		}
