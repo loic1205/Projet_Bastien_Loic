@@ -40,6 +40,6 @@ C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(581,8
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(582,39): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(583,89): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
 C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(584,59): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(626,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
-C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(636,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(625,2): warning C4098: 'saveMap' : fonction 'void' retournant une valeur
+C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\DreamLand\map.c(635,2): warning C4098: 'saveMapBin' : fonction 'void' retournant une valeur
   DreamLand.vcxproj -> C:\Users\l.begue\Documents\GitHub\Projet_Bastien_Loic\GAME\Debug\DreamLand.exe

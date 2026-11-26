@@ -586,13 +586,12 @@ bool collisionMapPlayer(sfFloatRect _sprite, Direction _direction, sfVector2f _v
 	// Si la ou les case(s) est une case non traversable ( entre 3 et 39 )
 	for (int l = 0; l < NB_LAYERS; l++)
 	{
-		if (map[l][nextPosInTab.y][nextPosInTab.x] >= 4 && map[l][nextPosInTab.y][nextPosInTab.x] <= 4 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 4 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 4 
-			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 6 && map[l][nextPosInTab.y][nextPosInTab.x] <= 6 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 6 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 6
-			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 11 && map[l][nextPosInTab.y][nextPosInTab.x] <= 15 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 11 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 15
-			|| map[l][nextPosInTab.y][nextPosInTab.x] == 21 && map[l][nextPosInTab.y][nextPosInTab.x] == 21 || map[l][nextPosInTab2.y][nextPosInTab2.x] == 21 && map[l][nextPosInTab2.y][nextPosInTab2.x] == 21
-			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 23 && map[l][nextPosInTab.y][nextPosInTab.x] <= 24 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 23 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 24
-			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 31 && map[l][nextPosInTab.y][nextPosInTab.x] <= 33 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 31 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 33
-			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 39 && map[l][nextPosInTab.y][nextPosInTab.x] <= 40 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 39 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 40)
+		if (map[l][nextPosInTab.y][nextPosInTab.x] >= 6 && map[l][nextPosInTab.y][nextPosInTab.x] <= 7 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 6 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 7
+			|| map[l][nextPosInTab.y][nextPosInTab.x] == 12 && map[l][nextPosInTab.y][nextPosInTab.x] == 12 || map[l][nextPosInTab2.y][nextPosInTab2.x] == 12 && map[l][nextPosInTab2.y][nextPosInTab2.x] == 12
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 14 && map[l][nextPosInTab.y][nextPosInTab.x] <= 15 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 14 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 15
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 22 && map[l][nextPosInTab.y][nextPosInTab.x] <= 23 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 22 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 23
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 30 && map[l][nextPosInTab.y][nextPosInTab.x] <= 32 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 30 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 32
+			|| map[l][nextPosInTab.y][nextPosInTab.x] >= 38 && map[l][nextPosInTab.y][nextPosInTab.x] <= 39 || map[l][nextPosInTab2.y][nextPosInTab2.x] >= 38 && map[l][nextPosInTab2.y][nextPosInTab2.x] <= 39)
 		{
 			return true; // retourne sfTrue si collision
 		}
