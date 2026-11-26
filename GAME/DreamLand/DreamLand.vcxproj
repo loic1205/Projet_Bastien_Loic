@@ -155,6 +155,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
+    <ClCompile Include="mob.c" />
     <ClCompile Include="music.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="pnj.c" />
@@ -164,6 +165,7 @@
     <ClInclude Include="items.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="mob.h" />
     <ClInclude Include="music.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="pnj.h" />

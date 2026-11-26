@@ -1,7 +1,7 @@
 #pragma once
 #include "tools.h"
 
-extern sfVector2f positionPNJ;
+sfVector2f positionPNJ;
 
 void initPNJ();
 void updatePNJ();

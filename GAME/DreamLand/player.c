@@ -38,7 +38,7 @@ void initPlayer()
 	hbPlayerRect = sfRectangleShape_create();
 	sfRectangleShape_setFillColor(hbPlayerRect, sfTransparent);
 	sfRectangleShape_setOutlineColor(hbPlayerRect, sfRed);
-	sfRectangleShape_setOutlineThickness(hbPlayerRect, 1.0f);
+	sfRectangleShape_setOutlineThickness(hbPlayerRect, 0.5f);
 
 	player_Gmode = false;
 	// initialisations des textures du joueur

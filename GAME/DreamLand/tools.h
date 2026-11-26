@@ -44,6 +44,7 @@ sfVector2f position;
 sfFloatRect hb_Player;
 sfFloatRect hb_portal;
 sfFloatRect hb_pnj;
+sfFloatRect hb_boss;
 
 void initTools();
 void restartClock();

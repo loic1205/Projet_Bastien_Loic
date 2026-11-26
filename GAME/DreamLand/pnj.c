@@ -4,7 +4,6 @@
 sfTexture* texPNJ;
 sfSprite* spPNJ;
 sfIntRect irectPNJ = { 0, 0, 64, 64};
-sfVector2f positionPNJ = {30.0f, 30.0f};
 sfRectangleShape* hbPNJRect;
 
 sfText* text;
@@ -37,7 +36,9 @@ static const char* lines[5] =
 
 void initPNJ()
 {
+
 	// init du PNJ
+	positionPNJ = (sfVector2f){ 30.0f, 30.0f };
 	texPNJ = sfTexture_createFromFile(TEXTURE_PATH"tilesetPNJ/sbire_idle.png", NULL);
 	spPNJ = sfSprite_create(texPNJ);
 	sfSprite_setTextureRect(spPNJ, irectPNJ);
@@ -48,7 +49,7 @@ void initPNJ()
 	hbPNJRect = sfRectangleShape_create(); 
 	sfRectangleShape_setFillColor(hbPNJRect, sfTransparent);
 	sfRectangleShape_setOutlineColor(hbPNJRect, sfRed);
-	sfRectangleShape_setOutlineThickness(hbPNJRect, 1.0f);
+	sfRectangleShape_setOutlineThickness(hbPNJRect, 0.5f);
 
 	// init du texte
 	font = sfFont_createFromFile(FONT_PATH"fontPNJ.ttf");

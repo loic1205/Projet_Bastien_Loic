@@ -33,7 +33,6 @@ Rituel rituel[4];
 sfTexture* texPortal;
 sfSprite* spPortal;
 sfIntRect irectPortal = {10, 10, 100, 100};
-sfVector2f posGate = { 100.0f, 200.0f };
 sfRectangleShape* hb_portalRect;
 
 
@@ -70,6 +69,7 @@ void initMap()
 	sfText_setScale(textNoEnd, (sfVector2f) { 0.15, 0.15 });
 
 	// récupère le sprite du portail
+	posGate = (sfVector2f){ 100.0f, 200.0f };
 	texPortal = sfTexture_createFromFile(TEXTURE_PATH"/tileset/Gate_End.png", NULL);
 	spPortal = sfSprite_create(texPortal);
 	sfSprite_setPosition(spPortal, posGate);
@@ -78,8 +78,8 @@ void initMap()
 	hb_portal = (sfFloatRect){posGate.x +6.5,posGate.y + 45.0f ,55.0f,15.0f };
 	hb_portalRect = sfRectangleShape_create(); // hitbox du portail
 	sfRectangleShape_setOutlineColor(hb_portalRect, sfRed);
-	sfRectangleShape_setOutlineThickness(hb_portalRect, 1.0f);
-	sfRectangleShape_setFillColor(hb_portalRect, (sfColor){255, 0, 0, 100});
+	sfRectangleShape_setOutlineThickness(hb_portalRect, 0.5f);
+	sfRectangleShape_setFillColor(hb_portalRect, sfTransparent);
 
 
 	// récupère le sprite rituel
@@ -167,6 +167,7 @@ void updateMap(sfRenderWindow* _window)
 
 
 	hb_portal = (sfFloatRect){ posGate.x + 6.5,posGate.y + 45.0f ,55.0f,15.0f };
+	sfSprite_setPosition(spPortal, posGate);
 	sfRectangleShape_setPosition(hb_portalRect, hb_portal.position);
 	sfRectangleShape_setSize(hb_portalRect, hb_portal.size);
 
@@ -478,9 +479,6 @@ void displayMap(sfRenderWindow* _window)
 
 	for(int i = 0; i<4; i++)
 		sfRenderWindow_drawSprite(_window, rituel[i].sprite, NULL);
-	sfRenderWindow_drawSprite(_window,spPortal, NULL);
-	if(debugMode)
-		sfRenderWindow_drawRectangleShape(_window, hb_portalRect, NULL);
 
 	if (showNoEndText)
 	{

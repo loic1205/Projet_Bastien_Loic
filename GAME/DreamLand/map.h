@@ -7,6 +7,7 @@
 #define NB_LAYERS 3
 extern int map[NB_LAYERS][MAP_HEIGHT][MAP_WIDTH];
 extern int currentLayer;
+sfVector2f posGate;
 
 void initMap();
 void initMapBin();

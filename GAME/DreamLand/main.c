@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "music.h"
 #include "items.h"
+#include "mob.h"
 
 
 int main()
@@ -12,7 +13,8 @@ int main()
 	//////////////////////////
 	//		  Inits 		//
 	//////////////////////////
-
+	extern sfSprite* spPortal;
+	extern sfRectangleShape* hb_portalRect;
 	sfVideoMode mode = { WIDTH_WINDOW_GAME / 2, HEIGHT_WINDOW_GAME / 2, 32 }; // fenêtre de jeu 
 	sfRenderWindow* window = sfRenderWindow_create(mode, "CSFML Window", sfResize | sfClose, sfWindowed, NULL);
 	sfEvent event;
@@ -29,6 +31,7 @@ int main()
 	initMenu();
 	initMusic();
 	initsItems();
+	initsMob();
 
 	state = GAME;
 
@@ -87,6 +90,7 @@ int main()
 
 
 		updateMap(window);
+		updateMob();
 		updatePlayer();
 		if(!player_Gmode)
 			updatePNJ();
@@ -158,16 +162,45 @@ int main()
 			sfView_setCenter(view, posView);
 			sfRenderWindow_setView(window, view);
 			displayMap(window);
-			if (position.y > positionPNJ.y)
+			displayMob(window);
+			if (position.y > posGate.y)
 			{
-				displayPNJ(window);
-				displayPlayer(window);
+				sfRenderWindow_drawSprite(window, spPortal, NULL);
+				if (debugMode)
+					sfRenderWindow_drawRectangleShape(window, hb_portalRect, NULL);
+
+				if (position.y > positionPNJ.y)
+				{
+					displayPNJ(window);
+					displayPlayer(window);
+				}
+				else
+				{
+					displayPlayer(window);
+					displayPNJ(window);
+				}
 			}
 			else
 			{
-				displayPlayer(window);
-				displayPNJ(window);
+				if (position.y > positionPNJ.y)
+				{
+					displayPNJ(window);
+					displayPlayer(window);
+				}
+				else
+				{
+					displayPlayer(window);
+					displayPNJ(window);
+				}
+
+				sfRenderWindow_drawSprite(window, spPortal, NULL);
+				if (debugMode)
+					sfRenderWindow_drawRectangleShape(window, hb_portalRect, NULL);
 			}
+
+
+
+
 				displayItems(window);
 
 			//View minimap
